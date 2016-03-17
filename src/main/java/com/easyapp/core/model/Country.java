@@ -2,32 +2,36 @@ package com.easyapp.core.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @Entity
 public class Country extends PersistModel {
-	@Column(nullable = false, unique = true)
+	@NotNull
+	@Column(unique = true)
 	private String isoAlpha2Code;
 
-	@Column(nullable = false, unique = true)
+	@NotNull
+	@Column(unique = true)
 	private String isoAlpha3Code;
 	
-	@Column(nullable = false, unique = true)
+	@NotNull
+	@Column(unique = true)
 	private int isoNumericCode;
 	
-	@Column(nullable = false)
+	@NotNull
 	private int callingCode;
 
-	@Column(nullable = false)
+	@NotNull
 	private String countryName;
 	
-	@Column(nullable = false)
+	@NotNull
 	private String continent;
 	
 	private String capitalCity;
 
-	@Column(nullable = false)
+	@NotNull
 	private String currencyCode;
 	
 	private String capitalCityTimeZone;
