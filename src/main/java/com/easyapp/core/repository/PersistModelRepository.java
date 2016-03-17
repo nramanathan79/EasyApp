@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 import com.easyapp.core.model.PersistModel;
 
 @Repository
-public interface PersistModelRepository extends JpaRepository<PersistModel, String> {
+public interface PersistModelRepository<T extends PersistModel> extends JpaRepository<T, String> {
 }

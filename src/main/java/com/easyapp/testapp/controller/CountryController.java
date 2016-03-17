@@ -1,4 +1,4 @@
-package com.easyapp.core.controller;
+package com.easyapp.testapp.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

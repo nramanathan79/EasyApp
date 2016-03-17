@@ -1,9 +1,11 @@
-package com.easyapp.core.model;
+package com.easyapp.testapp.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import com.easyapp.core.model.PersistModel;
 
 @XmlRootElement
 @Entity
