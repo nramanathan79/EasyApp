@@ -84,9 +84,9 @@
 										class="required">&nbsp;*</span></a>
 									<div class="pull-right">
 										<span ng-show="showSortIndex('countryName') > 0">{{showSortIndex('countryName')}}</span><img
-											src="images/sortascending.png"
+											src="resources/images/sortascending.png"
 											ng-show="sortBy.indexOf('countryName') >= 0"></img><img
-											src="images/sortdescending.png"
+											src="resources/images/sortdescending.png"
 											ng-show="sortBy.indexOf('-countryName') >= 0"></img>
 									</div></th>
 								<th><a href="#" ng-click="addSort('isoAlpha2Code')">ISO
@@ -94,9 +94,9 @@
 								</a>
 									<div class="pull-right">
 										<span ng-show="showSortIndex('isoAlpha2Code') > 0">{{showSortIndex('isoAlpha2Code')}}</span><img
-											src="images/sortascending.png"
+											src="resources/images/sortascending.png"
 											ng-show="sortBy.indexOf('isoAlpha2Code') >= 0"></img><img
-											src="images/sortdescending.png"
+											src="resources/images/sortdescending.png"
 											ng-show="sortBy.indexOf('-isoAlpha2Code') >= 0"></img>
 										<div class="dropdown" style="display: inline;">
 											<a href="#" data-toggle="dropdown" class="dropdown-toggle"><b
@@ -112,47 +112,47 @@
 								<th><a href="#" ng-click="addSort('isoAlpha3Code')">ISO
 										3 Code<span class="required">&nbsp;*</span>
 								</a><span class="pull-right"><img
-										src="images/sortascending.png"
+										src="resources/images/sortascending.png"
 										ng-show="sortBy.indexOf('isoAlpha3Code') >= 0" /><img
-										src="images/sortdescending.png"
+										src="resources/images/sortdescending.png"
 										ng-show="sortBy.indexOf('-isoAlpha3Code') >= 0" /> </span></th>
 								<th class="text-right"><a href="#"
 									ng-click="addSort('isoNumericCode')">ISO Numeric Code<span
 										class="required">&nbsp;*</span></a><span class="pull-right"><img
-										src="images/sortascending.png"
+										src="resources/images/sortascending.png"
 										ng-show="sortBy.indexOf('isoNumericCode') >= 0" /><img
-										src="images/sortdescending.png"
+										src="resources/images/sortdescending.png"
 										ng-show="sortBy.indexOf('-isoNumericCode') >= 0" /></span></th>
 								<th class="text-right"><a href="#"
 									ng-click="addSort('callingCode')">Phone Code<span
 										class="required">&nbsp;*</span><img
-										src="images/sortascending.png"
+										src="resources/images/sortascending.png"
 										ng-show="sortBy.indexOf('callingCode') >= 0" /></a><span
-									class="pull-right"><img src="images/sortdescending.png"
+									class="pull-right"><img src="resources/images/sortdescending.png"
 										ng-show="sortBy.indexOf('-callingCode') >= 0" /></span></th>
 								<th><a href="#" ng-click="addSort('currencyCode')">Currency
 										Code<span class="required">&nbsp;*</span>
 								</a><span class="pull-right"><img
-										src="images/sortascending.png"
+										src="resources/images/sortascending.png"
 										ng-show="sortBy.indexOf('currencyCode') >= 0" /><img
-										src="images/sortdescending.png"
+										src="resources/images/sortdescending.png"
 										ng-show="sortBy.indexOf('-currencyCode') >= 0" /> </span></th>
 								<th><a href="#" ng-click="addSort('continent')">Continent<span
 										class="required">&nbsp;*</span></a><span class="pull-right"><img
-										src="images/sortascending.png"
+										src="resources/images/sortascending.png"
 										ng-show="sortBy.indexOf('continent') >= 0" /><img
-										src="images/sortdescending.png"
+										src="resources/images/sortdescending.png"
 										ng-show="sortBy.indexOf('-continent') >= 0" /></span></th>
 								<th><a href="#" ng-click="addSort('capitalCity')">Capital</a><span
-									class="pull-right"><img src="images/sortascending.png"
+									class="pull-right"><img src="resources/images/sortascending.png"
 										ng-show="sortBy.indexOf('capitalCity') >= 0" /><img
-										src="images/sortdescending.png"
+										src="resources/images/sortdescending.png"
 										ng-show="sortBy.indexOf('-capitalCity') >= 0" /></span></th>
 								<th><a href="#" ng-click="addSort('capitalCityTimeZone')">Capital
 										Time Zone</a><span class="pull-right"><img
-										src="images/sortascending.png"
+										src="resources/images/sortascending.png"
 										ng-show="sortBy.indexOf('capitalCityTimeZone') >= 0" /><img
-										src="images/sortdescending.png"
+										src="resources/images/sortdescending.png"
 										ng-show="sortBy.indexOf('-capitalCityTimeZone') >= 0" /> </span></th>
 								<th>Action</th>
 							</tr>
