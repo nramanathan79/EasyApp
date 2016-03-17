@@ -3,11 +3,12 @@ package com.easyapp.core.model;
 import java.time.Clock;
 import java.time.LocalDateTime;
 
-import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -21,18 +22,18 @@ abstract public class PersistModel extends BaseModel {
 	@GeneratedValue(generator = "system-uuid")
 	private String id;
 
-	@Column(nullable = false)
+	@NotNull
 	private String createUser;
 
-	@Column(nullable = false)
+	@NotNull
 	@JsonSerialize(using = JsonLocalDateTimeSerializer.class)
 	@JsonDeserialize(using = JsonLocalDateTimeDeserializer.class)
 	private LocalDateTime createTimestamp;
 
-	@Column(nullable = false)
+	@NotNull
 	private String updateUser;
 
-	@Column(nullable = false)
+	@NotNull
 	@JsonSerialize(using = JsonLocalDateTimeSerializer.class)
 	@JsonDeserialize(using = JsonLocalDateTimeDeserializer.class)
 	private LocalDateTime updateTimestamp;
@@ -78,15 +79,19 @@ abstract public class PersistModel extends BaseModel {
 	}
 
 	@PrePersist
-	public void setAudit() {
+	public void onCreate() {
 		if (getCreateUser() == null) {
 			setCreateUser("SYSTEM");
 		}
 
-		if (getCreateTimestamp() == null) {
-			setCreateTimestamp(LocalDateTime.now(Clock.systemUTC()));
-		}
+		setCreateTimestamp(LocalDateTime.now(Clock.systemUTC()));
 
+		setUpdateUser(getCreateUser());
+		setUpdateTimestamp(getCreateTimestamp());
+	}
+
+	@PreUpdate
+	public void onUpdate() {
 		if (getUpdateUser() == null) {
 			setUpdateUser("SYSTEM");
 		}
