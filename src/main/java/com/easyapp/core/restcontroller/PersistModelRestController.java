@@ -1,0 +1,98 @@
+package com.easyapp.core.restcontroller;
+
+import java.util.List;
+
+import javax.validation.Valid;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.easyapp.core.model.PersistModel;
+import com.easyapp.core.repository.PersistModelRepository;
+import com.easyapp.core.service.PersistModelService;
+import com.easyapp.core.service.PersistModelServiceImpl;
+
+abstract public class PersistModelRestController<T extends PersistModel> {
+	private PersistModelService<T> persistModelService;
+	
+	public PersistModelRestController(PersistModelRepository<T> persistModelRepository) {
+		persistModelService = new PersistModelServiceImpl<>(persistModelRepository);
+	}
+
+	@RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<T>> findAll() {
+		List<T> records = persistModelService.findAll();
+
+		if (records == null || records.size() <= 0) {
+			return new ResponseEntity<List<T>>(HttpStatus.NO_CONTENT);
+		}
+
+		return new ResponseEntity<List<T>>(records, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<T> findOne(@PathVariable("id") final String id) {
+		T record = persistModelService.findOne(id);
+
+		if (record == null) {
+			return new ResponseEntity<T>(HttpStatus.NOT_FOUND);
+		}
+
+		return new ResponseEntity<T>(record, HttpStatus.OK);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<T> createUsingPost(@RequestBody @Valid T record) {
+		T recordCreated = persistModelService.create(record);
+
+		if (recordCreated == null) {
+			return new ResponseEntity<T>(HttpStatus.CONFLICT);
+		}
+
+		return new ResponseEntity<T>(recordCreated, HttpStatus.CREATED);
+	}
+
+	@RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<T> createUsingPut(@RequestBody @Valid T record) {
+		T recordCreated = persistModelService.create(record);
+
+		if (recordCreated == null) {
+			return new ResponseEntity<T>(HttpStatus.CONFLICT);
+		}
+
+		return new ResponseEntity<T>(recordCreated, HttpStatus.CREATED);
+	}
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<T> updateUsingPost(@RequestBody @Valid T record) {
+		T recordUpdated = persistModelService.update(record);
+
+		if (recordUpdated == null) {
+			return new ResponseEntity<T>(HttpStatus.CONFLICT);
+		}
+
+		return new ResponseEntity<T>(recordUpdated, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<T> updateUsingPut(@RequestBody @Valid T record) {
+		T recordUpdated = persistModelService.update(record);
+
+		if (recordUpdated == null) {
+			return new ResponseEntity<T>(HttpStatus.CONFLICT);
+		}
+
+		return new ResponseEntity<T>(recordUpdated, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<T> delete(@PathVariable("id") final String id) {
+		persistModelService.delete(id);
+		return new ResponseEntity<T>(HttpStatus.OK);
+	}
+}
