@@ -20,10 +20,10 @@ public class Country extends PersistModel {
 	
 	@NotNull
 	@Column(unique = true)
-	private int isoNumericCode;
+	private Integer isoNumericCode;
 	
 	@NotNull
-	private int callingCode;
+	private Integer callingCode;
 
 	@NotNull
 	private String countryName;
@@ -54,19 +54,19 @@ public class Country extends PersistModel {
 		this.isoAlpha3Code = isoAlpha3Code != null ? isoAlpha3Code.trim().toUpperCase() : null;
 	}
 
-	public int getIsoNumericCode() {
+	public Integer getIsoNumericCode() {
 		return isoNumericCode;
 	}
 
-	public void setIsoNumericCode(final int isoNumericCode) {
+	public void setIsoNumericCode(final Integer isoNumericCode) {
 		this.isoNumericCode = isoNumericCode;
 	}
 
-	public int getCallingCode() {
+	public Integer getCallingCode() {
 		return callingCode;
 	}
 
-	public void setCallingCode(final int callingCode) {
+	public void setCallingCode(final Integer callingCode) {
 		this.callingCode = callingCode;
 	}
 
