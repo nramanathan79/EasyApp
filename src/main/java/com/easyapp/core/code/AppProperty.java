@@ -1,27 +1,40 @@
 package com.easyapp.core.code;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
-import com.easyapp.core.model.PersistModel;
+import com.easyapp.core.annotation.JsonStorage;
+import com.easyapp.core.util.Pair;
 
 @Entity
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"className", "propertyName", "version"}))
-public class AppProperty extends PersistModel {
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"className", "propertyName", "appName", "version"}))
+public class AppProperty extends AppBaseCode {
 	public enum PropertyMode {Simple, Object, List, Set, Map};
 	public enum PropertyType {Character, Boolean, String, Byte, Short, Integer, Long, Float, Double, LocalDate, LocalDateTime};
-	public enum PropertyInputType {Text, Password, TextArea, RadioButton, CheckBox, Dropdown, Number, Amount, Date, DateTime, Phone, Email, URL, Search, Color, Range};
+	public enum PropertyInputType {Text, Password, TextArea, RadioButton, CheckBox, Dropdown, ComboBox, Number, Amount, Date, DateTime, Phone, Email, URL, Search, Color, Range};
 	
 	@NotNull
+	@JsonStorage
 	private String className;
 	
 	@NotNull
 	private String propertyName;
 	
+	@NotNull
+	private String propertyLabel;
+	
+	@NotNull
+	@JsonStorage
+	private String appName;
+
 	@NotNull
 	private String version;
 	
@@ -34,6 +47,7 @@ public class AppProperty extends PersistModel {
 	
 	private String propertyObjectType;
 	
+	@Enumerated(EnumType.STRING)
 	private PropertyInputType propertyInputType;
 	
 	private Integer propertyMinLength;
@@ -50,7 +64,14 @@ public class AppProperty extends PersistModel {
 
 	private Boolean propertyRequired;
 	
+	private Boolean propertyPersist;
+	
+	@Transient
 	private String propertyValue;
+	
+	@Transient
+	@JsonStorage
+	private List<Pair<String, String>> propertyValidValues;
 
 	public String getClassName() {
 		return className;
@@ -66,6 +87,22 @@ public class AppProperty extends PersistModel {
 
 	public void setPropertyName(final String propertyName) {
 		this.propertyName = propertyName;
+	}
+
+	public String getPropertyLabel() {
+		return propertyLabel;
+	}
+
+	public void setPropertyLabel(final String propertyLabel) {
+		this.propertyLabel = propertyLabel;
+	}
+
+	public String getAppName() {
+		return appName;
+	}
+
+	public void setAppName(final String appName) {
+		this.appName = appName;
 	}
 
 	public String getVersion() {
@@ -164,11 +201,31 @@ public class AppProperty extends PersistModel {
 		this.propertyRequired = propertyRequired;
 	}
 
+	public Boolean getPropertyPersist() {
+		return propertyPersist;
+	}
+
+	public void setPropertyPersist(final Boolean propertyPersist) {
+		this.propertyPersist = propertyPersist;
+	}
+
 	public String getPropertyValue() {
 		return propertyValue;
 	}
 
 	public void setPropertyValue(final String propertyValue) {
 		this.propertyValue = propertyValue;
+	}
+
+	public List<Pair<String, String>> getPropertyValidValues() {
+		return propertyValidValues;
+	}
+
+	public void addPropertyValidValue(Pair<String, String> propertyValidValue) {
+		if (this.propertyValidValues == null) {
+			this.propertyValidValues = new ArrayList<>();
+		}
+
+		this.propertyValidValues.add(propertyValidValue);
 	}
 }

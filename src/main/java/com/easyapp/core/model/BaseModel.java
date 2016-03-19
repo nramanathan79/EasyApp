@@ -6,6 +6,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 abstract public class BaseModel {
+	protected static final ObjectMapper jsonMapper = new ObjectMapper();
+
 	private enum MessageType {
 		SUCCESS, WARNING, ERROR
 	};
@@ -73,7 +75,7 @@ abstract public class BaseModel {
 		success("SUCCESS");
 	}
 
-	public String toJSON() {
+	public String toJson() {
 		String json = null;
 		ObjectMapper jsonMapper = new ObjectMapper();
 
@@ -86,9 +88,8 @@ abstract public class BaseModel {
 		return json;
 	}
 
-	public static BaseModel fromJSON(String json, Class<? extends BaseModel> modelClass) {
+	public static BaseModel fromJson(String json, Class<? extends BaseModel> modelClass) {
 		BaseModel model = null;
-		ObjectMapper jsonMapper = new ObjectMapper();
 
 		try {
 			model = jsonMapper.readValue(json, modelClass);

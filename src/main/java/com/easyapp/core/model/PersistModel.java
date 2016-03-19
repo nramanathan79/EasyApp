@@ -3,12 +3,12 @@ package com.easyapp.core.model;
 import java.time.Clock;
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -22,18 +22,18 @@ abstract public class PersistModel extends BaseModel {
 	@GeneratedValue(generator = "system-uuid")
 	private String id;
 
-	@NotNull
-	private String createUser;
+	@Column(nullable = false)
+	private String createUserId;
 
-	@NotNull
+	@Column(nullable = false)
 	@JsonSerialize(using = JsonLocalDateTimeSerializer.class)
 	@JsonDeserialize(using = JsonLocalDateTimeDeserializer.class)
 	private LocalDateTime createTimestamp;
 
-	@NotNull
-	private String updateUser;
+	@Column(nullable = false)
+	private String updateUserId;
 
-	@NotNull
+	@Column(nullable = false)
 	@JsonSerialize(using = JsonLocalDateTimeSerializer.class)
 	@JsonDeserialize(using = JsonLocalDateTimeDeserializer.class)
 	private LocalDateTime updateTimestamp;
@@ -46,12 +46,12 @@ abstract public class PersistModel extends BaseModel {
 		this.id = id;
 	}
 
-	public String getCreateUser() {
-		return createUser;
+	public String getCreateUserId() {
+		return createUserId;
 	}
 
-	public void setCreateUser(final String createUser) {
-		this.createUser = createUser != null ? createUser.trim() : null;
+	public void setCreateUserId(final String createUserId) {
+		this.createUserId = createUserId != null ? createUserId.trim() : null;
 	}
 
 	public LocalDateTime getCreateTimestamp() {
@@ -62,12 +62,12 @@ abstract public class PersistModel extends BaseModel {
 		this.createTimestamp = createTimestamp;
 	}
 
-	public String getUpdateUser() {
-		return updateUser;
+	public String getUpdateUserId() {
+		return updateUserId;
 	}
 
-	public void setUpdateUser(final String updateUser) {
-		this.updateUser = updateUser != null ? updateUser.trim() : null;
+	public void setUpdateUserId(final String updateUserId) {
+		this.updateUserId = updateUserId != null ? updateUserId.trim() : null;
 	}
 
 	public LocalDateTime getUpdateTimestamp() {
@@ -79,21 +79,21 @@ abstract public class PersistModel extends BaseModel {
 	}
 
 	@PrePersist
-	public void onCreate() {
-		if (getCreateUser() == null) {
-			setCreateUser("SYSTEM");
+	public void beforeCreate() {
+		if (getCreateUserId() == null) {
+			setCreateUserId("SYSTEM");
 		}
 
 		setCreateTimestamp(LocalDateTime.now(Clock.systemUTC()));
 
-		setUpdateUser(getCreateUser());
+		setUpdateUserId(getCreateUserId());
 		setUpdateTimestamp(getCreateTimestamp());
 	}
 
 	@PreUpdate
-	public void onUpdate() {
-		if (getUpdateUser() == null) {
-			setUpdateUser("SYSTEM");
+	public void beforeUpdate() {
+		if (getUpdateUserId() == null) {
+			setUpdateUserId("SYSTEM");
 		}
 
 		setUpdateTimestamp(LocalDateTime.now(Clock.systemUTC()));
@@ -101,6 +101,6 @@ abstract public class PersistModel extends BaseModel {
 
 	@Override
 	public int hashCode() {
-		return getId().hashCode();
+		return getId() != null && getId().length() > 0 ? getId().hashCode() : super.hashCode();
 	}
 }
