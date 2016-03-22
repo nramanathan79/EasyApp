@@ -1,5 +1,6 @@
 package com.easyapp.core.code;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -11,28 +12,20 @@ import javax.validation.constraints.NotNull;
 import com.easyapp.core.annotation.JsonStorage;
 
 @Entity
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"className", "appName", "version"}))
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"appName", "version", "className"}))
 public class AppClass extends AppBaseCode {
-	@NotNull
-	private String className;
-
 	@NotNull
 	private String appName;
 
 	@NotNull
 	private String version;
 
+	@NotNull
+	private String className;
+
 	@Transient
 	@JsonStorage
 	private List<String> parentClasses;
-
-	public String getClassName() {
-		return className;
-	}
-
-	public void setClassName(final String className) {
-		this.className = className;
-	}
 
 	public String getAppName() {
 		return appName;
@@ -50,11 +43,28 @@ public class AppClass extends AppBaseCode {
 		this.version = version;
 	}
 
+	public String getClassName() {
+		return className;
+	}
+
+	public void setClassName(final String className) {
+		this.className = className;
+	}
+
 	public List<String> getParentClass() {
 		return parentClasses;
 	}
 
 	public void addParentClass(final String parentClass) {
 		this.parentClasses.add(parentClass);
+	}
+
+	public void removeParentClass(final String parentClass) {
+		this.parentClasses.remove(parentClass);
+	}
+
+	@Override
+	public List<String> uniqueKeyFields() {
+		return Arrays.asList("appName", "version", "className");
 	}
 }

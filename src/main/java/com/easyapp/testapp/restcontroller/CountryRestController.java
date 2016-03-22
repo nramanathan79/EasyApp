@@ -13,6 +13,6 @@ import com.easyapp.testapp.repository.CountryRepository;
 public class CountryRestController extends PersistModelRestController<Country> {
 	@Autowired
 	CountryRestController(CountryRepository countryRepository) {
-		super(countryRepository);
+		super(Country.class, countryRepository);
 	}
 }

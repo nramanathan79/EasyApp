@@ -12,16 +12,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.easyapp.core.entity.PersistEntity;
 import com.easyapp.core.model.PersistModel;
-import com.easyapp.core.repository.PersistModelRepository;
+import com.easyapp.core.repository.PersistEntityRepository;
 import com.easyapp.core.service.PersistModelService;
 import com.easyapp.core.service.PersistModelServiceImpl;
 
 abstract public class PersistModelRestController<T extends PersistModel> {
 	private PersistModelService<T> persistModelService;
 	
-	public PersistModelRestController(PersistModelRepository<T> persistModelRepository) {
-		persistModelService = new PersistModelServiceImpl<>(persistModelRepository);
+	public PersistModelRestController(Class<T> modelClass, PersistEntityRepository<? extends PersistEntity> persistEntityRepository) {
+		persistModelService = new PersistModelServiceImpl<>(modelClass, persistEntityRepository);
 	}
 
 	@RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

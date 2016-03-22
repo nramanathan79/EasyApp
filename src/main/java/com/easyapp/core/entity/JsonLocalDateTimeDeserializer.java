@@ -1,4 +1,4 @@
-package com.easyapp.core.model;
+package com.easyapp.core.entity;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -11,7 +11,6 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.node.TextNode;
 
 public class JsonLocalDateTimeDeserializer extends JsonDeserializer<LocalDateTime> {
-
 	@Override
 	public LocalDateTime deserialize(JsonParser parser, DeserializationContext context)
 			throws IOException, JsonProcessingException {

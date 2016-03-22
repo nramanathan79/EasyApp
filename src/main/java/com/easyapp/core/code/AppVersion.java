@@ -1,31 +1,26 @@
 package com.easyapp.core.code;
 
+import java.util.Arrays;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"version", "appName"}))
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"appName", "version"}))
 public class AppVersion extends AppBaseCode {
 	@NotNull
-	private String version;
+	private String appName;
 
 	@NotNull
-	private String appName;
+	private String version;
 
 	@NotNull
 	private Boolean locked = false;
 	
 	private String lockPassword;
-
-	public String getVersion() {
-		return version;
-	}
-
-	public void setVersion(final String version) {
-		this.version = version;
-	}
 
 	public String getAppName() {
 		return appName;
@@ -69,5 +64,10 @@ public class AppVersion extends AppBaseCode {
 			setLocked(false);
 			setLockPassword(null);
 		}
+	}
+
+	@Override
+	public List<String> uniqueKeyFields() {
+		return Arrays.asList("appName", "version");
 	}
 }

@@ -1,6 +1,7 @@
 package com.easyapp.core.code;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -15,87 +16,61 @@ import com.easyapp.core.annotation.JsonStorage;
 import com.easyapp.core.util.Pair;
 
 @Entity
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"className", "propertyName", "appName", "version"}))
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"appName", "version", "className", "propertyName"}))
 public class AppProperty extends AppBaseCode {
 	public enum PropertyMode {Simple, Object, List, Set, Map};
 	public enum PropertyType {Character, Boolean, String, Byte, Short, Integer, Long, Float, Double, LocalDate, LocalDateTime};
 	public enum PropertyInputType {Text, Password, TextArea, RadioButton, CheckBox, Dropdown, ComboBox, Number, Amount, Date, DateTime, Phone, Email, URL, Search, Color, Range};
 	
 	@NotNull
-	@JsonStorage
-	private String className;
-	
-	@NotNull
-	private String propertyName;
-	
-	@NotNull
-	private String propertyLabel;
-	
-	@NotNull
-	@JsonStorage
 	private String appName;
 
 	@NotNull
 	private String version;
 	
 	@NotNull
+	private String className;
+	
+	@NotNull
+	private String propertyName;
+	
+	@NotNull
+	private String label;
+	
+	@NotNull
 	@Enumerated(EnumType.STRING)
-	private PropertyMode propertyMode;
+	private PropertyMode mode;
 	
 	@Enumerated(EnumType.STRING)
-	private PropertyType propertyType;
+	private PropertyType type;
 	
-	private String propertyObjectType;
+	private String objectType;
 	
 	@Enumerated(EnumType.STRING)
-	private PropertyInputType propertyInputType;
+	private PropertyInputType inputType;
 	
-	private Integer propertyMinLength;
+	private Integer minLength;
 	
-	private Integer propertyMaxLength;
+	private Integer maxLength;
 	
-	private Integer propertyMinValue;
+	private Integer minValue;
 	
-	private Integer PropertyMaxValue;
+	private Integer maxValue;
 	
-	private Integer propertyStepInterval;
+	private Integer stepInterval;
 	
-	private String propertyInputPattern; 
+	private String inputPattern; 
 
-	private Boolean propertyRequired;
+	private Boolean required;
 	
-	private Boolean propertyPersist;
+	private Boolean persist;
 	
 	@Transient
-	private String propertyValue;
+	private String value;
 	
 	@Transient
 	@JsonStorage
-	private List<Pair<String, String>> propertyValidValues;
-
-	public String getClassName() {
-		return className;
-	}
-
-	public void setClassName(final String className) {
-		this.className = className;
-	}
-
-	public String getPropertyName() {
-		return propertyName;
-	}
-
-	public void setPropertyName(final String propertyName) {
-		this.propertyName = propertyName;
-	}
-
-	public String getPropertyLabel() {
-		return propertyLabel;
-	}
-
-	public void setPropertyLabel(final String propertyLabel) {
-		this.propertyLabel = propertyLabel;
-	}
+	private List<Pair<String, String>> validValues;
 
 	public String getAppName() {
 		return appName;
@@ -113,119 +88,158 @@ public class AppProperty extends AppBaseCode {
 		this.version = version;
 	}
 
-	public PropertyMode getPropertyMode() {
-		return propertyMode;
+	public String getClassName() {
+		return className;
 	}
 
-	public void setPropertyMode(final PropertyMode propertyMode) {
-		this.propertyMode = propertyMode;
+	public void setClassName(final String className) {
+		this.className = className;
 	}
 
-	public PropertyType getPropertyType() {
-		return propertyType;
+	public String getPropertyName() {
+		return propertyName;
 	}
 
-	public void setPropertyType(final PropertyType propertyType) {
-		this.propertyType = propertyType;
+	public void setPropertyName(final String propertyName) {
+		this.propertyName = propertyName;
 	}
 
-	public String getPropertyObjectType() {
-		return propertyObjectType;
+	public String getLabel() {
+		return label;
 	}
 
-	public void setPropertyObjectType(final String propertyObjectType) {
-		this.propertyObjectType = propertyObjectType;
+	public void setLabel(final String label) {
+		this.label = label;
 	}
 
-	public PropertyInputType getPropertyInputType() {
-		return propertyInputType;
+	public PropertyMode getMode() {
+		return mode;
 	}
 
-	public void setPropertyInputType(final PropertyInputType propertyInputType) {
-		this.propertyInputType = propertyInputType;
+	public void setMode(final PropertyMode mode) {
+		this.mode = mode;
 	}
 
-	public Integer getPropertyMinLength() {
-		return propertyMinLength;
+	public PropertyType getType() {
+		return type;
 	}
 
-	public void setPropertyMinLength(final Integer propertyMinLength) {
-		this.propertyMinLength = propertyMinLength;
+	public void setType(final PropertyType type) {
+		this.type = type;
 	}
 
-	public Integer getPropertyMaxLength() {
-		return propertyMaxLength;
+	public String getObjectType() {
+		return objectType;
 	}
 
-	public void setPropertyMaxLength(final Integer propertyMaxLength) {
-		this.propertyMaxLength = propertyMaxLength;
+	public void setObjectType(final String objectType) {
+		this.objectType = objectType;
 	}
 
-	public Integer getPropertyMinValue() {
-		return propertyMinValue;
+	public PropertyInputType getInputType() {
+		return inputType;
 	}
 
-	public void setPropertyMinValue(final Integer propertyMinValue) {
-		this.propertyMinValue = propertyMinValue;
+	public void setInputType(final PropertyInputType inputType) {
+		this.inputType = inputType;
 	}
 
-	public Integer getPropertyMaxValue() {
-		return PropertyMaxValue;
+	public Integer getMinLength() {
+		return minLength;
 	}
 
-	public void setPropertyMaxValue(final Integer propertyMaxValue) {
-		PropertyMaxValue = propertyMaxValue;
+	public void setMinLength(final Integer minLength) {
+		this.minLength = minLength;
 	}
 
-	public Integer getPropertyStepInterval() {
-		return propertyStepInterval;
+	public Integer getMaxLength() {
+		return maxLength;
 	}
 
-	public void setPropertyStepInterval(final Integer propertyStepInterval) {
-		this.propertyStepInterval = propertyStepInterval;
+	public void setMaxLength(final Integer maxLength) {
+		this.maxLength = maxLength;
 	}
 
-	public String getPropertyInputPattern() {
-		return propertyInputPattern;
+	public Integer getMinValue() {
+		return minValue;
 	}
 
-	public void setPropertyInputPattern(final String propertyInputPattern) {
-		this.propertyInputPattern = propertyInputPattern;
+	public void setMinValue(final Integer minValue) {
+		this.minValue = minValue;
 	}
 
-	public Boolean getPropertyRequired() {
-		return propertyRequired;
+	public Integer getMaxValue() {
+		return maxValue;
 	}
 
-	public void setPropertyRequired(final Boolean propertyRequired) {
-		this.propertyRequired = propertyRequired;
+	public void setMaxValue(final Integer maxValue) {
+		this.maxValue = maxValue;
 	}
 
-	public Boolean getPropertyPersist() {
-		return propertyPersist;
+	public Integer getStepInterval() {
+		return stepInterval;
 	}
 
-	public void setPropertyPersist(final Boolean propertyPersist) {
-		this.propertyPersist = propertyPersist;
+	public void setStepInterval(final Integer stepInterval) {
+		this.stepInterval = stepInterval;
 	}
 
-	public String getPropertyValue() {
-		return propertyValue;
+	public String getInputPattern() {
+		return inputPattern;
 	}
 
-	public void setPropertyValue(final String propertyValue) {
-		this.propertyValue = propertyValue;
+	public void setInputPattern(final String inputPattern) {
+		this.inputPattern = inputPattern;
 	}
 
-	public List<Pair<String, String>> getPropertyValidValues() {
-		return propertyValidValues;
+	public Boolean getRequired() {
+		return required;
 	}
 
-	public void addPropertyValidValue(Pair<String, String> propertyValidValue) {
-		if (this.propertyValidValues == null) {
-			this.propertyValidValues = new ArrayList<>();
+	public void setRequired(final Boolean required) {
+		this.required = required;
+	}
+
+	public Boolean getPersist() {
+		return persist;
+	}
+
+	public void setPersist(final Boolean persist) {
+		this.persist = persist;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(final String value) {
+		this.value = value;
+	}
+
+	public List<Pair<String, String>> getValidValues() {
+		return validValues;
+	}
+
+	public void addValidValue(final Pair<String, String> validValue) {
+		if (this.validValues == null) {
+			this.validValues = new ArrayList<>();
 		}
 
-		this.propertyValidValues.add(propertyValidValue);
+		this.validValues.add(validValue);
+	}
+
+	public void removeValidValue(final Pair<String, String> validValue) {
+		if (this.validValues != null) {
+			this.validValues.remove(validValue);
+			
+			if (this.validValues.isEmpty()) {
+				this.validValues = null;
+			}
+		}
+	}
+
+	@Override
+	public List<String> uniqueKeyFields() {
+		return Arrays.asList("appName", "version", "className", "propertyName");
 	}
 }

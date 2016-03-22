@@ -1,41 +1,19 @@
 package com.easyapp.core.model;
 
-import java.time.Clock;
 import java.time.LocalDateTime;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
+import com.easyapp.core.BaseData;
+import com.easyapp.core.entity.PersistEntity;
 
-import org.hibernate.annotations.GenericGenerator;
-
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
-@MappedSuperclass
-abstract public class PersistModel extends BaseModel {
-	@Id
-	@GenericGenerator(name = "system-uuid", strategy = "uuid2")
-	@GeneratedValue(generator = "system-uuid")
+abstract public class PersistModel extends BaseData {
 	private String id;
 
-	@Column(nullable = false)
 	private String createUserId;
 
-	@Column(nullable = false)
-	@JsonSerialize(using = JsonLocalDateTimeSerializer.class)
-	@JsonDeserialize(using = JsonLocalDateTimeDeserializer.class)
 	private LocalDateTime createTimestamp;
 
-	@Column(nullable = false)
 	private String updateUserId;
 
-	@Column(nullable = false)
-	@JsonSerialize(using = JsonLocalDateTimeSerializer.class)
-	@JsonDeserialize(using = JsonLocalDateTimeDeserializer.class)
 	private LocalDateTime updateTimestamp;
 
 	public String getId() {
@@ -78,29 +56,22 @@ abstract public class PersistModel extends BaseModel {
 		this.updateTimestamp = updateTimestamp;
 	}
 
-	@PrePersist
-	public void beforeCreate() {
-		if (getCreateUserId() == null) {
-			setCreateUserId("SYSTEM");
+	public static <T extends PersistModel> T buildModelFromEntity(PersistEntity persistEntity, Class<T> modelClass) {
+		T persistModel = null;
+
+		try {
+			persistModel = modelClass.newInstance();
+			persistModel.mapFrom(persistEntity);
+		} catch (InstantiationException ie) {
+			ie.printStackTrace();
+		} catch (IllegalAccessException iae) {
+			iae.printStackTrace();
 		}
 
-		setCreateTimestamp(LocalDateTime.now(Clock.systemUTC()));
-
-		setUpdateUserId(getCreateUserId());
-		setUpdateTimestamp(getCreateTimestamp());
+		return persistModel;
 	}
 
-	@PreUpdate
-	public void beforeUpdate() {
-		if (getUpdateUserId() == null) {
-			setUpdateUserId("SYSTEM");
-		}
+	abstract public void mapFrom(PersistEntity persistEntity);
 
-		setUpdateTimestamp(LocalDateTime.now(Clock.systemUTC()));
-	}
-
-	@Override
-	public int hashCode() {
-		return getId() != null && getId().length() > 0 ? getId().hashCode() : super.hashCode();
-	}
+	abstract public <T extends PersistEntity> T mapTo();
 }

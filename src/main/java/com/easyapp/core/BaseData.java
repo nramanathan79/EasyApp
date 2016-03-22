@@ -1,11 +1,11 @@
-package com.easyapp.core.model;
+package com.easyapp.core;
 
 import java.io.IOException;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-abstract public class BaseModel {
+abstract public class BaseData {
 	protected static final ObjectMapper jsonMapper = new ObjectMapper();
 
 	private enum MessageType {
@@ -15,9 +15,8 @@ abstract public class BaseModel {
 	private int messageCode;
 	private MessageType messageType;
 	private String messageText;
-	private int rowsAffected;
 
-	public BaseModel() {
+	public BaseData() {
 		success("SUCCESS");
 	}
 
@@ -43,14 +42,6 @@ abstract public class BaseModel {
 
 	protected void setMessageText(final String messageText) {
 		this.messageText = messageText;
-	}
-
-	public int getRowsAffected() {
-		return rowsAffected;
-	}
-
-	protected void setRowsAffected(final int rowsAffected) {
-		this.rowsAffected = rowsAffected;
 	}
 
 	public void success(String successMessage) {
@@ -88,8 +79,8 @@ abstract public class BaseModel {
 		return json;
 	}
 
-	public static BaseModel fromJson(String json, Class<? extends BaseModel> modelClass) {
-		BaseModel model = null;
+	public static BaseData fromJson(String json, Class<? extends BaseData> modelClass) {
+		BaseData model = null;
 
 		try {
 			model = jsonMapper.readValue(json, modelClass);

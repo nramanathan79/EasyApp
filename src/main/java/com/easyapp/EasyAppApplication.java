@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableJpaRepositories
 @EnableTransactionManagement
 public class EasyAppApplication {
-
 	@Bean
 	public DataSource dataSource() {
 	  JndiDataSourceLookup dataSourceLookup = new JndiDataSourceLookup();
