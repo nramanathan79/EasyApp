@@ -17,9 +17,9 @@
 <script type="text/javascript"
 	src="webjars/bootstrap/3.3.6/bootstrap.min.js"></script>
 <script type="text/javascript"
-	src="webjars/angularjs/1.5.0/angular.min.js"></script>
+	src="webjars/angularjs/1.5.2/angular.min.js"></script>
 <script type="text/javascript"
-	src="webjars/angularjs/1.5.0/angular-resource.min.js"></script>
+	src="webjars/angularjs/1.5.2/angular-resource.min.js"></script>
 <script type="text/javascript" src="resources/js/dataTable.js"></script>
 </head>
 <body>
