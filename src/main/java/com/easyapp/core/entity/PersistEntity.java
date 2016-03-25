@@ -19,6 +19,8 @@ import com.easyapp.core.data.BaseData;
 import com.easyapp.core.event.PersistEvent;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 @MappedSuperclass
 abstract public class PersistEntity extends BaseData implements PersistEvent {
@@ -29,16 +31,16 @@ abstract public class PersistEntity extends BaseData implements PersistEvent {
 	private String createUserId;
 
 	@Column(nullable = false)
-	@JsonSerialize(using = JsonLocalDateTimeSerializer.class)
-	@JsonDeserialize(using = JsonLocalDateTimeDeserializer.class)
+	@JsonSerialize(using = LocalDateTimeSerializer.class)
+	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
 	private LocalDateTime createTimestamp;
 
 	@Column(nullable = false)
 	private String updateUserId;
 
 	@Column(nullable = false)
-	@JsonSerialize(using = JsonLocalDateTimeSerializer.class)
-	@JsonDeserialize(using = JsonLocalDateTimeDeserializer.class)
+	@JsonSerialize(using = LocalDateTimeSerializer.class)
+	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
 	private LocalDateTime updateTimestamp;
 
 	public String getId() {

@@ -62,24 +62,12 @@ abstract public class PersistModelRestController<T extends PersistModel> {
 
 	@RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<T> createUsingPut(@RequestBody @Valid T record) {
-		Optional<T> recordCreated = persistModelService.create(record);
-
-		if (recordCreated == null || !recordCreated.isPresent()) {
-			return new ResponseEntity<T>(HttpStatus.CONFLICT);
-		}
-
-		return new ResponseEntity<T>(recordCreated.get(), HttpStatus.CREATED);
+		return createUsingPost(record);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<T> updateUsingPost(@RequestBody @Valid T record) {
-		Optional<T> recordUpdated = persistModelService.update(record);
-
-		if (recordUpdated == null || !recordUpdated.isPresent()) {
-			return new ResponseEntity<T>(HttpStatus.CONFLICT);
-		}
-
-		return new ResponseEntity<T>(recordUpdated.get(), HttpStatus.OK);
+		return updateUsingPut(record);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

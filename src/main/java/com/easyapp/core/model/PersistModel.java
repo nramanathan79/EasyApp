@@ -5,16 +5,24 @@ import java.util.Optional;
 
 import com.easyapp.core.data.BaseData;
 import com.easyapp.core.entity.PersistEntity;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 abstract public class PersistModel extends BaseData {
 	private String id;
 
 	private String createUserId;
 
+	@JsonSerialize(using = LocalDateTimeSerializer.class)
+	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
 	private LocalDateTime createTimestamp;
 
 	private String updateUserId;
 
+	@JsonSerialize(using = LocalDateTimeSerializer.class)
+	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
 	private LocalDateTime updateTimestamp;
 
 	public String getId() {

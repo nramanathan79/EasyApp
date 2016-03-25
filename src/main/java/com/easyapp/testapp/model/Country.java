@@ -1,9 +1,12 @@
 package com.easyapp.testapp.model;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import com.easyapp.core.entity.PersistEntity;
 import com.easyapp.core.model.PersistModel;
 import com.easyapp.testapp.entity.CountryEntity;
 
+@XmlRootElement
 public class Country extends PersistModel {
 	private String isoAlpha2Code;
 	private String isoAlpha3Code;
