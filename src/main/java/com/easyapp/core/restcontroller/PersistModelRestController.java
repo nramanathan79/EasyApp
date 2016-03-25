@@ -1,6 +1,7 @@
 package com.easyapp.core.restcontroller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -20,8 +21,9 @@ import com.easyapp.core.service.PersistModelServiceImpl;
 
 abstract public class PersistModelRestController<T extends PersistModel> {
 	private PersistModelService<T> persistModelService;
-	
-	public PersistModelRestController(Class<T> modelClass, PersistEntityRepository<? extends PersistEntity> persistEntityRepository) {
+
+	public PersistModelRestController(Class<T> modelClass,
+			PersistEntityRepository<? extends PersistEntity> persistEntityRepository) {
 		persistModelService = new PersistModelServiceImpl<>(modelClass, persistEntityRepository);
 	}
 
@@ -38,57 +40,57 @@ abstract public class PersistModelRestController<T extends PersistModel> {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<T> findOne(@PathVariable("id") final String id) {
-		T record = persistModelService.findOne(id);
+		Optional<T> record = persistModelService.findOne(id);
 
 		if (record == null) {
 			return new ResponseEntity<T>(HttpStatus.NOT_FOUND);
 		}
 
-		return new ResponseEntity<T>(record, HttpStatus.OK);
+		return new ResponseEntity<T>(record.get(), HttpStatus.OK);
 	}
 
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<T> createUsingPost(@RequestBody @Valid T record) {
-		T recordCreated = persistModelService.create(record);
+		Optional<T> recordCreated = persistModelService.create(record);
 
-		if (recordCreated == null) {
+		if (recordCreated == null || !recordCreated.isPresent()) {
 			return new ResponseEntity<T>(HttpStatus.CONFLICT);
 		}
 
-		return new ResponseEntity<T>(recordCreated, HttpStatus.CREATED);
+		return new ResponseEntity<T>(recordCreated.get(), HttpStatus.CREATED);
 	}
 
 	@RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<T> createUsingPut(@RequestBody @Valid T record) {
-		T recordCreated = persistModelService.create(record);
+		Optional<T> recordCreated = persistModelService.create(record);
 
-		if (recordCreated == null) {
+		if (recordCreated == null || !recordCreated.isPresent()) {
 			return new ResponseEntity<T>(HttpStatus.CONFLICT);
 		}
 
-		return new ResponseEntity<T>(recordCreated, HttpStatus.CREATED);
+		return new ResponseEntity<T>(recordCreated.get(), HttpStatus.CREATED);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<T> updateUsingPost(@RequestBody @Valid T record) {
-		T recordUpdated = persistModelService.update(record);
+		Optional<T> recordUpdated = persistModelService.update(record);
 
-		if (recordUpdated == null) {
+		if (recordUpdated == null || !recordUpdated.isPresent()) {
 			return new ResponseEntity<T>(HttpStatus.CONFLICT);
 		}
 
-		return new ResponseEntity<T>(recordUpdated, HttpStatus.OK);
+		return new ResponseEntity<T>(recordUpdated.get(), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<T> updateUsingPut(@RequestBody @Valid T record) {
-		T recordUpdated = persistModelService.update(record);
+		Optional<T> recordUpdated = persistModelService.update(record);
 
-		if (recordUpdated == null) {
+		if (recordUpdated == null || !recordUpdated.isPresent()) {
 			return new ResponseEntity<T>(HttpStatus.CONFLICT);
 		}
 
-		return new ResponseEntity<T>(recordUpdated, HttpStatus.OK);
+		return new ResponseEntity<T>(recordUpdated.get(), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)

@@ -1,8 +1,9 @@
 package com.easyapp.core.model;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
-import com.easyapp.core.BaseData;
+import com.easyapp.core.data.BaseData;
 import com.easyapp.core.entity.PersistEntity;
 
 abstract public class PersistModel extends BaseData {
@@ -56,22 +57,56 @@ abstract public class PersistModel extends BaseData {
 		this.updateTimestamp = updateTimestamp;
 	}
 
-	public static <T extends PersistModel> T buildModelFromEntity(PersistEntity persistEntity, Class<T> modelClass) {
-		T persistModel = null;
+	abstract protected void mapFrom(final PersistEntity persistEntity);
 
-		try {
-			persistModel = modelClass.newInstance();
-			persistModel.mapFrom(persistEntity);
-		} catch (InstantiationException ie) {
-			ie.printStackTrace();
-		} catch (IllegalAccessException iae) {
-			iae.printStackTrace();
+	abstract protected <T extends PersistEntity> T mapTo();
+
+	@SuppressWarnings(value = { "unchecked" })
+	public static <T extends PersistModel> Optional<T> buildModelFromEntity(final PersistEntity persistEntity,
+			final Class<T> modelClass) {
+		Optional<T> persistModel = Optional.empty();
+
+		if (persistEntity != null) {
+			try {
+				PersistModel model = modelClass.newInstance();
+
+				model.setId(persistEntity.getId());
+				model.setCreateUserId(persistEntity.getCreateUserId());
+				model.setCreateTimestamp(persistEntity.getCreateTimestamp());
+				model.setUpdateUserId(persistEntity.getUpdateUserId());
+				model.setUpdateTimestamp(persistEntity.getUpdateTimestamp());
+
+				model.mapFrom(persistEntity);
+
+				persistModel = Optional.of((T) model);
+			} catch (InstantiationException ie) {
+				ie.printStackTrace();
+			} catch (IllegalAccessException iae) {
+				iae.printStackTrace();
+			}
 		}
 
 		return persistModel;
 	}
 
-	abstract public void mapFrom(PersistEntity persistEntity);
+	@Override
+	public void onChange(Object newValue) {
+		// Do nothing.
+	}
 
-	abstract public <T extends PersistEntity> T mapTo();
+	public <T extends PersistEntity> T buildEntityFromModelAndMerge(final PersistEntity existingRecord) {
+		T newRecord = mapTo();
+
+		if (existingRecord != null) {
+			newRecord.setId(existingRecord.getId());
+			newRecord.setCreateUserId(existingRecord.getCreateUserId());
+			newRecord.setCreateTimestamp(existingRecord.getCreateTimestamp());
+		}
+
+		return newRecord;
+	}
+
+	public <T extends PersistEntity> T buildEntityFromModel() {
+		return buildEntityFromModelAndMerge(null);
+	}
 }

@@ -1,11 +1,12 @@
-package com.easyapp.core;
+package com.easyapp.core.data;
 
 import java.io.IOException;
 
+import com.easyapp.core.event.Event;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-abstract public class BaseData {
+abstract public class BaseData implements Event {
 	protected static final ObjectMapper jsonMapper = new ObjectMapper();
 
 	private enum MessageType {
@@ -44,19 +45,19 @@ abstract public class BaseData {
 		this.messageText = messageText;
 	}
 
-	public void success(String successMessage) {
+	public void success(final String successMessage) {
 		setMessageCode(0);
 		setMessageType(MessageType.SUCCESS);
 		setMessageText(successMessage);
 	}
 
-	public void warning(int warningCode, String warningMessage) {
+	public void warning(final int warningCode, final String warningMessage) {
 		setMessageCode(warningCode);
 		setMessageType(MessageType.WARNING);
 		setMessageText(warningMessage);
 	}
 
-	public void error(int errorCode, String errorMessage) {
+	public void error(final int errorCode, final String errorMessage) {
 		setMessageCode(errorCode);
 		setMessageType(MessageType.ERROR);
 		setMessageText(errorMessage);
@@ -79,7 +80,7 @@ abstract public class BaseData {
 		return json;
 	}
 
-	public static BaseData fromJson(String json, Class<? extends BaseData> modelClass) {
+	public static BaseData fromJson(final String json, Class<? extends BaseData> modelClass) {
 		BaseData model = null;
 
 		try {

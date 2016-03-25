@@ -27,7 +27,7 @@ abstract public class AppBaseCode extends PersistEntity {
 		return jsonStorage;
 	}
 
-	private Object getFieldValue(Field field, AppBaseCode baseCode) {
+	private Object getFieldValue(Field field, final AppBaseCode baseCode) {
 		Object value = null;
 
 		try {
@@ -112,19 +112,26 @@ abstract public class AppBaseCode extends PersistEntity {
 		setJsonStorage();
 	}
 
+	@Override
 	@PostPersist
 	public void afterCreate() {
 		clearJsonStorage();
 	}
 
+	@Override
 	@PostUpdate
 	public void afterUpdate() {
 		clearJsonStorage();
 	}
 
 	@PostLoad
-	public void afterLoad() {
+	public final void afterLoad() {
 		restoreFromJson();
 		clearJsonStorage();
+	}
+	
+	@Override
+	public void onChange(Object newValue) {
+		// Do Nothing for now. Would need to add audit history
 	}
 }

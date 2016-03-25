@@ -1,5 +1,7 @@
 package com.easyapp.core.code;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -66,12 +68,12 @@ public class AppProperty extends AppBaseCode {
 	private Boolean persist;
 	
 	@Transient
-	private String value;
+	private Object value;
 	
 	@Transient
 	@JsonStorage
 	private List<Pair<String, String>> validValues;
-
+	
 	public String getAppName() {
 		return appName;
 	}
@@ -208,11 +210,55 @@ public class AppProperty extends AppBaseCode {
 		this.persist = persist;
 	}
 
-	public String getValue() {
+	public Object getValue() {
 		return value;
 	}
 
+	public void setValue(final Character value) {
+		this.value = new Character(value);
+	}
+
+	public void setValue(final Boolean value) {
+		this.value = new Boolean(value);
+	}
+
 	public void setValue(final String value) {
+		this.value = new String(value);
+	}
+
+	public void setValue(final Byte value) {
+		this.value = new Byte(value);
+	}
+
+	public void setValue(final Short value) {
+		this.value = new Short(value);
+	}
+
+	public void setValue(final Integer value) {
+		this.value = new Integer(value);
+	}
+
+	public void setValue(final Long value) {
+		this.value = new Long(value);
+	}
+
+	public void setValue(final Float value) {
+		this.value = new Float(value);
+	}
+
+	public void setValue(final Double value) {
+		this.value = new Double(value);
+	}
+
+	public void setValue(final LocalDate value) {
+		this.value = LocalDate.of(value.getYear(), value.getMonthValue(), value.getDayOfMonth());
+	}
+
+	public void setValue(final LocalDateTime value) {
+		this.value = LocalDateTime.of(value.toLocalDate(), value.toLocalTime());
+	}
+	
+	public void setValue(Object value) {
 		this.value = value;
 	}
 

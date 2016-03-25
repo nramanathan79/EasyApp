@@ -22,6 +22,11 @@ public class AppClass extends AppBaseCode {
 
 	@NotNull
 	private String className;
+	
+	@NotNull
+	private Boolean persist;
+	
+	private String tableName;
 
 	@Transient
 	@JsonStorage
@@ -49,6 +54,22 @@ public class AppClass extends AppBaseCode {
 
 	public void setClassName(final String className) {
 		this.className = className;
+	}
+
+	public Boolean getPersist() {
+		return persist;
+	}
+
+	public void setPersist(final Boolean persist) {
+		this.persist = persist;
+	}
+
+	public String getTableName() {
+		return tableName;
+	}
+
+	public void setTableName(final String tableName) {
+		this.tableName = tableName;
 	}
 
 	public List<String> getParentClass() {

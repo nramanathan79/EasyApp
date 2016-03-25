@@ -10,15 +10,18 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.PostPersist;
+import javax.persistence.PostUpdate;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 
-import com.easyapp.core.BaseData;
+import com.easyapp.core.data.BaseData;
+import com.easyapp.core.event.PersistEvent;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @MappedSuperclass
-abstract public class PersistEntity extends BaseData {
+abstract public class PersistEntity extends BaseData implements PersistEvent {
 	@Id
 	private String id;
 
@@ -78,7 +81,7 @@ abstract public class PersistEntity extends BaseData {
 		this.updateTimestamp = updateTimestamp;
 	}
 
-	private String getFieldValue(String fieldName) {
+	private String getFieldValue(final String fieldName) {
 		String fieldValue = "";
 
 		try {
@@ -131,12 +134,21 @@ abstract public class PersistEntity extends BaseData {
 		return getId() != null && getId().length() > 0 ? getId().hashCode() : super.hashCode();
 	}
 
-	@SuppressWarnings(value = { "unchecked" })
-	public <T extends PersistEntity> T merge(PersistEntity existingEntity) {
-		setCreateUserId(existingEntity.getCreateUserId());
-		setCreateTimestamp(existingEntity.getCreateTimestamp());
-		
-		return (T) this;
+	@Override
+	@PostPersist
+	public void afterCreate() {
+		// Do nothing;
+	}
+
+	@Override
+	@PostUpdate
+	public void afterUpdate() {
+		// Do nothing;
+	}
+
+	@Override
+	public void onChange(Object newValue) {
+		// Do nothing;
 	}
 
 	abstract public List<String> uniqueKeyFields();

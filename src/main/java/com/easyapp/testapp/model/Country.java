@@ -88,11 +88,10 @@ public class Country extends PersistModel {
 	}
 
 	@Override
-	public void mapFrom(PersistEntity persistEntity) {
+	protected void mapFrom(final PersistEntity persistEntity) {
 		if (persistEntity instanceof CountryEntity) {
 			CountryEntity countryEntity = (CountryEntity) persistEntity;
 
-			setId(countryEntity.getId());
 			setIsoAlpha2Code(countryEntity.getIsoAlpha2Code());
 			setIsoAlpha3Code(countryEntity.getIsoAlpha3Code());
 			setIsoNumericCode(countryEntity.getIsoNumericCode());
@@ -107,10 +106,9 @@ public class Country extends PersistModel {
 
 	@Override
 	@SuppressWarnings(value = { "unchecked" })
-	public <T extends PersistEntity> T mapTo() {
+	protected <T extends PersistEntity> T mapTo() {
 		CountryEntity countryEntity = new CountryEntity();
 
-		countryEntity.setId(getId());
 		countryEntity.setIsoAlpha2Code(getIsoAlpha2Code());
 		countryEntity.setIsoAlpha3Code(getIsoAlpha3Code());
 		countryEntity.setIsoNumericCode(getIsoNumericCode());
