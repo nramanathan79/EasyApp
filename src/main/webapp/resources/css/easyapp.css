@@ -10,6 +10,12 @@
 	display: inline;
 }
 
-.required {
+.required-field::after {
 	color: red;
+	content: "*";
+	margin-left: 2px;
+}
+
+.column-filter {
+	width: 1px;
 }

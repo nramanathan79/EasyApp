@@ -107,6 +107,20 @@ angular
 		}
 	}
 	
+	$scope.hasSort = function(column) {
+		var columnIndex = $scope.sortBy.indexOf(column);
+		if (columnIndex >= 0) {
+			return true;
+		}
+		
+		var columnReverseIndex = $scope.sortBy.indexOf("-" + column);
+		if (columnReverseIndex >= 0) {
+			return true;
+		}
+		
+		return false;
+	}
+
 	$scope.showSortIndex = function(column) {
 		if ($scope.sortSelection === "Multiple") {
 			var columnIndex = $scope.sortBy.indexOf(column);
