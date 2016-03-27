@@ -42,7 +42,7 @@ abstract public class PersistModelRestController<T extends PersistModel> {
 	public ResponseEntity<T> findOne(@PathVariable("id") final String id) {
 		Optional<T> record = persistModelService.findOne(id);
 
-		if (record == null) {
+		if (record == null || !record.isPresent()) {
 			return new ResponseEntity<T>(HttpStatus.NOT_FOUND);
 		}
 

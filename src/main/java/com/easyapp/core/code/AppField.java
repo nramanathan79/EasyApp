@@ -18,62 +18,74 @@ import com.easyapp.core.annotation.JsonStorage;
 import com.easyapp.core.util.Pair;
 
 @Entity
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"appName", "version", "className", "propertyName"}))
-public class AppProperty extends AppBaseCode {
-	public enum PropertyMode {Simple, Object, List, Set, Map};
-	public enum PropertyType {Character, Boolean, String, Byte, Short, Integer, Long, Float, Double, LocalDate, LocalDateTime};
-	public enum PropertyInputType {Text, Password, TextArea, RadioButton, CheckBox, Dropdown, ComboBox, Number, Amount, Date, DateTime, Phone, Email, URL, Search, Color, Range};
-	
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = { "appName", "version", "className", "fieldName" }))
+public class AppField extends AppBaseCode {
+	public enum FieldMode {
+		Simple, Object, List, Set, Map
+	};
+
+	public enum FieldType {
+		Character, Boolean, String, Byte, Short, Integer, Long, Float, Double, LocalDate, LocalDateTime
+	};
+
+	public enum FieldInputType {
+		Text, Password, TextArea, RadioButton, CheckBox, Dropdown, ComboBox, Number, Amount, Date, DateTime, Phone, Email, URL, Search, Color, Range
+	};
+
 	@NotNull
 	private String appName;
 
 	@NotNull
 	private String version;
-	
+
 	@NotNull
 	private String className;
-	
+
 	@NotNull
-	private String propertyName;
-	
+	private String fieldName;
+
 	@NotNull
 	private String label;
-	
+
 	@NotNull
 	@Enumerated(EnumType.STRING)
-	private PropertyMode mode;
-	
+	private FieldMode mode;
+
 	@Enumerated(EnumType.STRING)
-	private PropertyType type;
-	
+	private FieldType type;
+
 	private String objectType;
-	
+
 	@Enumerated(EnumType.STRING)
-	private PropertyInputType inputType;
-	
+	private FieldInputType inputType;
+
 	private Integer minLength;
-	
+
 	private Integer maxLength;
-	
+
 	private Integer minValue;
-	
+
 	private Integer maxValue;
-	
+
 	private Integer stepInterval;
-	
-	private String inputPattern; 
+
+	private String inputPattern;
+
+	private String patternMismatchMessage;
 
 	private Boolean required;
-	
+
 	private Boolean persist;
-	
+
+	private String placeholder;
+
 	@Transient
 	private Object value;
-	
+
 	@Transient
 	@JsonStorage
 	private List<Pair<String, String>> validValues;
-	
+
 	public String getAppName() {
 		return appName;
 	}
@@ -98,12 +110,12 @@ public class AppProperty extends AppBaseCode {
 		this.className = className;
 	}
 
-	public String getPropertyName() {
-		return propertyName;
+	public String getFieldName() {
+		return fieldName;
 	}
 
-	public void setPropertyName(final String propertyName) {
-		this.propertyName = propertyName;
+	public void setFieldName(final String fieldName) {
+		this.fieldName = fieldName;
 	}
 
 	public String getLabel() {
@@ -114,19 +126,19 @@ public class AppProperty extends AppBaseCode {
 		this.label = label;
 	}
 
-	public PropertyMode getMode() {
+	public FieldMode getMode() {
 		return mode;
 	}
 
-	public void setMode(final PropertyMode mode) {
+	public void setMode(final FieldMode mode) {
 		this.mode = mode;
 	}
 
-	public PropertyType getType() {
+	public FieldType getType() {
 		return type;
 	}
 
-	public void setType(final PropertyType type) {
+	public void setType(final FieldType type) {
 		this.type = type;
 	}
 
@@ -138,11 +150,11 @@ public class AppProperty extends AppBaseCode {
 		this.objectType = objectType;
 	}
 
-	public PropertyInputType getInputType() {
+	public FieldInputType getInputType() {
 		return inputType;
 	}
 
-	public void setInputType(final PropertyInputType inputType) {
+	public void setInputType(final FieldInputType inputType) {
 		this.inputType = inputType;
 	}
 
@@ -192,6 +204,14 @@ public class AppProperty extends AppBaseCode {
 
 	public void setInputPattern(final String inputPattern) {
 		this.inputPattern = inputPattern;
+	}
+
+	public String getPatternMismatchMessage() {
+		return patternMismatchMessage;
+	}
+
+	public void setPatternMismatchMessage(final String patternMismatchMessage) {
+		this.patternMismatchMessage = patternMismatchMessage;
 	}
 
 	public Boolean getRequired() {
@@ -257,13 +277,17 @@ public class AppProperty extends AppBaseCode {
 	public void setValue(final LocalDateTime value) {
 		this.value = LocalDateTime.of(value.toLocalDate(), value.toLocalTime());
 	}
-	
+
 	public void setValue(Object value) {
 		this.value = value;
 	}
 
 	public List<Pair<String, String>> getValidValues() {
 		return validValues;
+	}
+
+	public void setValidValues(List<Pair<String, String>> validValues) {
+		this.validValues = validValues;
 	}
 
 	public void addValidValue(final Pair<String, String> validValue) {
@@ -277,15 +301,23 @@ public class AppProperty extends AppBaseCode {
 	public void removeValidValue(final Pair<String, String> validValue) {
 		if (this.validValues != null) {
 			this.validValues.remove(validValue);
-			
+
 			if (this.validValues.isEmpty()) {
 				this.validValues = null;
 			}
 		}
 	}
 
+	public String getPlaceholder() {
+		return placeholder;
+	}
+
+	public void setPlaceholder(final String placeholder) {
+		this.placeholder = placeholder;
+	}
+
 	@Override
 	public List<String> uniqueKeyFields() {
-		return Arrays.asList("appName", "version", "className", "propertyName");
+		return Arrays.asList("appName", "version", "className", "fieldName");
 	}
 }
