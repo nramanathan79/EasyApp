@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div ng-app="dataTable" ng-controller="dataTableController"
 	ng-init="initializeResource('countries')">
@@ -71,16 +70,16 @@
 									value="${column.dataCell.field.label}"></c:out></span> <c:if
 								test="${dataTable.enableColumnSort}">
 								<span class="glyphicon glyphicon-sort-by-attributes"
-									ng-show="sortBy.indexOf('<c:out value="${column.dataCell.field.fieldName}"></c:out>') >= 0"></span>
+									ng-show="sortBy.indexOf('<c:out value="${column.dataCell.field.name}"></c:out>') >= 0"></span>
 								<span class="glyphicon glyphicon-sort-by-attributes-alt"
-									ng-show="sortBy.indexOf('-<c:out value="${column.dataCell.field.fieldName}"></c:out>') >= 0"></span>
+									ng-show="sortBy.indexOf('-<c:out value="${column.dataCell.field.name}"></c:out>') >= 0"></span>
 								<sup
-									ng-show="showSortIndex('<c:out value="${column.dataCell.field.fieldName}"></c:out>') > 0">{{showSortIndex('<c:out
-										value="${column.dataCell.field.fieldName}"></c:out>')}}
+									ng-show="showSortIndex('<c:out value="${column.dataCell.field.name}"></c:out>') > 0">{{showSortIndex('<c:out
+										value="${column.dataCell.field.name}"></c:out>')}}
 								</sup>
 								<div class="pull-right">
 									<a href="#"
-										ng-click="addSort('<c:out value="${column.dataCell.field.fieldName}"></c:out>')"><span
+										ng-click="addSort('<c:out value="${column.dataCell.field.name}"></c:out>')"><span
 										class="glyphicon glyphicon-sort"></span></a>
 								</div>
 							</c:if></th>
@@ -88,13 +87,13 @@
 							<th class="column-filter">
 								<div class="dropdown layout-inline">
 									<a href="#"
-										id="<c:out value="${column.dataCell.field.fieldName}"></c:out>Filter"
+										id="<c:out value="${column.dataCell.field.name}"></c:out>Filter"
 										class="dropdown-toggle" data-toggle="dropdown"
 										aria-haspopup="true" aria-expanded="true"> <span
 										class="caret"></span>
 									</a>
 									<ul class="dropdown-menu pull-right"
-										aria-labelledby="<c:out value="${column.dataCell.field.fieldName}"></c:out>Filter">
+										aria-labelledby="<c:out value="${column.dataCell.field.name}"></c:out>Filter">
 										<li><a href="#">Clear All</a></li>
 										<li><a href="#">Select All</a></li>
 										<li role="separator" class="divider"></li>
@@ -115,14 +114,14 @@
 							<c:if test="${dataTable.enableColumnFilter}">colspan="2"</c:if>>
 							<div ng-hide="record.editing">
 								{{record.
-								<c:out value="${column.dataCell.field.fieldName}"></c:out>
+								<c:out value="${column.dataCell.field.name}"></c:out>
 								}}
 							</div>
 							<div ng-show="record.editing">
-								<input
-									type="<c:out value="${column.dataCell.field.type}"></c:out>"
-									ng-model="record.<c:out value="${column.dataCell.field.fieldName}"></c:out>"
-									<c:if test="${column.dataCell.field.required}">required="required"</c:if>></input>
+								<c:set var="inputCell" value="${column.dataCell}" scope="request"></c:set>
+								<c:import url="textInput.jsp">
+									<c:param name="modelObject" value="record"></c:param>
+								</c:import>
 							</div>
 						</td>
 					</c:forEach>

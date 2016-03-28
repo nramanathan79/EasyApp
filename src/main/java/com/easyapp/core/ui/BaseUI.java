@@ -29,7 +29,7 @@ public abstract class BaseUI {
 	}
 
 	public String getStyleClassesString() {
-		return styleClasses.stream().collect(joining(" "));
+		return styleClasses != null ? styleClasses.stream().collect(joining(" ")) : null;
 	}
 
 	public void setStyleClasses(final Set<String> styleClasses) {

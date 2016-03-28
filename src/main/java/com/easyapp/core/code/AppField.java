@@ -28,10 +28,6 @@ public class AppField extends AppBaseCode {
 		Character, Boolean, String, Byte, Short, Integer, Long, Float, Double, LocalDate, LocalDateTime
 	};
 
-	public enum FieldInputType {
-		Text, Password, TextArea, RadioButton, CheckBox, Dropdown, ComboBox, Number, Amount, Date, DateTime, Phone, Email, URL, Search, Color, Range
-	};
-
 	@NotNull
 	private String appName;
 
@@ -56,28 +52,11 @@ public class AppField extends AppBaseCode {
 
 	private String objectType;
 
-	@Enumerated(EnumType.STRING)
-	private FieldInputType inputType;
-
-	private Integer minLength;
-
 	private Integer maxLength;
-
-	private Integer minValue;
-
-	private Integer maxValue;
-
-	private Integer stepInterval;
-
-	private String inputPattern;
-
-	private String patternMismatchMessage;
 
 	private Boolean required;
 
 	private Boolean persist;
-
-	private String placeholder;
 
 	@Transient
 	private Object value;
@@ -85,6 +64,11 @@ public class AppField extends AppBaseCode {
 	@Transient
 	@JsonStorage
 	private List<Pair<String, String>> validValues;
+
+	public AppField() {
+		mode = FieldMode.Simple;
+		type = FieldType.String;
+	}
 
 	public String getAppName() {
 		return appName;
@@ -150,68 +134,12 @@ public class AppField extends AppBaseCode {
 		this.objectType = objectType;
 	}
 
-	public FieldInputType getInputType() {
-		return inputType;
-	}
-
-	public void setInputType(final FieldInputType inputType) {
-		this.inputType = inputType;
-	}
-
-	public Integer getMinLength() {
-		return minLength;
-	}
-
-	public void setMinLength(final Integer minLength) {
-		this.minLength = minLength;
-	}
-
 	public Integer getMaxLength() {
 		return maxLength;
 	}
 
 	public void setMaxLength(final Integer maxLength) {
 		this.maxLength = maxLength;
-	}
-
-	public Integer getMinValue() {
-		return minValue;
-	}
-
-	public void setMinValue(final Integer minValue) {
-		this.minValue = minValue;
-	}
-
-	public Integer getMaxValue() {
-		return maxValue;
-	}
-
-	public void setMaxValue(final Integer maxValue) {
-		this.maxValue = maxValue;
-	}
-
-	public Integer getStepInterval() {
-		return stepInterval;
-	}
-
-	public void setStepInterval(final Integer stepInterval) {
-		this.stepInterval = stepInterval;
-	}
-
-	public String getInputPattern() {
-		return inputPattern;
-	}
-
-	public void setInputPattern(final String inputPattern) {
-		this.inputPattern = inputPattern;
-	}
-
-	public String getPatternMismatchMessage() {
-		return patternMismatchMessage;
-	}
-
-	public void setPatternMismatchMessage(final String patternMismatchMessage) {
-		this.patternMismatchMessage = patternMismatchMessage;
 	}
 
 	public Boolean getRequired() {
@@ -306,14 +234,6 @@ public class AppField extends AppBaseCode {
 				this.validValues = null;
 			}
 		}
-	}
-
-	public String getPlaceholder() {
-		return placeholder;
-	}
-
-	public void setPlaceholder(final String placeholder) {
-		this.placeholder = placeholder;
 	}
 
 	@Override
