@@ -8,7 +8,7 @@
 			<div class="row" ng-show="error">
 				<div class="alert alert-danger col-md-12">{{error}}</div>
 			</div>
-			<div class="row">
+			<div class="row bottom-5">
 				<div class="col-md-4">
 					<c:if test="${dataTable.enableSearch}">
 						<div class="row">
@@ -30,7 +30,7 @@
 							</div>
 							<div class="col-md-5">
 								<label class="radio-inline"> <input type="radio"
-									name="sortSelection" ng-init="sortSelection='Single'"
+									name="sortSelection" ng-init="sortSelection = 'Single'"
 									ng-model="sortSelection" value="Single"
 									ng-change="changeSortSelection()" checked="checked"></input>Single
 								</label> <label class="radio-inline"> <input type="radio"
@@ -40,7 +40,7 @@
 							</div>
 						</c:if>
 						<div class="col-md-4">
-							<label><a href="#" ng-click="clearSort()">Clear All
+							<label><a href="" ng-click="clearSort()">Clear All
 									Sort</a></label>
 						</div>
 					</div>
@@ -49,7 +49,7 @@
 					<div class="row text-right">
 						<c:if test="${dataTable.enableColumnFilter}">
 							<div class="col-md-8">
-								<label><a href="#" ng-click="clearFilters()">Clear
+								<label><a href="" ng-click="clearFilters()">Clear
 										All Filters</a></label>
 							</div>
 						</c:if>
@@ -78,7 +78,7 @@
 										value="${column.dataCell.field.name}"></c:out>')}}
 								</sup>
 								<div class="pull-right">
-									<a href="#"
+									<a href=""
 										ng-click="addSort('<c:out value="${column.dataCell.field.name}"></c:out>')"><span
 										class="glyphicon glyphicon-sort"></span></a>
 								</div>
@@ -86,19 +86,20 @@
 						<c:if test="${dataTable.enableColumnFilter}">
 							<th class="column-filter">
 								<div class="dropdown layout-inline">
-									<a href="#"
+									<a href=""
 										id="<c:out value="${column.dataCell.field.name}"></c:out>Filter"
 										class="dropdown-toggle" data-toggle="dropdown"
 										aria-haspopup="true" aria-expanded="true"> <span
 										class="caret"></span>
 									</a>
-									<ul class="dropdown-menu pull-right"
+									<div class="dropdown-menu pull-right padding-5"
 										aria-labelledby="<c:out value="${column.dataCell.field.name}"></c:out>Filter">
-										<li><a href="#">Clear All</a></li>
-										<li><a href="#">Select All</a></li>
-										<li role="separator" class="divider"></li>
-										<li><a href="#">Something</a></li>
-									</ul>
+										<c:set var="columnDataCell" value="${column.dataCell}"
+											scope="request"></c:set>
+										<c:import url="columnFilter.jsp">
+											<c:param name="modelObject" value="record"></c:param>
+										</c:import>
+									</div>
 								</div>
 							</th>
 						</c:if>
@@ -108,7 +109,7 @@
 					</c:if>
 				</tr>
 				<tr
-					ng-repeat="record in records | filter:searchText | orderBy:sortBy">
+					ng-repeat="record in records | filter:{countryName:searchText} | orderBy:sortBy">
 					<c:forEach items="${dataTable.columns}" var="column">
 						<td
 							<c:if test="${dataTable.enableColumnFilter}">colspan="2"</c:if>>
@@ -118,7 +119,8 @@
 								}}
 							</div>
 							<div ng-show="record.editing">
-								<c:set var="inputCell" value="${column.dataCell}" scope="request"></c:set>
+								<c:set var="inputCell" value="${column.dataCell}"
+									scope="request"></c:set>
 								<c:import url="textInput.jsp">
 									<c:param name="modelObject" value="record"></c:param>
 								</c:import>

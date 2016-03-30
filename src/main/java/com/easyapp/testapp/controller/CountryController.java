@@ -26,7 +26,7 @@ public class CountryController {
 		countryTable.setEnableDataEdit(true);
 		countryTable.setDataEditApiName("countries");
 		countryTable.setDataResource(DataResource.api);
-		countryTable.setStyleClassesString("table table-striped table-bordered");
+		countryTable.setStyleClassesString("table table-striped table-bordered bottom-5");
 
 		Row headerRow = new Row();
 		headerRow.addStyleClass("text-uppercase");
