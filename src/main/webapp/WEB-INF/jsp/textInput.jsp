@@ -22,7 +22,7 @@
 				<c:if test="${inputCell.field.required}">required="required"</c:if>></input>
 		</c:when>
 		<c:when test="${inputCell.field.inputType == 'Number'}">
-			<input type="number"
+			<input class="text-right" type="number"
 				ng-model="<c:if test='${!empty param.modelObject}'><c:out value='${param.modelObject}'></c:out>.</c:if><c:out value='${inputCell.field.name}'></c:out>"
 				<c:if test="${inputCell.field.required}">required="required"</c:if>
 				<c:if test="${!empty inputCell.field.minValue}">min="<c:out value='${inputCell.field.minValue}'></c:out>"</c:if>

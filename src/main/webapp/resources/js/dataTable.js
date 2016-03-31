@@ -6,11 +6,29 @@ angular
 	$scope.initializeResource = function(resourceEndPoint) {
 		$scope.restResource = $resource(apiUri + "/" + resourceEndPoint + "/:id", {id: "@id"});
 		$scope.sortBy = [];
+		$scope.columnFilters = [];
 	}
 	
 	$scope.listRecords = function() {
 		$scope.restResource.query(function(result) {
 			$scope.records = result;
+			
+			if ($scope.records && angular.isArray($scope.records)
+				&& $scope.columnFilters && angular.isArray($scope.columnFilters)) {
+				
+				for (var col = 0; col < $scope.columnFilters.length; col++) {
+					$scope.columnFilters[col].uniqueValues = [];
+					for (var row = 0; row < $scope.records.length; row++) {
+						var uniqueValue = {};
+						uniqueValue.value = $scope.records[row][$scope.columnFilters[col].name];
+						
+						if ($scope.columnFilters[col].uniqueValues.map(function(e) { return e.value; }).indexOf(uniqueValue.value) < 0) {
+							uniqueValue.selected = false;
+							$scope.columnFilters[col].uniqueValues.push(uniqueValue);
+						}
+					}
+				}
+			}
 		},
 		function(error) {
 			$scope.error = "Error encountered while retrieving the list of records";
@@ -72,6 +90,10 @@ angular
 		});
 	}
 	
+	$scope.$watch("restResource", function() {
+		$scope.listRecords();
+	});
+	
 	$scope.editRecord = function(record) {
 		$scope.recordBeforeEdit = angular.copy(record);
 		record.editing = true;
@@ -96,7 +118,7 @@ angular
 		$scope.records.push(record);
 		$scope.records.editing = true;
 	}
-	
+
 	$scope.changeSortSelection = function() {
 		if ($scope.sortSelection === "Single") {
 			if ($scope.sortBy.length > 1) {
@@ -160,11 +182,129 @@ angular
 		$scope.sortBy = [];
 	}
 	
-	$scope.clearFilters = function() {
+	$scope.initializeColumnFilter = function(columnName, columnType) {
+		var columnFilter = {};
+		columnFilter.name = columnName;
+		columnFilter.type = columnType;
 		
+		$scope.columnFilters.push(columnFilter);
 	}
 	
-	$scope.$watch("restResource", function() {
-		$scope.listRecords();
-	});
+	$scope.clearColumnFilter = function(columnIndex) {
+		if ($scope.columnFilters[columnIndex].uniqueValues) {
+			for (var i = 0; i < $scope.columnFilters[columnIndex].uniqueValues.length; i++) {
+				$scope.columnFilters[columnIndex].uniqueValues[i].selected = false;
+			}
+		}
+		
+		if ($scope.columnFilters[columnIndex].type === 'Text') {
+			delete $scope.columnFilters[columnIndex].contains;
+			delete $scope.columnFilters[columnIndex].doesNotContain;
+			delete $scope.columnFilters[columnIndex].startsWith;
+			delete $scope.columnFilters[columnIndex].endsWith;
+		}
+		else if ($scope.columnFilters[columnIndex].type === 'Number') {
+			delete $scope.columnFilters[columnIndex].fromNumber;
+			delete $scope.columnFilters[columnIndex].toNumber;
+		} 
+	}
+
+	$scope.clearFilters = function() {
+		for (var i = 0; i < $scope.columnFilters.length; i++) {
+			$scope.clearColumnFilter(i);
+		}
+	}
+	
+	$scope.hasFilterFields = function(columnIndex) {
+		if ($scope.columnFilters[columnIndex].type === 'Text') {
+			if ($scope.columnFilters[columnIndex].contains
+				|| $scope.columnFilters[columnIndex].doesNotContain
+				|| $scope.columnFilters[columnIndex].startsWith
+				|| $scope.columnFilters[columnIndex].endsWith) {
+				return true;
+			}
+		}
+		else if ($scope.columnFilters[columnIndex].type === 'Number') {
+			if ($scope.columnFilters[columnIndex].fromNumber
+				|| $scope.columnFilters[columnIndex].toNumber) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+	
+	$scope.hasFilter = function(columnIndex) {
+		var filterPresent = $scope.hasFilterFields(columnIndex);
+		
+		if (!filterPresent && $scope.columnFilters[columnIndex].uniqueValues) {
+			for (var i = 0; !filterPresent && i < $scope.columnFilters[columnIndex].uniqueValues.length; i++) {
+				filterPresent = $scope.columnFilters[columnIndex].uniqueValues[i].selected;
+			}
+		}
+		
+		return filterPresent;
+	}
+	
+	$scope.getFilterClass = function(columnIndex) {
+		return $scope.hasFilter(columnIndex) ? "red" : "";
+	}
+	
+	$scope.columnFilterFunc = function(record) {
+		var matchFound = true;
+		
+		for (var i = 0; matchFound && i < $scope.columnFilters.length; i++) {
+			if ($scope.hasFilter(i)) {
+				if ($scope.columnFilters[i].uniqueValues) {
+					for (var j = 0; matchFound && j < $scope.columnFilters[i].uniqueValues.length; j++) {
+						if ($scope.columnFilters[i].uniqueValues[j].selected) {
+							matchFound = record[$scope.columnFilters[i].name] === $scope.columnFilters[i].uniqueValues[j].value;
+						}
+					}
+				}
+				
+				if ($scope.columnFilters[i].type === 'Text') {
+					var ignoreCaseStr = ($scope.columnFilters[i].ignoreCase) ? "i" : "";
+					var regExp;
+					
+					if (matchFound && $scope.columnFilters[i].contains) {
+						regExp = new RegExp($scope.columnFilters[i].contains, ignoreCaseStr);
+						matchFound = record[$scope.columnFilters[i].name].search(regExp) >= 0;
+					}
+					
+					if (matchFound && $scope.columnFilters[i].doesNotContain) {
+						regExp = new RegExp("^((?!" + $scope.columnFilters[i].doesNotContain + ").)*$", ignoreCaseStr);
+						matchFound = record[$scope.columnFilters[i].name].search(regExp) >= 0;
+					}
+
+					if (matchFound && $scope.columnFilters[i].startsWith) {
+						regExp = new RegExp("^" + $scope.columnFilters[i].startsWith, ignoreCaseStr);
+						matchFound = record[$scope.columnFilters[i].name].search(regExp) >= 0;
+					}
+
+					if (matchFound && $scope.columnFilters[i].endsWith) {
+						regExp = new RegExp($scope.columnFilters[i].endsWith + "$", ignoreCaseStr);
+						matchFound = record[$scope.columnFilters[i].name].search(regExp) >= 0;
+					}
+				}
+				else if ($scope.columnFilters[i].type === 'Number') {
+					if (matchFound && $scope.columnFilters[i].fromNumber) {
+						matchFound = record[$scope.columnFilters[i].name] >= $scope.columnFilters[i].fromNumber;
+					}
+
+					if (matchFound && $scope.columnFilters[i].toNumber) {
+						matchFound = record[$scope.columnFilters[i].name] <= $scope.columnFilters[i].toNumber;
+					}
+				}
+			}
+		}
+		
+		return matchFound;
+	}
+});
+
+// Disable click inside the dropdown menu to close the dropdown except on button or link
+$('.dropdown-menu').click(function(event) {
+	if (event.target.nodeName === 'A' || event.target.nodeName === 'BUTTON') return;
+    event.stopPropagation();
 });

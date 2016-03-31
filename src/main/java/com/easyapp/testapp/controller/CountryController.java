@@ -18,12 +18,12 @@ public class CountryController {
 	public ModelAndView countries() {
 		Table countryTable = new Table();
 
-		countryTable.setEnableSearch(true);
-		countryTable.setEnableColumnSort(true);
-		countryTable.setEnableMultiColumnSort(true);
-		countryTable.setEnableColumnFilter(true);
-		countryTable.setEnableRowNum(true);
-		countryTable.setEnableDataEdit(true);
+		countryTable.setEnableSearch(false);
+		countryTable.setEnableColumnSort(false);
+		countryTable.setEnableMultiColumnSort(false);
+		countryTable.setEnableColumnFilter(false);
+		countryTable.setEnableRowNum(false);
+		countryTable.setEnableDataEdit(false);
 		countryTable.setDataEditApiName("countries");
 		countryTable.setDataResource(DataResource.api);
 		countryTable.setStyleClassesString("table table-striped table-bordered bottom-5");
@@ -61,7 +61,7 @@ public class CountryController {
 
 		dataCell = new DataCell();
 		dataCell.setField(columnField);
-		dataCell.setCustomStyle("width:30px;");
+		dataCell.setCustomStyle("width:60px;");
 
 		dataColumn = new Column();
 		dataColumn.setDataCell(dataCell);
@@ -80,7 +80,7 @@ public class CountryController {
 
 		dataCell = new DataCell();
 		dataCell.setField(columnField);
-		dataCell.setCustomStyle("width:45px;");
+		dataCell.setCustomStyle("width:75px;");
 
 		dataColumn = new Column();
 		dataColumn.setDataCell(dataCell);
@@ -99,7 +99,7 @@ public class CountryController {
 
 		dataCell = new DataCell();
 		dataCell.setField(columnField);
-		dataCell.setCustomStyle("width:45px;");
+		dataCell.setCustomStyle("width:75px;");
 
 		dataColumn = new Column();
 		dataColumn.setDataCell(dataCell);
@@ -117,8 +117,7 @@ public class CountryController {
 
 		dataCell = new DataCell();
 		dataCell.setField(columnField);
-		dataCell.addStyleClass("text-right");
-		dataCell.setCustomStyle("width:45px;");
+		dataCell.addStyleClass("pull-right");
 
 		dataColumn = new Column();
 		dataColumn.setDataCell(dataCell);
@@ -137,7 +136,7 @@ public class CountryController {
 
 		dataCell = new DataCell();
 		dataCell.setField(columnField);
-		dataCell.setCustomStyle("width:45px;");
+		dataCell.setCustomStyle("width:75px;");
 
 		dataColumn = new Column();
 		dataColumn.setDataCell(dataCell);
