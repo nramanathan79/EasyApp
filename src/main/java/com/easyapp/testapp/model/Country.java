@@ -10,19 +10,21 @@ import com.easyapp.testapp.entity.CountryEntity;
 public class Country extends PersistModel {
 	private String isoAlpha2Code;
 	private String isoAlpha3Code;
-	private Integer isoNumericCode;
-	private Integer callingCode;
+	private String isoNumericCode;
+	private Long callingCode;
 	private String countryName;
 	private String continent;
 	private String capitalCity;
 	private String currencyCode;
 	private String capitalCityTimeZone;
+	private Double capitalCityLatitude;
+	private Double capitalCityLongitude;
 
 	public String getIsoAlpha2Code() {
 		return isoAlpha2Code;
 	}
 
-	public void setIsoAlpha2Code(String isoAlpha2Code) {
+	public void setIsoAlpha2Code(final String isoAlpha2Code) {
 		this.isoAlpha2Code = isoAlpha2Code;
 	}
 
@@ -30,23 +32,23 @@ public class Country extends PersistModel {
 		return isoAlpha3Code;
 	}
 
-	public void setIsoAlpha3Code(String isoAlpha3Code) {
+	public void setIsoAlpha3Code(final String isoAlpha3Code) {
 		this.isoAlpha3Code = isoAlpha3Code;
 	}
 
-	public Integer getIsoNumericCode() {
+	public String getIsoNumericCode() {
 		return isoNumericCode;
 	}
 
-	public void setIsoNumericCode(Integer isoNumericCode) {
+	public void setIsoNumericCode(final String isoNumericCode) {
 		this.isoNumericCode = isoNumericCode;
 	}
 
-	public Integer getCallingCode() {
+	public Long getCallingCode() {
 		return callingCode;
 	}
 
-	public void setCallingCode(Integer callingCode) {
+	public void setCallingCode(final Long callingCode) {
 		this.callingCode = callingCode;
 	}
 
@@ -54,7 +56,7 @@ public class Country extends PersistModel {
 		return countryName;
 	}
 
-	public void setCountryName(String countryName) {
+	public void setCountryName(final String countryName) {
 		this.countryName = countryName;
 	}
 
@@ -62,7 +64,7 @@ public class Country extends PersistModel {
 		return continent;
 	}
 
-	public void setContinent(String continent) {
+	public void setContinent(final String continent) {
 		this.continent = continent;
 	}
 
@@ -70,7 +72,7 @@ public class Country extends PersistModel {
 		return capitalCity;
 	}
 
-	public void setCapitalCity(String capitalCity) {
+	public void setCapitalCity(final String capitalCity) {
 		this.capitalCity = capitalCity;
 	}
 
@@ -78,7 +80,7 @@ public class Country extends PersistModel {
 		return currencyCode;
 	}
 
-	public void setCurrencyCode(String currencyCode) {
+	public void setCurrencyCode(final String currencyCode) {
 		this.currencyCode = currencyCode;
 	}
 
@@ -86,8 +88,24 @@ public class Country extends PersistModel {
 		return capitalCityTimeZone;
 	}
 
-	public void setCapitalCityTimeZone(String capitalCityTimeZone) {
+	public void setCapitalCityTimeZone(final String capitalCityTimeZone) {
 		this.capitalCityTimeZone = capitalCityTimeZone;
+	}
+
+	public Double getCapitalCityLatitude() {
+		return capitalCityLatitude;
+	}
+
+	public void setCapitalCityLatitude(final Double capitalCityLatitude) {
+		this.capitalCityLatitude = capitalCityLatitude;
+	}
+
+	public Double getCapitalCityLongitude() {
+		return capitalCityLongitude;
+	}
+
+	public void setCapitalCityLongitude(final Double capitalCityLongitude) {
+		this.capitalCityLongitude = capitalCityLongitude;
 	}
 
 	@Override
@@ -104,6 +122,8 @@ public class Country extends PersistModel {
 			setCapitalCity(countryEntity.getCapitalCity());
 			setCurrencyCode(countryEntity.getCurrencyCode());
 			setCapitalCityTimeZone(countryEntity.getCapitalCityTimeZone());
+			setCapitalCityLatitude(countryEntity.getCapitalCityLatitude());
+			setCapitalCityLongitude(countryEntity.getCapitalCityLongitude());
 		}
 	}
 
@@ -121,6 +141,8 @@ public class Country extends PersistModel {
 		countryEntity.setCapitalCity(getCapitalCity());
 		countryEntity.setCurrencyCode(getCurrencyCode());
 		countryEntity.setCapitalCityTimeZone(getCapitalCityTimeZone());
+		countryEntity.setCapitalCityLatitude(getCapitalCityLatitude());
+		countryEntity.setCapitalCityLongitude(getCapitalCityLongitude());
 
 		return (T) countryEntity;
 	}

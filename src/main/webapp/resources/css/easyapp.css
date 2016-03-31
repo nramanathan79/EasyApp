@@ -38,11 +38,11 @@
 
 .dropdown-menu {
 	text-transform: none;
-	width: 225px;
+	width: 200px;
 }
 
-.table {
-	margin-bottom: 5px;
+.fw-normal {
+	font-weight: normal;
 }
 
 .red {

@@ -27,6 +27,7 @@ public class Table extends BaseUI {
 	private List<Column> columns;
 	private Optional<Row> headerRow;
 	private Optional<Row> dataRow;
+	private Boolean enableRefresh;
 
 	public Table() {
 		setEnableSearch(false);
@@ -36,6 +37,7 @@ public class Table extends BaseUI {
 		setEnableRowNum(false);
 		setEnableDataEdit(false);
 		setEnablePagination(false);
+		setEnableRefresh(false);
 	}
 
 	public Boolean getEnableSearch() {
@@ -184,5 +186,13 @@ public class Table extends BaseUI {
 
 	public void setDataRow(Row dataRow) {
 		this.dataRow = Optional.ofNullable(dataRow);
+	}
+
+	public Boolean getEnableRefresh() {
+		return enableRefresh;
+	}
+
+	public void setEnableRefresh(final Boolean enableRefresh) {
+		this.enableRefresh = enableRefresh;
 	}
 }

@@ -2,22 +2,22 @@ package com.easyapp.core.ui;
 
 public class InputField extends BaseUI {
 	public enum InputType {
-		Text, Password, TextArea, RadioButton, CheckBox, Dropdown, ComboBox, Number, Amount, Date, DateTime, Phone, Email, URL, Search, Color, Range
+		Text, Password, TextArea, RadioButton, CheckBox, Dropdown, ComboBox, Integer, Decimal, Amount, Date, DateTime, Phone, Email, URL, Search, Color, Range
 	};
 	
 	private String label;
 	private String name;
 	private Boolean required;
 	private InputType inputType;  
-	private Integer stepInterval;
+	private String stepInterval;
 	private String inputPattern;
 	private String patternMismatchMessage;
 	private String placeholder;
 	private Boolean trim;
 	private Integer minLength;
 	private Integer maxLength;
-	private Integer minValue;
-	private Integer maxValue;
+	private Double minValue;
+	private Double maxValue;
 	
 	public InputField() {
 		inputType = InputType.Text;
@@ -55,12 +55,20 @@ public class InputField extends BaseUI {
 		this.inputType = inputType;
 	}
 	
-	public Integer getStepInterval() {
+	public String getStepInterval() {
 		return stepInterval;
 	}
 	
-	public void setStepInterval(final Integer stepInterval) {
+	public void setStepInterval(final String stepInterval) {
 		this.stepInterval = stepInterval;
+	}
+	
+	public void setStepInterval(final Integer stepInterval) {
+		this.stepInterval = String.valueOf(stepInterval);
+	}
+	
+	public void setStepInterval(final Double stepInterval) {
+		this.stepInterval = String.valueOf(stepInterval);
 	}
 	
 	public String getInputPattern() {
@@ -111,19 +119,19 @@ public class InputField extends BaseUI {
 		this.maxLength = maxLength;
 	}
 	
-	public Integer getMinValue() {
+	public Double getMinValue() {
 		return minValue;
 	}
 	
-	public void setMinValue(final Integer minValue) {
+	public void setMinValue(final Double minValue) {
 		this.minValue = minValue;
 	}
 	
-	public Integer getMaxValue() {
+	public Double getMaxValue() {
 		return maxValue;
 	}
 	
-	public void setMaxValue(final Integer maxValue) {
+	public void setMaxValue(final Double maxValue) {
 		this.maxValue = maxValue;
 	}
 }

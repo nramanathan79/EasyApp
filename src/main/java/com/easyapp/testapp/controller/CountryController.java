@@ -18,15 +18,16 @@ public class CountryController {
 	public ModelAndView countries() {
 		Table countryTable = new Table();
 
-		countryTable.setEnableSearch(false);
-		countryTable.setEnableColumnSort(false);
-		countryTable.setEnableMultiColumnSort(false);
-		countryTable.setEnableColumnFilter(false);
-		countryTable.setEnableRowNum(false);
-		countryTable.setEnableDataEdit(false);
+		countryTable.setEnableSearch(true);
+		countryTable.setEnableColumnSort(true);
+		countryTable.setEnableMultiColumnSort(true);
+		countryTable.setEnableColumnFilter(true);
+		countryTable.setEnableRowNum(true);
+		countryTable.setEnableDataEdit(true);
+		countryTable.setEnableRefresh(true);
 		countryTable.setDataEditApiName("countries");
 		countryTable.setDataResource(DataResource.api);
-		countryTable.setStyleClassesString("table table-striped table-bordered bottom-5");
+		countryTable.setStyleClassesString("table table-striped table-bordered mtop-5 mbottom-5");
 
 		Row headerRow = new Row();
 		headerRow.addStyleClass("text-uppercase");
@@ -108,12 +109,11 @@ public class CountryController {
 
 		columnField = new InputField();
 		columnField.setName("callingCode");
-		columnField.setInputType(InputType.Number);
+		columnField.setInputType(InputType.Integer);
 		columnField.setLabel("Phone Code");
 		columnField.setPlaceholder("Phone Code");
-		columnField.setMinValue(1);
-		columnField.setMaxValue(999);
-		columnField.setRequired(true);
+		columnField.setMinValue(1d);
+		columnField.setMaxValue(999999d);
 
 		dataCell = new DataCell();
 		dataCell.setField(columnField);
@@ -176,13 +176,49 @@ public class CountryController {
 
 		columnField = new InputField();
 		columnField.setName("capitalCityTimeZone");
-		columnField.setLabel("Capital Time Zone");
-		columnField.setPlaceholder("Capital Time Zone");
+		columnField.setLabel("Time Zone");
+		columnField.setPlaceholder("Time Zone");
 		columnField.setInputPattern("[A-Za-z/_]+");
 		columnField.setPatternMismatchMessage("Input may only contain words separated by _ or / with no spaces");
 
 		dataCell = new DataCell();
 		dataCell.setField(columnField);
+
+		dataColumn = new Column();
+		dataColumn.setDataCell(dataCell);
+
+		countryTable.addColumn(dataColumn);
+
+		columnField = new InputField();
+		columnField.setName("capitalCityLatitude");
+		columnField.setLabel("Latitude");
+		columnField.setPlaceholder("Latitude");
+		columnField.setInputType(InputType.Decimal);
+		columnField.setMinValue(-180.0d);
+		columnField.setMaxValue(180.0d);
+		columnField.setStepInterval("any");
+
+		dataCell = new DataCell();
+		dataCell.setField(columnField);
+		dataCell.addStyleClass("pull-right");
+
+		dataColumn = new Column();
+		dataColumn.setDataCell(dataCell);
+
+		countryTable.addColumn(dataColumn);
+
+		columnField = new InputField();
+		columnField.setName("capitalCityLongitude");
+		columnField.setLabel("Longitude");
+		columnField.setPlaceholder("Longitude");
+		columnField.setInputType(InputType.Decimal);
+		columnField.setMinValue(-180.0d);
+		columnField.setMaxValue(180.0d);
+		columnField.setStepInterval("any");
+
+		dataCell = new DataCell();
+		dataCell.setField(columnField);
+		dataCell.addStyleClass("pull-right");
 
 		dataColumn = new Column();
 		dataColumn.setDataCell(dataCell);

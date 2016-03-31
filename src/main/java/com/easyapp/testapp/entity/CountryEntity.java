@@ -25,10 +25,9 @@ public class CountryEntity extends PersistEntity {
 
 	@NotNull
 	@Column(unique = true)
-	private Integer isoNumericCode;
+	private String isoNumericCode;
 
-	@NotNull
-	private Integer callingCode;
+	private Long callingCode;
 
 	@NotNull
 	private String countryName;
@@ -42,6 +41,10 @@ public class CountryEntity extends PersistEntity {
 	private String currencyCode;
 
 	private String capitalCityTimeZone;
+
+	private Double capitalCityLatitude;
+
+	private Double capitalCityLongitude;
 
 	public String getIsoAlpha2Code() {
 		return isoAlpha2Code;
@@ -59,19 +62,19 @@ public class CountryEntity extends PersistEntity {
 		this.isoAlpha3Code = isoAlpha3Code != null ? isoAlpha3Code.trim().toUpperCase() : null;
 	}
 
-	public Integer getIsoNumericCode() {
+	public String getIsoNumericCode() {
 		return isoNumericCode;
 	}
 
-	public void setIsoNumericCode(final Integer isoNumericCode) {
+	public void setIsoNumericCode(final String isoNumericCode) {
 		this.isoNumericCode = isoNumericCode;
 	}
 
-	public Integer getCallingCode() {
+	public Long getCallingCode() {
 		return callingCode;
 	}
 
-	public void setCallingCode(final Integer callingCode) {
+	public void setCallingCode(final Long callingCode) {
 		this.callingCode = callingCode;
 	}
 
@@ -113,6 +116,22 @@ public class CountryEntity extends PersistEntity {
 
 	public void setCapitalCityTimeZone(final String capitalCityTimeZone) {
 		this.capitalCityTimeZone = capitalCityTimeZone != null ? capitalCityTimeZone.trim() : null;
+	}
+
+	public Double getCapitalCityLatitude() {
+		return capitalCityLatitude;
+	}
+
+	public void setCapitalCityLatitude(final Double capitalCityLatitude) {
+		this.capitalCityLatitude = capitalCityLatitude;
+	}
+
+	public Double getCapitalCityLongitude() {
+		return capitalCityLongitude;
+	}
+
+	public void setCapitalCityLongitude(final Double capitalCityLongitude) {
+		this.capitalCityLongitude = capitalCityLongitude;
 	}
 
 	@Override

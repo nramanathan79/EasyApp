@@ -9,26 +9,42 @@ angular
 		$scope.columnFilters = [];
 	}
 	
+	$scope.populateUniqueValues = function(record) {
+		if ($scope.columnFilters && angular.isArray($scope.columnFilters)) {
+			for (var col = 0; col < $scope.columnFilters.length; col++) {
+				if (!$scope.columnFilters[col].uniqueValues) {
+					$scope.columnFilters[col].uniqueValues = [];
+				}
+				
+				var uniqueValue = {};
+				uniqueValue.value = record[$scope.columnFilters[col].name];
+				
+				if ($scope.columnFilters[col].uniqueValues.map(function(e) { return e.value; }).indexOf(uniqueValue.value) < 0) {
+					uniqueValue.selected = false;
+					$scope.columnFilters[col].uniqueValues.push(uniqueValue);
+				}
+			}
+		}
+	}
+	
+	$scope.populateAllUniqueValues = function() {
+		if ($scope.columnFilters && angular.isArray($scope.columnFilters)) {
+			for (var col = 0; col < $scope.columnFilters.length; col++) {
+				$scope.columnFilters[col].uniqueValues = [];
+			}
+		}
+		
+		if ($scope.records && angular.isArray($scope.records)) {
+			for (var row = 0; row < $scope.records.length; row++) {
+				$scope.populateUniqueValues($scope.records[row]);
+			}
+		}
+	}
+	
 	$scope.listRecords = function() {
 		$scope.restResource.query(function(result) {
 			$scope.records = result;
-			
-			if ($scope.records && angular.isArray($scope.records)
-				&& $scope.columnFilters && angular.isArray($scope.columnFilters)) {
-				
-				for (var col = 0; col < $scope.columnFilters.length; col++) {
-					$scope.columnFilters[col].uniqueValues = [];
-					for (var row = 0; row < $scope.records.length; row++) {
-						var uniqueValue = {};
-						uniqueValue.value = $scope.records[row][$scope.columnFilters[col].name];
-						
-						if ($scope.columnFilters[col].uniqueValues.map(function(e) { return e.value; }).indexOf(uniqueValue.value) < 0) {
-							uniqueValue.selected = false;
-							$scope.columnFilters[col].uniqueValues.push(uniqueValue);
-						}
-					}
-				}
-			}
+			$scope.populateAllUniqueValues();
 		},
 		function(error) {
 			$scope.error = "Error encountered while retrieving the list of records";
@@ -46,6 +62,7 @@ angular
 			if (result.messageType === "SUCCESS") {
 				$scope.records[$scope.records.length - 1] = result;
 				delete $scope.records.editing;
+				$scope.populateUniqueValues(result);
 			}
 			else {
 				record.editing = true;
@@ -62,7 +79,8 @@ angular
 		delete $scope.error;
 		record.$save(function(result) {
 			if (result.messageType === "SUCCESS") {
-				delete $scope.records.editing;	
+				delete $scope.records.editing;
+				$scope.populateAllUniqueValues();
 			}
 			else {
 				record.editing = true;
@@ -80,6 +98,7 @@ angular
 		record.$delete(function(result) {
 			if (result.messageType === "SUCCESS") {
 				$scope.records.splice($scope.records.indexOf(record), 1);
+				$scope.populateAllUniqueValues();
 			}
 			else {
 				$scope.error = result.messageText;
@@ -203,7 +222,7 @@ angular
 			delete $scope.columnFilters[columnIndex].startsWith;
 			delete $scope.columnFilters[columnIndex].endsWith;
 		}
-		else if ($scope.columnFilters[columnIndex].type === 'Number') {
+		else if ($scope.columnFilters[columnIndex].type === 'Integer' || $scope.columnFilters[columnIndex].type === 'Decimal') {
 			delete $scope.columnFilters[columnIndex].fromNumber;
 			delete $scope.columnFilters[columnIndex].toNumber;
 		} 
@@ -224,7 +243,7 @@ angular
 				return true;
 			}
 		}
-		else if ($scope.columnFilters[columnIndex].type === 'Number') {
+		else if ($scope.columnFilters[columnIndex].type === 'Integer' || $scope.columnFilters[columnIndex].type === 'Decimal') {
 			if ($scope.columnFilters[columnIndex].fromNumber
 				|| $scope.columnFilters[columnIndex].toNumber) {
 				return true;
@@ -287,7 +306,7 @@ angular
 						matchFound = record[$scope.columnFilters[i].name].search(regExp) >= 0;
 					}
 				}
-				else if ($scope.columnFilters[i].type === 'Number') {
+				else if ($scope.columnFilters[i].type === 'Integer' || $scope.columnFilters[i].type === 'Decimal') {
 					if (matchFound && $scope.columnFilters[i].fromNumber) {
 						matchFound = record[$scope.columnFilters[i].name] >= $scope.columnFilters[i].fromNumber;
 					}
@@ -301,10 +320,33 @@ angular
 		
 		return matchFound;
 	}
+})
+.directive("importCsv", function() {
+	return {
+		scope: {
+			importCsv: "="
+		},
+		link: function(scope, element) {
+			$(element).on('change', function(changeEvent) {
+				var files = changeEvent.target.files;
+				if (files.length) {
+					var r = new FileReader();
+					r.onload = function(e) {
+						var contents = e.target.result;
+						scope.$apply(function() {
+							scope.importCsv = contents;
+						});
+					};
+
+					r.readAsText(files[0]);
+				}
+			});
+		}
+	};
 });
 
 // Disable click inside the dropdown menu to close the dropdown except on button or link
 $('.dropdown-menu').click(function(event) {
-	if (event.target.nodeName === 'A' || event.target.nodeName === 'BUTTON') return;
+	if (event.target.nodeName === 'A' || event.target.nodeName === 'BUTTON' || event.target.nodeName === 'LI') return;
     event.stopPropagation();
 });

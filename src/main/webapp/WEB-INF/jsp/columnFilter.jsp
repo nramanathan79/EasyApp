@@ -11,11 +11,11 @@
 				Filter</a>
 		</div>
 	</div>
-	<div class="panel panel-default padding-3 mbottom-5">
+	<div class="panel panel-default padding-3 mbottom-5" ng-if="columnFilters[<c:out value='${param.loopIndex}'></c:out>].uniqueValues.length > 0">
 		<div class="row"
 			ng-repeat="uniqueValue in columnFilters[<c:out value='${param.loopIndex}'></c:out>].uniqueValues">
 			<div class="col-sm-12">
-				<label><input class="checkbox mright-5" type="checkbox"
+				<label class="fw-normal"><input class="checkbox mright-5" type="checkbox"
 					ng-model="uniqueValue.selected" value="false"></input>{{uniqueValue.value}}</label>
 			</div>
 		</div>
@@ -69,7 +69,7 @@
 				</div>
 			</div>
 		</c:when>
-		<c:when test="${columnDataCell.field.inputType == 'Number'}">
+		<c:when test="${columnDataCell.field.inputType == 'Integer' || columnDataCell.field.inputType == 'Decimal'}">
 			<div class="row mbottom-5">
 				<div class="col-sm-12">
 					<div class="input-group input-group-sm">
