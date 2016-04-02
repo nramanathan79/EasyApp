@@ -37,7 +37,6 @@ public class CountryEntity extends PersistEntity {
 
 	private String capitalCity;
 
-	@NotNull
 	private String currencyCode;
 
 	private String capitalCityTimeZone;

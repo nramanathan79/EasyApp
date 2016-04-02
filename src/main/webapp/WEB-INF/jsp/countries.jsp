@@ -19,6 +19,9 @@
 	src="webjars/angularjs/1.5.2/angular.min.js"></script>
 <script type="text/javascript"
 	src="webjars/angularjs/1.5.2/angular-resource.min.js"></script>
+<script type="text/javascript" src="webjars/spin.js/2.3.2/spin.min.js"></script>
+<script type="text/javascript"
+	src="webjars/angular-spinner/0.8.1/angular-spinner.min.js"></script>
 </head>
 <body>
 	<div class="page-layout">

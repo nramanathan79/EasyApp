@@ -8,7 +8,6 @@ import com.easyapp.core.ui.Column;
 import com.easyapp.core.ui.DataCell;
 import com.easyapp.core.ui.InputField;
 import com.easyapp.core.ui.InputField.InputType;
-import com.easyapp.core.ui.Row;
 import com.easyapp.core.ui.Table;
 import com.easyapp.core.ui.Table.DataResource;
 
@@ -29,16 +28,11 @@ public class CountryController {
 		countryTable.setDataResource(DataResource.api);
 		countryTable.setStyleClassesString("table table-striped table-bordered mtop-5 mbottom-5");
 
-		Row headerRow = new Row();
-		headerRow.addStyleClass("text-uppercase");
-
-		countryTable.setHeaderRow(headerRow);
-
 		InputField columnField = new InputField();
 		columnField.setName("countryName");
 		columnField.setLabel("Country");
 		columnField.setPlaceholder("Country");
-		columnField.setInputPattern("[A-Za-z ]+");
+		columnField.setInputPattern("[A-Za-z \\-,]+");
 		columnField.setPatternMismatchMessage("Input may only contain words");
 		columnField.setRequired(true);
 
@@ -92,9 +86,8 @@ public class CountryController {
 		columnField.setName("isoNumericCode");
 		columnField.setLabel("Numeric Code");
 		columnField.setPlaceholder("Numeric Code");
-		columnField.setMinLength(3);
 		columnField.setMaxLength(3);
-		columnField.setInputPattern("[0-9]{3}");
+		columnField.setInputPattern("[0-9]+");
 		columnField.setPatternMismatchMessage("Input may only contain three-digit numbers");
 		columnField.setRequired(true);
 
@@ -132,7 +125,6 @@ public class CountryController {
 		columnField.setPatternMismatchMessage("Input may only contain three alphabets");
 		columnField.setMinLength(3);
 		columnField.setMaxLength(3);
-		columnField.setRequired(true);
 
 		dataCell = new DataCell();
 		dataCell.setField(columnField);

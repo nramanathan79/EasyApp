@@ -3,71 +3,108 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div ng-app="dataTable" ng-controller="dataTableController"
 	ng-init="initializeResource('countries')">
-	<form name="dataTableRowEdit" class="form-inline">
-		<div class="container-fluid">
-			<div class="row" ng-show="error">
-				<div class="alert alert-danger col-md-12">{{error}}</div>
-			</div>
-			<c:if
-				test="${dataTable.enableSearch || dataTable.enableMultiColumnSort || dataTable.enableColumnFilter || dataTable.enableRefresh}">
-				<div class="row mtop-5">
-					<div class="col-md-2">
-						<c:if test="${dataTable.enableSearch}">
-							<div class="row">
-								<div class="col-md-12">
-									<div class="input-group input-group-sm">
-										<input class="form-control" type="text" name="searchText"
-											placeholder="Search Table" ng-model="searchText"></input>
+	<div class="container-fluid">
+		<div class="row" ng-show="error">
+			<div class="alert alert-danger col-md-12">{{error}}</div>
+		</div>
+		<c:if
+			test="${dataTable.enableSearch || dataTable.enableMultiColumnSort || dataTable.enableColumnFilter || dataTable.enableRefresh}">
+			<div class="row mtop-5">
+				<div class="col-md-3">
+					<c:if test="${dataTable.enableSearch}">
+						<div class="row">
+							<div class="col-md-12">
+								<form id="dataTableSearch" class="form form-inline">
+									<input class="form-control" type="text"
+										placeholder="Search Table" ng-model="searchText"
+										ng-model-options="{updateOn: 'submit'}"></input>
+									<button class="btn btn-sm btn-primary" type="submit">
+										<span class="glyphicon glyphicon-search mright-3"></span>Search
+									</button>
+									<button class="btn btn-sm btn-default" type="button"
+										ng-click="clearSearch()">Clear</button>
+								</form>
+							</div>
+						</div>
+					</c:if>
+				</div>
+				<div class="col-md-3">
+					<c:if test="${dataTable.enableMultiColumnSort}">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="btn-group" ng-init="sortSelection = 'Single'">
+									<button class="btn btn-sm"
+										ng-class="sortSelection == 'Single' ? 'btn-success' : 'btn-default'"
+										ng-click="changeSortSelection('Single')">Single
+										Column Sort</button>
+									<button class="btn btn-sm"
+										ng-class="sortSelection == 'Single' ? 'btn-default' : 'btn-success'"
+										ng-click="changeSortSelection('Multiple')">Multi
+										Column Sort</button>
+								</div>
+								<button class="btn btn-sm btn-default" ng-click="clearSort()">Clear
+									All Sort</button>
+							</div>
+						</div>
+					</c:if>
+				</div>
+				<div class="col-md-3">
+					<c:if test="${dataTable.enableColumnFilter}">
+						<div class="row">
+							<div class="col-md-6">
+								<button class="btn btn-sm btn-default" ng-click="clearFilters()">Clear
+									All Filters</button>
+							</div>
+							<div class="col-md-6">
+								<button class="btn btn-sm btn-primary" data-toggle="modal"
+									data-target="#importCsv">
+									<span class="glyphicon glyphicon-import mright-3"></span>Import
+									CSV
+								</button>
+
+								<div id="importCsv" class="modal fade" role="dialog">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<h4 class="modal-title">Import CSV File</h4>
+											</div>
+											<div class="modal-body">
+												<input type="file" name="importCsv" id="importCsv"
+													accept=".csv" import-csv></input>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="pull-left btn btn-primary"
+													ng-click="importCsvFile()"
+													ng-disabled="!hasImportCsvFile()">Import</button>
+												<button type="button" class="btn btn-default"
+													data-dismiss="modal">Close</button>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
-						</c:if>
-					</div>
-					<div class="col-md-4">
-						<c:if test="${dataTable.enableMultiColumnSort}">
-							<div class="row">
-								<div class="col-md-6">
-									<label class="radio-inline"> <input type="radio"
-										name="sortSelection" ng-init="sortSelection = 'Single'"
-										ng-model="sortSelection" value="Single"
-										ng-click="changeSortSelection()" checked="checked"></input>Single
-										Column Sort
-									</label> <label class="radio-inline"> <input type="radio"
-										name="sortSelection" ng-model="sortSelection" value="Multiple"
-										ng-click="changeSortSelection()"></input>Multi Column Sort
-									</label>
-								</div>
-								<div class="col-md-6">
-									<label><a href="" ng-click="clearSort()">Clear All
-											Sort</a></label>
-								</div>
-							</div>
-						</c:if>
-					</div>
-					<div class="col-md-4">
-						<c:if test="${dataTable.enableColumnFilter}">
-							<div class="row">
-								<div class="col-md-12">
-									<label><a href="" ng-click="clearFilters()">Clear
-											All Filters</a></label> <label class="btn btm-sm btn-primary">Import<input
-										style="display: none;" type="file" name="importCsv"
-										id="importCsv" accept=".csv" import-csv="csvFileContent"></input>
-									</label>
-								</div>
-							</div>
-						</c:if>
-					</div>
-					<div class="col-md-2 text-right">
-						<c:if test="${dataTable.enableRefresh}">
-							<button class="btn btn-sm btn-primary" type="button"
-								ng-disabled="records.editing" ng-click="listRecords()">Refresh</button>
-						</c:if>
-					</div>
+						</div>
+					</c:if>
 				</div>
-			</c:if>
-			<%
-				int numberOfColumns = 0;
-			%>
+				<div class="col-md-3 text-right">
+					<c:if test="${dataTable.enableRefresh}">
+						<div class="row">
+							<div class="col-md-12">
+								<button class="btn btn-sm btn-primary"
+									ng-disabled="records.editing" ng-click="listRecords()">
+									<span class="glyphicon glyphicon-refresh mright-3"></span>Refresh
+								</button>
+							</div>
+						</div>
+					</c:if>
+				</div>
+			</div>
+		</c:if>
+		<%
+			int numberOfColumns = 0;
+		%>
+		<form name="dataTableRowEdit" class="form-inline">
 			<table
 				class="<c:out value="${dataTable.getStyleClassesString()}"></c:out>">
 				<tr
@@ -76,7 +113,7 @@
 						<%
 							numberOfColumns++;
 						%>
-						<th>#</th>
+						<th class="text-right">#</th>
 					</c:if>
 					<c:forEach items="${dataTable.columns}" var="column"
 						varStatus="loop">
@@ -114,7 +151,7 @@
 											class="glyphicon glyphicon-filter"
 											ng-class="getFilterClass(<c:out value='${loop.index}'></c:out>)"></span>
 										</a>
-										<div class="dropdown-menu dropdown-menu-right padding-5"
+										<div class="dropdown-menu dropdown-menu-right pad-5"
 											aria-labelledby="<c:out value="${column.dataCell.field.name}"></c:out>Filter">
 											<c:set var="columnDataCell" value="${column.dataCell}"
 												scope="request"></c:set>
@@ -130,13 +167,13 @@
 						<%
 							numberOfColumns++;
 						%>
-						<th>Action</th>
+						<th class="text-nowrap">Action</th>
 					</c:if>
 				</tr>
 				<tr
-					ng-repeat="record in records | filter:searchText | filter:columnFilterFunc | orderBy:sortBy">
+					ng-repeat="record in records | filter:searchText | filter:columnFilterFunc | orderBy:sortBy" repeat-complete="stopSpinner()">
 					<c:if test="${dataTable.enableRowNum}">
-						<td>{{$index+1}}</td>
+						<td class="text-right">{{$index+1}}</td>
 					</c:if>
 					<c:forEach items="${dataTable.columns}" var="column">
 						<c:set var="inputCell" value="${column.dataCell}" scope="request"></c:set>
@@ -158,22 +195,25 @@
 						</td>
 					</c:forEach>
 					<c:if test="${dataTable.enableDataEdit}">
-						<td>
+						<td class="text-nowrap">
 							<div ng-hide="record.editing || records.editing">
-								<button class="btn btn-sm btn-primary" type="button"
-									ng-click="editRecord(record)">Edit</button>
-								<button class="btn btn-sm btn-default" type="button"
-									ng-click="deleteRecord(record)">Delete</button>
+								<label class="small mright-5"><a href=""
+									ng-click="editRecord(record)"><span
+										class="glyphicon glyphicon-pencil mright-3"></span>Edit</a></label> <label
+									class="small"><a href=""
+									ng-click="deleteRecord(record)"><span
+										class="glyphicon glyphicon-trash mright-3"></span>Delete</a></label>
 							</div>
 							<div ng-show="record.editing">
-								<button class="btn btn-sm btn-primary" type="submit"
-									ng-hide="record.id" ng-click="createRecord(record)"
-									ng-disabled="dataTableRowEdit.$invalid">Create</button>
-								<button class="btn btn-sm btn-primary" type="submit"
-									ng-show="record.id" ng-click="updateRecord(record)"
-									ng-disabled="dataTableRowEdit.$invalid">Save</button>
-								<button class="btn btn-sm btn-default" type="button"
-									ng-click="cancelRecord(record)">Cancel</button>
+								<label class="small mright-5" ng-hide="record.id"><a
+									href="" ng-click="createRecord(record, false)"><span
+										class="glyphicon glyphicon-save mright-3"></span>Create</a></label> <label
+									class="small mright-5" ng-show="record.id"><a href=""
+									ng-click="updateRecord(record)"><span
+										class="glyphicon glyphicon-floppy-disk mright-3"></span>Save</a></label> <label
+									class="small"><a href=""
+									ng-click="cancelRecord(record)"><span
+										class="glyphicon glyphicon-remove mright-3"></span>Cancel</a></label>
 							</div>
 						</td>
 					</c:if>
@@ -182,11 +222,20 @@
 					<td colspan="<%=numberOfColumns%>">No records found!</td>
 				</tr>
 			</table>
-			<c:if test="${dataTable.enableDataEdit}">
-				<button class="btn btn-sm btn-primary" type="button"
-					ng-hide="records.editing" ng-click="addRecord()">Add</button>
-			</c:if>
-		</div>
-	</form>
+		</form>
+		<c:if test="${dataTable.enableDataEdit}">
+			<div class="row mbottom-5">
+				<div class="col-sm-12">
+					<button class="btn btn-sm btn-primary" ng-hide="records.editing"
+						ng-click="addRecord()">
+						<span class="glyphicon glyphicon-plus mright-3"></span>Add
+					</button>
+				</div>
+			</div>
+		</c:if>
+	</div>
+	<span us-spinner="{radius:30, width:8, length: 16}" spinner-on="showSpinner"></span>
 </div>
+<script type="text/javascript"
+	src="webjars/papa-parse/4.1.0/papaparse.min.js"></script>
 <script type="text/javascript" src="resources/js/dataTable.js"></script>

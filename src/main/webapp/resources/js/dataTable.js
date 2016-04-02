@@ -1,8 +1,8 @@
 angular
-.module("dataTable", ["ngResource"])
+.module("dataTable", ["ngResource", 'angularSpinner'])
 .constant("apiUri", "api")
 .controller("dataTableController", function($scope, $resource, apiUri) {
-	
+
 	$scope.initializeResource = function(resourceEndPoint) {
 		$scope.restResource = $resource(apiUri + "/" + resourceEndPoint + "/:id", {id: "@id"});
 		$scope.sortBy = [];
@@ -42,9 +42,17 @@ angular
 	}
 	
 	$scope.listRecords = function() {
+		$scope.showSpinner = true;
+		delete $scope.error;
 		$scope.restResource.query(function(result) {
 			$scope.records = result;
-			$scope.populateAllUniqueValues();
+			
+			if (result.length > 0) {
+				$scope.populateAllUniqueValues();
+			}
+			else {
+				$scope.showSpinner = false;
+			}
 		},
 		function(error) {
 			$scope.error = "Error encountered while retrieving the list of records";
@@ -52,15 +60,23 @@ angular
 	}
 	
 	$scope.getRecord = function(id) {
+		$scope.showSpinner = true;
 		$scope.record = $scope.restResource.get(id);
+		$scope.showSpinner = false;
 	}
 	
-	$scope.createRecord = function(record) {
-		delete record.editing;
+	$scope.createRecord = function(record, fromImport) {
+		$scope.showSpinner = true;
 		delete $scope.error;
 		new $scope.restResource(record).$save(function(result) {
-			if (result.messageType === "SUCCESS") {
+			if (fromImport && fromImport === true) {
+				$scope.records.push(result);
+			}
+			else {
 				$scope.records[$scope.records.length - 1] = result;
+			}
+
+			if (result.messageType === "SUCCESS") {
 				delete $scope.records.editing;
 				$scope.populateUniqueValues(result);
 			}
@@ -72,9 +88,11 @@ angular
 		function(error) {
 			$scope.error = "Error creating a new record";
 		});
+		$scope.showSpinner = false;
 	}
 	
 	$scope.updateRecord = function(record) {
+		$scope.showSpinner = true;
 		delete record.editing;
 		delete $scope.error;
 		record.$save(function(result) {
@@ -91,9 +109,11 @@ angular
 			record.editing = true;
 			$scope.error = "Error updating the record";
 		});
+		$scope.showSpinner = false;
 	}
 	
 	$scope.deleteRecord = function(record) {
+		$scope.showSpinner = true;
 		delete $scope.error;
 		record.$delete(function(result) {
 			if (result.messageType === "SUCCESS") {
@@ -107,6 +127,7 @@ angular
 		function(error) {
 			$scope.error = "Error deleting the record";
 		});
+		$scope.showSpinner = false;
 	}
 	
 	$scope.$watch("restResource", function() {
@@ -138,7 +159,8 @@ angular
 		$scope.records.editing = true;
 	}
 
-	$scope.changeSortSelection = function() {
+	$scope.changeSortSelection = function(selection) {
+		$scope.sortSelection = selection;
 		if ($scope.sortSelection === "Single") {
 			if ($scope.sortBy.length > 1) {
 				var primarySort = $scope.sortBy[0];
@@ -201,6 +223,10 @@ angular
 		$scope.sortBy = [];
 	}
 	
+	$scope.clearSearch = function() {
+		$scope.searchText = "";
+	}
+	
 	$scope.initializeColumnFilter = function(columnName, columnType) {
 		var columnFilter = {};
 		columnFilter.name = columnName;
@@ -215,6 +241,9 @@ angular
 				$scope.columnFilters[columnIndex].uniqueValues[i].selected = false;
 			}
 		}
+		
+		delete $scope.columnFilters[columnIndex].blank;
+		delete $scope.columnFilters[columnIndex].notBlank;
 		
 		if ($scope.columnFilters[columnIndex].type === 'Text') {
 			delete $scope.columnFilters[columnIndex].contains;
@@ -256,6 +285,10 @@ angular
 	$scope.hasFilter = function(columnIndex) {
 		var filterPresent = $scope.hasFilterFields(columnIndex);
 		
+		if (!filterPresent && ($scope.columnFilters[columnIndex].blank || $scope.columnFilters[columnIndex].notBlank)) {
+			filterPresent = true;
+		}
+		
 		if (!filterPresent && $scope.columnFilters[columnIndex].uniqueValues) {
 			for (var i = 0; !filterPresent && i < $scope.columnFilters[columnIndex].uniqueValues.length; i++) {
 				filterPresent = $scope.columnFilters[columnIndex].uniqueValues[i].selected;
@@ -274,7 +307,19 @@ angular
 		
 		for (var i = 0; matchFound && i < $scope.columnFilters.length; i++) {
 			if ($scope.hasFilter(i)) {
-				if ($scope.columnFilters[i].uniqueValues) {
+				if ($scope.columnFilters[i].blank) {
+					if (record[$scope.columnFilters[i].name]) {
+						matchFound = false;
+					}
+				}
+				
+				if (matchFound && $scope.columnFilters[i].notBlank) {
+					if (!record[$scope.columnFilters[i].name]) {
+						matchFound = false;
+					}
+				}
+
+				if (matchFound && $scope.columnFilters[i].uniqueValues) {
 					for (var j = 0; matchFound && j < $scope.columnFilters[i].uniqueValues.length; j++) {
 						if ($scope.columnFilters[i].uniqueValues[j].selected) {
 							matchFound = record[$scope.columnFilters[i].name] === $scope.columnFilters[i].uniqueValues[j].value;
@@ -282,7 +327,7 @@ angular
 					}
 				}
 				
-				if ($scope.columnFilters[i].type === 'Text') {
+				if (matchFound && $scope.columnFilters[i].type === 'Text') {
 					var ignoreCaseStr = ($scope.columnFilters[i].ignoreCase) ? "i" : "";
 					var regExp;
 					
@@ -306,7 +351,7 @@ angular
 						matchFound = record[$scope.columnFilters[i].name].search(regExp) >= 0;
 					}
 				}
-				else if ($scope.columnFilters[i].type === 'Integer' || $scope.columnFilters[i].type === 'Decimal') {
+				else if (matchFound && ($scope.columnFilters[i].type === 'Integer' || $scope.columnFilters[i].type === 'Decimal')) {
 					if (matchFound && $scope.columnFilters[i].fromNumber) {
 						matchFound = record[$scope.columnFilters[i].name] >= $scope.columnFilters[i].fromNumber;
 					}
@@ -320,25 +365,62 @@ angular
 		
 		return matchFound;
 	}
+	
+	$scope.hasImportCsvFile = function() {
+		if ($scope.csvFile && $scope.csvFile.name) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	$scope.stopSpinner = function() {
+		$scope.showSpinner = false;
+	}
+	
+	$scope.importCsvFile = function() {
+		if ($scope.hasImportCsvFile()) {
+			Papa.parse($scope.csvFile, {
+				header: true,
+				comments: "#",
+				step: function(results, parser) {
+					$scope.createRecord(results.data[0], true);
+				},
+				complete: function(results) {
+					$('#importCsv').modal('hide');
+				},
+				error: function(error, file) {
+					console.log("Error: " + error + " encountered in file: " + file);
+				},
+				skipEmptyLines: true
+			});
+		}
+	}
+})
+.directive('repeatComplete', function($timeout, $parse) {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attr) {
+        	console.log(scope);
+            if (scope.$last === true) {
+            	$timeout(function () {
+                    if (!!attr.repeatComplete) {
+                    	$parse(attr.repeatComplete)(scope);
+                    }
+                });
+            }
+        }
+    };
 })
 .directive("importCsv", function() {
 	return {
-		scope: {
-			importCsv: "="
-		},
-		link: function(scope, element) {
+		link: function(scope, element, attr) {
 			$(element).on('change', function(changeEvent) {
 				var files = changeEvent.target.files;
-				if (files.length) {
-					var r = new FileReader();
-					r.onload = function(e) {
-						var contents = e.target.result;
-						scope.$apply(function() {
-							scope.importCsv = contents;
-						});
-					};
-
-					r.readAsText(files[0]);
+				if (files && files.length) {
+					scope.$apply(function() {
+						scope.csvFile = files[0];
+					});
 				}
 			});
 		}

@@ -12,11 +12,11 @@
 	width: 1px;
 }
 
-.padding-3 {
+.pad-3 {
 	padding: 5px;
 }
 
-.padding-5 {
+.pad-5 {
 	padding: 5px;
 }
 
@@ -26,6 +26,10 @@
 
 .mbottom-5 {
 	margin-bottom: 5px;
+}
+
+.mright-3 {
+	margin-right: 3px !important;
 }
 
 .mright-5 {
@@ -47,4 +51,14 @@
 
 .red {
 	color: red;
+}
+
+.text-nowrap {
+    white-space: nowrap;
+}
+
+.div-scroll-200 {
+	height: 200px;
+	overflow: auto;
+	overflow-x: hidden;
 }
