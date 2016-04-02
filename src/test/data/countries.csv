@@ -1,0 +1,248 @@
+countryName,isoAlpha2Code,isoAlpha3Code,isoNumericCode,callingCode,currencyCode,continent,capitalCity,capitalCityTimeZone,capitalCityLatitude,capitalCityLongitude
+Andorra,AD,AND,20,376,EUR,Europe,Andorra la Vella,Europe/Andorra,42.50779,1.52109
+United Arab Emirates,AE,ARE,784,971,AED,Asia,Abu Dhabi,Asia/Dubai,24.46667,54.36667
+Afghanistan,AF,AFG,4,93,AFN,Asia,Kabul,Asia/Kabul,34.52813,69.17233
+Antigua and Barbuda,AG,ATG,28,1809,XCD,North America,Saint John’s,America/Antigua,17.11717,-61.84573
+Anguilla,AI,AIA,660,1809,XCD,North America,The Valley,America/Anguilla,18.21704,-63.05783
+Albania,AL,ALB,8,355,ALL,Europe,Tirana,Europe/Tirane,41.3275,19.81889
+Armenia,AM,ARM,51,374,AMD,Asia,Yerevan,Asia/Yerevan,40.18111,44.51361
+Netherlands Antilles,AN,ANT,530,599,ANG,North America,Willemstad,America/Curacao,12.133649,-68.930873
+Angola,AO,AGO,24,244,AOA,Africa,Luanda,Africa/Luanda,-8.83682,13.23432
+Antarctica,AQ,ATA,10,,,Antarctica,,Antarctica/McMurdo,,
+Argentina,AR,ARG,32,54,ARS,South America,Buenos Aires,America/Argentina/Buenos_Aires,-34.61315,-58.37723
+American Samoa,AS,ASM,16,1684,USD,Oceania,Pago Pago,Pacific/Pago_Pago,-14.27806,-170.7025
+Austria,AT,AUT,40,43,EUR,Europe,Vienna,Europe/Vienna,48.20849,16.37208
+Australia,AU,AUS,36,61,AUD,Australia,Canberra,Australia/Lord_Howe,-35.28346,149.12807
+Aruba,AW,ABW,533,297,AWG,North America,Oranjestad,America/Aruba,12.52398,-70.02703
+Azerbaijan,AZ,AZE,31,994,AZN,Asia,Baku,Asia/Baku,40.37767,49.89201
+Bosnia and Herzegovina,BA,BIH,70,387,BAM,Europe,Sarajevo,Europe/Sarajevo,43.84864,18.35644
+Barbados,BB,BRB,52,1809,BBD,North America,Bridgetown,America/Barbados,13.1,-59.61667
+Bangladesh,BD,BGD,50,880,BDT,Asia,Dhaka,Asia/Dhaka,23.7104,90.40744
+Belgium,BE,BEL,56,32,EUR,Europe,Brussels,Europe/Brussels,50.85045,4.34878
+Burkina Faso,BF,BFA,854,226,XOF,Africa,Ouagadougou,Africa/Ouagadougou,12.36566,-1.53388
+Bulgaria,BG,BGR,100,359,BGN,Europe,Sofia,Europe/Sofia,42.69751,23.32415
+Bahrain,BH,BHR,48,973,BHD,Asia,Manama,Asia/Bahrain,26.21536,50.5832
+Burundi,BI,BDI,108,257,BIF,Africa,Bujumbura,Africa/Bujumbura,-3.3822,29.3644
+Benin,BJ,BEN,204,229,XOF,Africa,Porto-Novo,Africa/Porto-Novo,6.49646,2.60359
+Saint Barthelemy,BL,BLM,652,590,EUR,America,Gustavia,America/St_Barthelemy,17.89618,-62.84978
+Bermuda,BM,BMU,60,1809,BMD,North America,Hamilton,Atlantic/Bermuda,32.2949,-64.78303
+Brunei,BN,BRN,96,673,BND,Asia,Bandar Seri Begawan,Asia/Brunei,4.94029,114.94806
+Bolivia,BO,BOL,68,591,BOB,South America,Sucre,America/La_Paz,-19.03332,-65.26274
+Brazil,BR,BRA,76,55,BRL,South America,Brasília,America/Noronha,-15.77972,-47.92972
+Bahamas,BS,BHS,44,1809,BSD,North America,Nassau,America/Nassau,25.05823,-77.34306
+Bhutan,BT,BTN,64,975,BTN,Asia,Thimphu,Asia/Thimphu,27.46609,89.64191
+Bouvet Island,BV,BVT,74,,NOK,Antarctica,,,,
+Botswana,BW,BWA,72,267,BWP,Africa,Gaborone,Africa/Gaborone,-24.65451,25.90859
+Belarus,BY,BLR,112,375,BYR,Europe,Minsk,Europe/Minsk,53.9,27.56667
+Belize,BZ,BLZ,84,501,BZD,Central America,Belmopan,America/Belize,17.25,-88.76667
+Canada,CA,CAN,124,1,CAD,North America,Ottawa,America/St_Johns,45.41117,-75.69812
+Cocos Islands,CC,CCK,166,891,AUD,Australia,West Island,Indian/Cocos,-12.14603,96.822424
+Democratic Republic of the Congo,CD,COD,180,242,CDF,Africa,Kinshasa,Africa/Kinshasa,-4.32758,15.31357
+Central African Republic,CF,CAF,140,236,XAF,Africa,Bangui,Africa/Bangui,4.36122,18.55496
+Republic of the Congo,CG,COG,178,242,CDF,Africa,Brazzaville,Africa/Brazzaville,-4.26613,15.28318
+Switzerland,CH,CHE,756,41,CHF,Europe,Bern,Europe/Zurich,46.94809,7.44744
+Ivory Coast,CI,CIV,384,225,XOF,Africa,Yamoussoukro,Africa/Abidjan,6.82055,-5.27674
+Cook Islands,CK,COK,184,682,NZD,Oceania,Avarua,Pacific/Rarotonga,-21.20778,-159.775
+Chile,CL,CHL,152,56,CLP,South America,Santiago,America/Santiago,-33.45694,-70.64827
+Cameroon,CM,CMR,120,237,XAF,Africa,Yaoundé,Africa/Douala,3.86667,11.51667
+China,CN,CHN,156,86,CNY,Asia,Beijing,Asia/Shanghai,39.9075,116.39723
+Colombia,CO,COL,170,57,COP,South America,Bogotá,America/Bogota,4.60971,-74.08175
+Costa Rica,CR,CRI,188,506,CRC,Central America,San José,America/Costa_Rica,9.93333,-84.08333
+Cuba,CU,CUB,192,53,CUP,North America,Havana,America/Havana,23.13302,-82.38304
+Cape Verde,CV,CPV,132,238,CVE,Africa,Praia,Atlantic/Cape_Verde,14.93152,-23.51254
+Curacao,CW,CUW,531,5999,ANG,America,Willemstad,America/Curacao,,
+Christmas Island,CX,CXR,162,6724,AUD,Australia,Flying Fish Cove,Indian/Christmas,-10.42172,105.67912
+Cyprus,CY,CYP,196,357,EUR,Asia,Nicosia,Asia/Nicosia,35.17531,33.3642
+Czech Republic,CZ,CZE,203,42,CZK,Europe,Prague,Europe/Prague,50.08804,14.42076
+Germany,DE,DEU,276,49,EUR,Europe,Berlin,Europe/Berlin,52.52437,13.41053
+Djibouti,DJ,DJI,262,253,DJF,Africa,Djibouti,Africa/Djibouti,11.58901,43.14503
+Denmark,DK,DNK,208,45,DKK,Europe,Copenhagen,Europe/Copenhagen,55.67594,12.56553
+Dominica,DM,DMA,212,1809,XCD,North America,Roseau,America/Dominica,15.30174,-61.38808
+Dominican Republic,DO,DOM,214,1809,DOP,North America,Santo Domingo,America/Santo_Domingo,18.50012,-69.98857
+Algeria,DZ,DZA,12,213,DZD,Africa,Algiers,Africa/Algiers,36.7525,3.04197
+Ecuador,EC,ECU,218,593,USD,South America,Quito,America/Guayaquil,-0.22985,-78.52495
+Estonia,EE,EST,233,372,EUR,Europe,Tallinn,Europe/Tallinn,59.43696,24.75353
+Egypt,EG,EGY,818,20,EGP,Africa,Cairo,Africa/Cairo,30.06263,31.24967
+Western Sahara,EH,ESH,732,,MAD,Africa,El Aaiún,Africa/El_Aaiun,27.1418,-13.18797
+Eritrea,ER,ERI,232,291,ERN,Africa,Asmara,Africa/Asmara,15.33805,38.93184
+Spain,ES,ESP,724,34,EUR,Europe,Madrid,Europe/Madrid,40.4165,-3.70256
+Ethiopia,ET,ETH,231,251,ETB,Africa,Addis Ababa,Africa/Addis_Ababa,9.02497,38.74689
+Finland,FI,FIN,246,358,EUR,Europe,Helsinki,Europe/Helsinki,60.16952,24.93545
+Fiji,FJ,FJI,242,679,FJD,Oceania,Suva,Pacific/Fiji,-18.14161,178.44149
+Falkland Islands,FK,FLK,238,500,FKP,South America,Stanley,Atlantic/Stanley,-51.7,-57.85
+"Micronesia, Federated States of",FM,FSM,583,691,USD,Oceania,,Pacific/Chuuk,,
+Faroe Islands,FO,FRO,234,298,DKK,Europe,Tórshavn,Atlantic/Faroe,62.00973,-6.77164
+France,FR,FRA,250,33,EUR,Europe,Paris,Europe/Paris,48.85341,2.3488
+Gabon,GA,GAB,266,241,XAF,Africa,Libreville,Africa/Libreville,0.39241,9.45356
+United Kingdom,GB,GBR,826,44,GBP,Europe,London,Europe/London,51.50853,-0.12574
+Grenada,GD,GRD,308,1809,XCD,North America,Saint George's,America/Grenada,12.05644,-61.74849
+Georgia,GE,GEO,268,995,GEL,Asia,Tbilisi,Asia/Tbilisi,41.69411,44.83368
+French Guiana,GF,GUF,254,594,EUR,South America,Cayenne,America/Cayenne,4.93333,-52.33333
+Guernsey,GG,GGY,831,44,GGP,Europe,Saint Peter Port,Europe/Guernsey,49.45981,-2.53527
+Ghana,GH,GHA,288,233,GHS,Africa,Accra,Africa/Accra,5.55602,-0.1969
+Gibraltar,GI,GIB,292,350,GIP,Europe,Gibraltar,Europe/Gibraltar,36.14474,-5.35257
+Greenland,GL,GRL,304,299,DKK,North America,Nuuk,America/Godthab,64.18347,-51.72157
+Gambia,GM,GMB,270,220,GMD,Africa,Banjul,Africa/Banjul,13.45274,-16.57803
+Guinea,GN,GIN,324,224,GNF,Africa,Conakry,Africa/Conakry,9.53795,-13.67729
+Guadeloupe,GP,GLP,312,590,EUR,North America,Basse-Terre,America/Guadeloupe,15.99854,-61.72548
+Equatorial Guinea,GQ,GNQ,226,240,XAF,Africa,Malabo,Africa/Malabo,3.75,8.78333
+Greece,GR,GRC,300,30,EUR,Europe,Athens,Europe/Athens,37.97945,23.71622
+South Georgia and South Sandwich Islands,GS,SGS,239,500,GBP,Antarctica,King Edward Point,Atlantic/South_Georgia,-54.283349,-36.494533
+Guatemala,GT,GTM,320,502,GTQ,Central America,Guatemala City,America/Guatemala,14.64072,-90.51327
+Guam,GU,GUM,316,671,USD,Oceania,Hagåtña,Pacific/Guam,13.47567,144.74886
+Guinea-Bissau,GW,GNB,624,245,XOF,Africa,Bissau,Africa/Bissau,11.86357,-15.59767
+Guyana,GY,GUY,328,592,GYD,South America,Georgetown,America/Guyana,6.80448,-58.15527
+Hong Kong,HK,HKG,344,852,HKD,Asia,Hong Kong,Asia/Hong_Kong,22.28552,114.15769
+Heard Island and McDonald Islands,HM,HMD,334,,AUD,Antarctica,,,,
+Honduras,HN,HND,340,504,HNL,Central America,Tegucigalpa,America/Tegucigalpa,14.0818,-87.20681
+Croatia,HR,HRV,191,385,HRK,Europe,Zagreb,Europe/Zagreb,45.81444,15.97798
+Haiti,HT,HTI,332,509,HTG,North America,Port-au-Prince,America/Port-au-Prince,18.53917,-72.335
+Hungary,HU,HUN,348,36,HUF,Europe,Budapest,Europe/Budapest,47.49801,19.03991
+Indonesia,ID,IDN,360,62,IDR,Asia,Jakarta,Asia/Jakarta,-6.21462,106.84513
+Ireland,IE,IRL,372,353,EUR,Europe,Dublin,Europe/Dublin,53.33306,-6.24889
+Israel,IL,ISR,376,972,ILS,Asia,Jerusalem,Asia/Jerusalem,31.76904,35.21633
+Isle of Man,IM,IMN,833,441624,IMP,Europe,Douglas,Europe/Isle_of_Man,54.15,-4.48333
+India,IN,IND,356,91,INR,Asia,New Delhi,Asia/Kolkata,28.63576,77.22445
+British Indian Ocean Territory,IO,IOT,86,246,USD,Africa,,Indian/Chagos,,
+Iraq,IQ,IRQ,368,964,IQD,Asia,Baghdad,Asia/Baghdad,33.34058,44.40088
+Iran,IR,IRN,364,98,IRR,Asia,Tehran,Asia/Tehran,35.69439,51.42151
+Iceland,IS,ISL,352,354,ISK,Europe,Reykjavík,Atlantic/Reykjavik,64.13548,-21.89541
+Italy,IT,ITA,380,39,EUR,Europe,Rome,Europe/Rome,41.89193,12.51133
+Jersey,JE,JEY,832,44,JEP,Europe,Saint Helier,Europe/Jersey,49.18804,-2.10491
+Jamaica,JM,JAM,388,1876,JMD,North America,Kingston,America/Jamaica,17.99702,-76.79358
+Jordan,JO,JOR,400,962,JOD,Asia,Amman,Asia/Amman,31.95522,35.94503
+Japan,JP,JPN,392,81,JPY,Asia,Tokyo,Asia/Tokyo,35.6895,139.69171
+Kenya,KE,KEN,404,254,KES,Africa,Nairobi,Africa/Nairobi,-1.28333,36.81667
+Kyrgyzstan,KG,KGZ,417,996,KGS,Asia,Bishkek,Asia/Bishkek,42.87,74.59
+Cambodia,KH,KHM,116,855,KHR,Asia,Phnom Penh,Asia/Phnom_Penh,11.56245,104.91601
+Kiribati,KI,KIR,296,686,AUD,Oceania,Tarawa,Pacific/Tarawa,1.3278,172.97696
+Comoros,KM,COM,174,269,KMF,Africa,Moroni,Indian/Comoro,-11.70216,43.25506
+Saint Kitts and Nevis,KN,KNA,659,1809,XCD,North America,Basseterre,America/St_Kitts,17.29484,-62.7261
+North Korea,KP,PRK,408,850,KPW,Asia,Pyongyang,Asia/Pyongyang,39.03385,125.75432
+South Korea,KR,KOR,410,82,KRW,Asia,Seoul,Asia/Seoul,37.566,126.9784
+Kuwait,KW,KWT,414,965,KWD,Asia,Kuwait City,Asia/Kuwait,29.36972,47.97833
+Cayman Islands,KY,CYM,136,1809,KYD,North America,George Town,America/Cayman,19.2866,-81.37436
+Kazakhstan,KZ,KAZ,398,7,KZT,Asia,Astana,Asia/Almaty,51.1801,71.44598
+Laos,LA,LAO,418,856,LAK,Asia,Vientiane,Asia/Vientiane,17.96667,102.6
+Lebanon,LB,LBN,422,961,LBP,Asia,Beirut,Asia/Beirut,33.88894,35.49442
+Saint Lucia,LC,LCA,662,1809,XCD,North America,Castries,America/St_Lucia,13.9957,-61.00614
+Liechtenstein,LI,LIE,438,423,CHF,Europe,Vaduz,Europe/Vaduz,47.14151,9.52154
+Sri Lanka,LK,LKA,144,94,LKR,Asia,Colombo,Asia/Colombo,6.93194,79.84778
+Liberia,LR,LBR,430,231,LRD,Africa,Monrovia,Africa/Monrovia,6.30054,-10.7969
+Lesotho,LS,LSO,426,266,LSL,Africa,Maseru,Africa/Maseru,-29.31667,27.48333
+Lithuania,LT,LTU,440,370,LTL,Europe,Vilnius,Europe/Vilnius,54.68916,25.2798
+Luxembourg,LU,LUX,442,352,EUR,Europe,Luxembourg,Europe/Luxembourg,49.61167,6.13
+Latvia,LV,LVA,428,371,EUR,Europe,Riga,Europe/Riga,56.946,24.10589
+Libya,LY,LBY,434,218,LYD,Africa,Tripoli,Africa/Tripoli,32.87519,13.18746
+Morocco,MA,MAR,504,212,MAD,Africa,Rabat,Africa/Casablanca,34.01325,-6.83255
+Monaco,MC,MCO,492,3393,EUR,Europe,Monaco,Europe/Monaco,43.73333,7.41667
+Moldova,MD,MDA,498,373,MDL,Europe,Chisinau,Europe/Chisinau,47.00556,28.8575
+Montenegro,ME,MNE,499,382,EUR,Europe,Podgorica,Europe/Podgorica,42.44111,19.26361
+Madagascar,MG,MDG,450,261,MGA,Africa,Antananarivo,Indian/Antananarivo,-18.91368,47.53613
+Marshall Islands,MH,MHL,584,692,USD,Oceania,Majuro,Pacific/Majuro,7.08971,171.38027
+Macedonia,MK,MKD,807,389,MKD,Europe,Skopje,Europe/Skopje,41.99646,21.43141
+Mali,ML,MLI,466,223,XOF,Africa,Bamako,Africa/Bamako,12.65,-8
+Burma,MM,MMR,104,95,MMK,Asia,Nay Pyi Taw,Asia/Rangoon,19.745,96.12972
+Mongolia,MN,MNG,496,976,MNT,Asia,Ulaanbaatar,Asia/Ulaanbaatar,47.90771,106.88324
+Macau,MO,MAC,446,853,MOP,Asia,Concelho de Macau,Asia/Macau,22.20056,113.54611
+Northern Mariana Islands,MP,MNP,580,1670,USD,Oceania,Saipan,Pacific/Saipan,15.21233,145.7545
+Martinique,MQ,MTQ,474,596,EUR,North America,Fort-de-France,America/Martinique,14.60892,-61.07334
+Mauritania,MR,MRT,478,222,MRO,Africa,Nouakchott,Africa/Nouakchott,18.08581,-15.9785
+Montserrat,MS,MSR,500,1809,XCD,North America,Brades,America/Montserrat,16.79183,-62.21058
+Malta,MT,MLT,470,356,EUR,Europe,Valletta,Europe/Malta,35.89972,14.51472
+Mauritius,MU,MUS,480,230,MUR,Africa,Port Louis,Indian/Mauritius,-20.16194,57.49889
+Maldives,MV,MDV,462,960,MVR,Asia,Male,Indian/Maldives,4.1748,73.50888
+Malawi,MW,MWI,454,265,MWK,Africa,Lilongwe,Africa/Blantyre,-13.96692,33.78725
+Mexico,MX,MEX,484,52,MXN,Central America,Mexico City,America/Mexico_City,19.42847,-99.12766
+Malaysia,MY,MYS,458,60,MYR,Asia,Kuala Lumpur,Asia/Kuala_Lumpur,3.1412,101.68653
+Mozambique,MZ,MOZ,508,258,MZN,Africa,Maputo,Africa/Maputo,-25.96553,32.58322
+Namibia,NA,NAM,516,264,NAD,Africa,Windhoek,Africa/Windhoek,-22.55941,17.08323
+New Caledonia,NC,NCL,540,687,XPF,Oceania,Nouméa,Pacific/Noumea,-22.27631,166.4572
+Niger,NE,NER,562,227,XOF,Africa,Niamey,Africa/Niamey,13.51366,2.1098
+Norfolk Island,NF,NFK,574,6723,AUD,Australia,Kingston,Pacific/Norfolk,-29.05459,167.96628
+Nigeria,NG,NGA,566,234,NGN,Africa,Abuja,Africa/Lagos,9.05785,7.49508
+Nicaragua,NI,NIC,558,505,NIO,Central America,Managua,America/Managua,12.13282,-86.2504
+Netherlands,NL,NLD,528,31,EUR,Europe,Amsterdam,Europe/Amsterdam,52.37403,4.88969
+Norway,NO,NOR,578,47,NOK,Europe,Oslo,Europe/Oslo,59.91273,10.74609
+Nepal,NP,NPL,524,977,NPR,Asia,Kathmandu,Asia/Kathmandu,27.70169,85.3206
+Nauru,NR,NRU,520,674,AUD,Oceania,Yaren,Pacific/Nauru,-0.55085,166.9252
+Niue,NU,NIU,570,683,NZD,Oceania,Alofi,Pacific/Niue,-19.05952,-169.91867
+New Zealand,NZ,NZL,554,64,NZD,Australia,Wellington,Pacific/Auckland,-41.28664,174.77557
+Oman,OM,OMN,512,968,OMR,Asia,Muscat,Asia/Muscat,23.61387,58.5922
+Panama,PA,PAN,591,507,PAB,Central America,Panamá,America/Panama,8.9936,-79.51973
+Peru,PE,PER,604,51,PEN,South America,Lima,America/Lima,-12.04318,-77.02824
+French Polynesia,PF,PYF,258,689,XPF,Oceania,Papeete,Pacific/Tahiti,-17.53733,-149.5665
+Papua New Guinea,PG,PNG,598,675,PGK,Oceania,Port Moresby,Pacific/Port_Moresby,-9.44314,147.17972
+Philippines,PH,PHL,608,63,PHP,Asia,Manila,Asia/Manila,14.6042,120.9822
+Pakistan,PK,PAK,586,92,PKR,Asia,Islamabad,Asia/Karachi,33.72148,73.04329
+Poland,PL,POL,616,48,PLN,Europe,Warsaw,Europe/Warsaw,52.22977,21.01178
+Saint Pierre and Miquelon,PM,SPM,666,508,EUR,North America,Saint-Pierre,America/Miquelon,46.77914,-56.1773
+Pitcairn Islands,PN,PCN,612,649,GBP,Oceania,Adamstown,Pacific/Pitcairn,-25.066397,-130.100197
+Puerto Rico,PR,PRI,630,1809,USD,North America,San Juan,America/Puerto_Rico,18.46633,-66.10572
+Palestine,PS,PSE,275,970,ILS,Asia,Ramallah,Asia/Gaza,31.89964,35.20422
+Portugal,PT,PRT,620,351,EUR,Europe,Lisbon,Europe/Lisbon,38.71667,-9.13333
+Palau,PW,PLW,585,680,USD,Oceania,Ngerulmud,Pacific/Palau,,
+Paraguay,PY,PRY,600,595,PYG,South America,Asunción,America/Asuncion,-25.30066,-57.63591
+Qatar,QA,QAT,634,974,QAR,Asia,Doha,Asia/Qatar,25.27932,51.52245
+Reunion,RE,REU,638,262,EUR,Africa,Saint-Denis,Indian/Reunion,-20.88231,55.4504
+Romania,RO,ROU,642,40,RON,Europe,Bucharest,Europe/Bucharest,44.43225,26.10626
+Serbia,RS,SRB,688,381,RSD,Europe,Belgrade,Europe/Belgrade,44.80401,20.46513
+Russia,RU,RUS,643,7,RUB,Europe,Moscow,Europe/Kaliningrad,55.75222,37.61556
+Rwanda,RW,RWA,646,250,RWF,Africa,Kigali,Africa/Kigali,-1.94995,30.05885
+Saudi Arabia,SA,SAU,682,966,SAR,Asia,Riyadh,Asia/Riyadh,24.68773,46.72185
+Solomon Islands,SB,SLB,90,677,SBD,Oceania,Honiara,Pacific/Guadalcanal,-9.43333,159.95
+Seychelles,SC,SYC,690,248,SCR,Africa,Victoria,Indian/Mahe,-4.61667,55.45
+Sudan,SD,SDN,736,249,SDG,Africa,Khartoum,Africa/Khartoum,15.55177,32.53241
+Sweden,SE,SWE,752,46,SEK,Europe,Stockholm,Europe/Stockholm,59.33258,18.0649
+Singapore,SG,SGP,702,65,SGD,Asia,Singapore,Asia/Singapore,1.28967,103.85007
+"Saint Helena, Ascension and Tristan da Cunha",SH,SHN,654,290,SHP,Africa,Jamestown,Atlantic/St_Helena,-15.93872,-5.71675
+Slovenia,SI,SVN,705,386,EUR,Europe,Ljubljana,Europe/Ljubljana,46.05108,14.50513
+Svalbard,SJ,SJM,744,47,NOK,Europe,Longyearbyen,Arctic/Longyearbyen,78.22334,15.64689
+Slovakia,SK,SVK,703,42,EUR,Europe,Bratislava,Europe/Bratislava,48.14816,17.10674
+Sierra Leone,SL,SLE,694,232,SLL,Africa,Freetown,Africa/Freetown,8.484,-13.22994
+San Marino,SM,SMR,674,378,EUR,Europe,San Marino,Europe/San_Marino,43.93667,12.44639
+Senegal,SN,SEN,686,221,XOF,Africa,Dakar,Africa/Dakar,14.6937,-17.44406
+Somalia,SO,SOM,706,252,SOS,Africa,Mogadishu,Africa/Mogadishu,2.03711,45.34375
+Suriname,SR,SUR,740,597,SRD,South America,Paramaribo,America/Paramaribo,5.86638,-55.16682
+South Sudan,SS,SSD,728,211,SSP,Africa,Juba,Africa/Juba,4.85165,31.58247
+Sao Tome and Principe,ST,STP,678,239,STD,Africa,São Tomé,Africa/Sao_Tome,0.33654,6.72732
+El Salvador,SV,SLV,222,503,USD,Central America,San Salvador,America/El_Salvador,13.68935,-89.18718
+Saint Martin,SX,SXM,534,1721,ANG,America,Philipsburg,America/Lower_Princes,18.025415,-63.050516
+Syria,SY,SYR,760,963,SYP,Asia,Damascus,Asia/Damascus,33.5102,36.29128
+Swaziland,SZ,SWZ,748,268,SZL,Africa,Mbabane,Africa/Mbabane,-26.31667,31.13333
+Turks and Caicos Islands,TC,TCA,796,1649,USD,North America,Cockburn Town,America/Grand_Turk,21.46122,-71.14188
+Chad,TD,TCD,148,235,XAF,Africa,N'Djamena,Africa/Ndjamena,12.10672,15.0444
+French Southern and Antarctic Lands,TF,ATF,260,,EUR,Antarctica,Port-aux-Français,Indian/Kerguelen,-49.35,70.21667
+Togo,TG,TGO,768,228,XOF,Africa,Lomé,Africa/Lome,6.13748,1.21227
+Thailand,TH,THA,764,66,THB,Asia,Bangkok,Asia/Bangkok,13.75398,100.50144
+Tajikistan,TJ,TJK,762,992,TJS,Asia,Dushanbe,Asia/Dushanbe,38.53575,68.77905
+Tokelau,TK,TKL,772,690,NZD,Oceania,Nukunonu,Pacific/Fakaofo,-9.20045,-171.84804
+Timor-Leste,TL,TLS,626,670,USD,Asia,Dili,Asia/Dili,-8.55861,125.57361
+Turkmenistan,TM,TKM,795,993,TMT,Asia,Ashgabat,Asia/Ashgabat,37.95,58.38333
+Tunisia,TN,TUN,788,216,TND,Africa,Tunis,Africa/Tunis,36.81897,10.16579
+Tonga,TO,TON,776,676,TOP,Oceania,Nuku‘alofa,Pacific/Tongatapu,-21.13938,-175.2018
+Turkey,TR,TUR,792,90,TRY,Asia,Ankara,Europe/Istanbul,39.91987,32.85427
+Trinidad and Tobago,TT,TTO,780,296,TTD,North America,Port-of-Spain,America/Port_of_Spain,10.66668,-61.51889
+Tuvalu,TV,TUV,798,688,AUD,Oceania,Funafuti,Pacific/Funafuti,-8.52425,179.19417
+Taiwan,TW,TWN,158,886,TWD,Asia,Taipei,Asia/Taipei,25.04776,121.53185
+Tanzania,TZ,TZA,834,255,TZS,Africa,Dodoma,Africa/Dar_es_Salaam,-6.17221,35.73947
+Ukraine,UA,UKR,804,380,UAH,Europe,Kiev,Europe/Kiev,50.45466,30.5238
+Uganda,UG,UGA,800,256,UGX,Africa,Kampala,Africa/Kampala,0.31628,32.58219
+United States,US,USA,840,1,USD,North America,"Washington, D.C.",America/New_York,38.89511,-77.03637
+Uruguay,UY,URY,858,598,UYU,South America,Montevideo,America/Montevideo,-34.90328,-56.18816
+Uzbekistan,UZ,UZB,860,998,UZS,Asia,Tashkent,Asia/Samarkand,41.26465,69.21627
+Vatican City,VA,VAT,336,396,EUR,Europe,Vatican City,Europe/Vatican,,
+Saint Vincent and the Grenadines,VC,VCT,670,1809,XCD,North America,Kingstown,America/St_Vincent,13.15872,-61.22475
+Venezuela,VE,VEN,862,58,VEF,South America,Caracas,America/Caracas,10.48801,-66.87919
+British Virgin Islands,VG,VGB,92,1284,USD,North America,Road Town,America/Tortola,18.42693,-64.62079
+Virgin Islands,VI,VIR,850,1809,USD,North America,Charlotte Amalie,America/St_Thomas,18.3419,-64.9307
+Vietnam,VN,VNM,704,84,VND,Asia,Hanoi,Asia/Ho_Chi_Minh,21.0245,105.84117
+Vanuatu,VU,VUT,548,678,VUV,Oceania,Port-Vila,Pacific/Efate,-17.73381,168.32188
+Wallis and Futuna,WF,WLF,876,681,XPF,Oceania,Mata-Utu,Pacific/Wallis,-13.28163,-176.17453
+Samoa,WS,WSM,882,685,WST,Oceania,Apia,Pacific/Apia,-13.83333,-171.76666
+Kosovo,XK,KOS,0,383,EUR,Europe,Pristina,Europe/Belgrade,42.67272,21.16688
+Yemen,YE,YEM,887,967,YER,Asia,Sanaa,Asia/Aden,15.35472,44.20667
+Mayotte,YT,MYT,175,269,EUR,Africa,Mamoudzou,Indian/Mayotte,-12.78234,45.22878
+South Africa,ZA,ZAF,710,27,ZAR,Africa,Pretoria,Africa/Johannesburg,-25.74486,28.18783
+Zambia,ZM,ZMB,894,260,ZMK,Africa,Lusaka,Africa/Lusaka,-15.40669,28.28713
+Zimbabwe,ZW,ZWE,716,263,ZWL,Africa,Harare,Africa/Harare,-17.82772,31.05337
