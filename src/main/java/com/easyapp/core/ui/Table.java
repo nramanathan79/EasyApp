@@ -28,6 +28,8 @@ public class Table extends BaseUI {
 	private Optional<Row> headerRow;
 	private Optional<Row> dataRow;
 	private Boolean enableRefresh;
+	private Boolean enableImportCsv;
+	private Boolean enableExportCsv;
 
 	public Table() {
 		setEnableSearch(false);
@@ -38,6 +40,8 @@ public class Table extends BaseUI {
 		setEnableDataEdit(false);
 		setEnablePagination(false);
 		setEnableRefresh(false);
+		setEnableImportCsv(false);
+		setEnableExportCsv(false);
 	}
 
 	public Boolean getEnableSearch() {
@@ -168,11 +172,11 @@ public class Table extends BaseUI {
 		return headerRow;
 	}
 
-	public void setHeaderRow(Optional<Row> headerRow) {
+	public void setHeaderRow(final Optional<Row> headerRow) {
 		this.headerRow = headerRow;
 	}
 
-	public void setHeaderRow(Row headerRow) {
+	public void setHeaderRow(final Row headerRow) {
 		this.headerRow = Optional.ofNullable(headerRow);
 	}
 
@@ -180,11 +184,11 @@ public class Table extends BaseUI {
 		return dataRow;
 	}
 
-	public void setDataRow(Optional<Row> dataRow) {
+	public void setDataRow(final Optional<Row> dataRow) {
 		this.dataRow = dataRow;
 	}
 
-	public void setDataRow(Row dataRow) {
+	public void setDataRow(final Row dataRow) {
 		this.dataRow = Optional.ofNullable(dataRow);
 	}
 
@@ -194,5 +198,21 @@ public class Table extends BaseUI {
 
 	public void setEnableRefresh(final Boolean enableRefresh) {
 		this.enableRefresh = enableRefresh;
+	}
+
+	public Boolean getEnableImportCsv() {
+		return enableImportCsv;
+	}
+
+	public void setEnableImportCsv(final Boolean enableImportCsv) {
+		this.enableImportCsv = enableImportCsv;
+	}
+
+	public Boolean getEnableExportCsv() {
+		return enableExportCsv;
+	}
+
+	public void setEnableExportCsv(final Boolean enableExportCsv) {
+		this.enableExportCsv = enableExportCsv;
 	}
 }

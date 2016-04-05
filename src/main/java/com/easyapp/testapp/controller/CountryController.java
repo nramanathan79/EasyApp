@@ -24,6 +24,8 @@ public class CountryController {
 		countryTable.setEnableRowNum(true);
 		countryTable.setEnableDataEdit(true);
 		countryTable.setEnableRefresh(true);
+		countryTable.setEnableImportCsv(true);
+		countryTable.setEnableExportCsv(true);
 		countryTable.setDataEditApiName("countries");
 		countryTable.setDataResource(DataResource.api);
 		countryTable.setStyleClassesString("table table-striped table-bordered mtop-5 mbottom-5");

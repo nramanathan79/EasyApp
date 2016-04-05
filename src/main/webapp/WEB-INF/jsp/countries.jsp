@@ -16,9 +16,11 @@
 <script type="text/javascript"
 	src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script type="text/javascript"
-	src="webjars/angularjs/1.5.2/angular.min.js"></script>
+	src="webjars/angularjs/1.5.3/angular.min.js"></script>
 <script type="text/javascript"
-	src="webjars/angularjs/1.5.2/angular-resource.min.js"></script>
+	src="webjars/angularjs/1.5.3/angular-resource.min.js"></script>
+<script type="text/javascript"
+	src="webjars/angular-ui-bootstrap/1.2.5/ui-bootstrap.min.js"></script>
 <script type="text/javascript" src="webjars/spin.js/2.3.2/spin.min.js"></script>
 <script type="text/javascript"
 	src="webjars/angular-spinner/0.8.1/angular-spinner.min.js"></script>

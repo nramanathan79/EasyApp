@@ -33,7 +33,8 @@
 			<c:out value='${inputCell.field.name}'></c:out>"
 				<c:if test="${inputCell.field.required}">required="required"</c:if>></input>
 		</c:when>
-		<c:when test="${inputCell.field.inputType == 'Integer' || inputCell.field.inputType == 'Decimal'}">
+		<c:when
+			test="${inputCell.field.inputType == 'Integer' || inputCell.field.inputType == 'Decimal'}">
 			<input type="number"
 				class="text-right <c:if test="${!empty inputCell.getStyleClassesString()}"><c:out value='${inputCell.getStyleClassesString()}'></c:out></c:if>"
 				<c:if test="${!empty inputCell.customStyle}">style="<c:out value='${inputCell.customStyle}'></c:out>"</c:if>
@@ -44,7 +45,8 @@
 				<c:if test="${!empty inputCell.field.minValue}">min="<c:out
 					value='${inputCell.field.minValue}'></c:out>"</c:if>
 				<c:if test="${!empty inputCell.field.maxValue}">max="<c:out
-					value='${inputCell.field.maxValue}'></c:out>"</c:if><c:if test="${!empty inputCell.field.stepInterval}">step="<c:out
+					value='${inputCell.field.maxValue}'></c:out>"</c:if>
+				<c:if test="${!empty inputCell.field.stepInterval}">step="<c:out
 					value='${inputCell.field.stepInterval}'></c:out>"</c:if>></input>
 		</c:when>
 	</c:choose>
