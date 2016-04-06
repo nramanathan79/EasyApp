@@ -189,7 +189,7 @@
 					</td>
 				</c:if>
 			</tr>
-			<tr ng-if="records.length == 0" ng-cloak>
+			<tr ng-if="filteredRecords.length == 0 && searchText === '' && columnFilters.length <= 0" ng-cloak>
 				<td colspan="<%=numberOfColumns%>">No records found!</td>
 			</tr>
 		</table>

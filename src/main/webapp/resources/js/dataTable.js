@@ -1,11 +1,6 @@
 var dataTableApp = angular.module('dataTable', ['ngResource', 'angularSpinner']).constant('apiUri', 'api');
 
 dataTableApp.controller('dataTableController', function($scope, $resource, apiUri) {
-	$scope.records = [];
-	$scope.filteredRecords = [];
-	$scope.sortBy = [];
-	$scope.columnFilters = [];
-
 	$scope.startSpinner = function() {
 		$scope.showSpinner = true;
 	}
@@ -20,7 +15,9 @@ dataTableApp.controller('dataTableController', function($scope, $resource, apiUr
 	
 	$scope.$on('filterColumn', function(event, columnFilter) {
 		if (columnFilter) {
-			$scope.startSpinner();
+			if (!$scope.columnFilters) {
+				$scope.columnFilters = [];
+			}
 
 			if ($scope.columnFilters.length > 0) {
 				var columnIndex = $scope.columnFilters.map(function(e) { return e.name; }).indexOf(columnFilter.name);
@@ -244,7 +241,6 @@ dataTableApp.controller('dataTableController', function($scope, $resource, apiUr
 	}
 	
 	$scope.clearFilters = function() {
-		$scope.startSpinner();
 		$scope.columnFilters = [];
 		$scope.filteredRecords = $scope.records;
 		$scope.$broadcast('resetFilters', $scope.filteredRecords, $scope.columnFilters);
@@ -279,31 +275,24 @@ dataTableApp.controller('dataTableController', function($scope, $resource, apiUr
 });
 
 dataTableApp.directive('repeatComplete', function($timeout, $parse) {
-    return {
-        restrict: 'A',
-        link: function(scope, element, attr) {
-        	if (scope.$last === true) {
-            	$timeout(function () {
-                    if (!!attr.repeatComplete) {
-                    	$parse(attr.repeatComplete)(scope);
-                    }
-                });
-        	}
-        }
+    return function(scope, element, attrs) {
+    	if (scope.$last) {
+    		if (attrs.repeatComplete) {
+        		scope.$eval(attrs.repeatComplete);
+    		}
+       	}
     };
 });
 
 dataTableApp.directive('importCsv', function() {
-	return {
-		link: function(scope, element, attr) {
-			$(element).on('change', function(changeEvent) {
-				var files = changeEvent.target.files;
-				if (files && files.length) {
-					scope.$apply(function() {
-						scope.csvFile = files[0];
-					});
-				}
-			});
-		}
+	return function(scope, element, attrs) {
+		$(element).on('change', function(changeEvent) {
+			var files = changeEvent.target.files;
+			if (files && files.length) {
+				scope.$apply(function() {
+					scope.csvFile = files[0];
+				});
+			}
+		});
 	};
 });
