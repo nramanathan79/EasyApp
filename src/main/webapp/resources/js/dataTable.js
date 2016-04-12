@@ -3,15 +3,15 @@ var dataTableApp = angular.module('dataTable', ['ngResource', 'angularSpinner'])
 dataTableApp.controller('dataTableController', function($scope, $resource, apiUri) {
 	$scope.startSpinner = function() {
 		$scope.showSpinner = true;
-	}
+	};
 	
 	$scope.stopSpinner = function() {
 		$scope.showSpinner = false;
-	}
+	};
 	
 	$scope.initializeResource = function(resourceEndPoint) {
 		$scope.restResource = $resource(apiUri + '/' + resourceEndPoint + '/:id', {id: '@id'});
-	}
+	};
 	
 	$scope.$on('filterColumn', function(event, columnFilter) {
 		if (columnFilter) {
@@ -65,7 +65,7 @@ dataTableApp.controller('dataTableController', function($scope, $resource, apiUr
 		function(error) {
 			$scope.error = 'Error encountered while retrieving the list of records';
 		});
-	}
+	};
 	
 	$scope.getRecord = function(id) {
 		$scope.startSpinner();
@@ -73,7 +73,7 @@ dataTableApp.controller('dataTableController', function($scope, $resource, apiUr
 		$scope.record = $scope.restResource.get(id);
 		
 		$scope.stopSpinner();
-	}
+	};
 	
 	$scope.createRecord = function(record, fromImport) {
 		$scope.startSpinner();
@@ -101,7 +101,7 @@ dataTableApp.controller('dataTableController', function($scope, $resource, apiUr
 		});
 
 		$scope.stopSpinner();
-	}
+	};
 	
 	$scope.updateRecord = function(record) {
 		$scope.startSpinner();
@@ -124,7 +124,7 @@ dataTableApp.controller('dataTableController', function($scope, $resource, apiUr
 		});
 
 		$scope.stopSpinner();
-	}
+	};
 	
 	$scope.deleteRecord = function(record) {
 		$scope.startSpinner();
@@ -144,7 +144,7 @@ dataTableApp.controller('dataTableController', function($scope, $resource, apiUr
 		});
 
 		$scope.stopSpinner();
-	}
+	};
 	
 	$scope.$watch('restResource', function() {
 		$scope.listRecords();
@@ -154,7 +154,7 @@ dataTableApp.controller('dataTableController', function($scope, $resource, apiUr
 		$scope.recordBeforeEdit = angular.copy(record);
 		record.editing = true;
 		$scope.filteredRecords.editing = true;
-	}
+	};
 	
 	$scope.cancelRecord = function(record) {
 		if (record.id) {
@@ -167,13 +167,13 @@ dataTableApp.controller('dataTableController', function($scope, $resource, apiUr
 		
 		delete $scope.filteredRecords.editing;
 		delete $scope.error;
-	}
+	};
 	
 	$scope.addRecord = function() {
 		var record = {'editing': true};
 		$scope.records.push(record);
 		$scope.filteredRecords.editing = true;
-	}
+	};
 
 	$scope.changeSortSelection = function(selection) {
         if (!$scope.sortBy) {
@@ -188,25 +188,19 @@ dataTableApp.controller('dataTableController', function($scope, $resource, apiUr
 				$scope.sortBy.push(primarySort);
 			}
 		}
-	}
+	};
 	
 	$scope.hasSort = function(column) {
         if (!$scope.sortBy) {
             $scope.sortBy = [];
         }
 
-        var columnIndex = $scope.sortBy.indexOf(column);
-		if (columnIndex >= 0) {
+		if ($scope.sortBy.indexOf(column) >= 0) {
 			return true;
 		}
 		
-		var columnReverseIndex = $scope.sortBy.indexOf('-' + column);
-		if (columnReverseIndex >= 0) {
-			return true;
-		}
-		
-		return false;
-	}
+		return $scope.sortBy.indexOf('-' + column) >= 0;
+	};
 
 	$scope.showSortIndex = function(column) {
         if (!$scope.sortBy) {
@@ -226,7 +220,7 @@ dataTableApp.controller('dataTableController', function($scope, $resource, apiUr
 		}
 		
 		return -1;
-	}
+	};
 	
 	$scope.addSort = function(column) {
 		if (!$scope.sortBy) {
@@ -249,37 +243,33 @@ dataTableApp.controller('dataTableController', function($scope, $resource, apiUr
 			
 			$scope.sortBy.push(column);
 		}
-	}
+	};
 	
 	$scope.clearSort = function() {
 		$scope.sortBy = [];
-	}
+	};
 
     $scope.sortPresent = function() {
         return $scope.sortBy && angular.isArray($scope.sortBy) && $scope.sortBy.length > 0;
-    }
+    };
 	
 	$scope.clearSearch = function() {
 		$scope.searchText = '';
-	}
+	};
 	
 	$scope.clearFilters = function() {
 		$scope.columnFilters = [];
 		$scope.filteredRecords = $scope.records;
 		$scope.$broadcast('resetFilters', $scope.filteredRecords, $scope.columnFilters);
-	}
+	};
 
 	$scope.hasFilters = function() {
 		return $scope.columnFilters && angular.isArray($scope.columnFilters) && $scope.columnFilters.length > 0;
-	}
+	};
 	
 	$scope.hasImportCsvFile = function() {
-		if ($scope.csvFile && $scope.csvFile.name) {
-			return true;
-		}
-		
-		return false;
-	}
+		return $scope.csvFile && $scope.csvFile.name;
+	};
 	
 	$scope.importCsvFile = function() {
 		if ($scope.hasImportCsvFile()) {

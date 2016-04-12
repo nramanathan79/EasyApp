@@ -25,7 +25,7 @@ if (dataTableApp) {
 					return a.value < b.value ? -1 : (a.value > b.value ? 1 : 0);
 				});
 			}
-		}
+		};
 		
 		$scope.populateUniqueValue = function(value) {
 			if (!$scope.columnFilter.uniqueValues) {
@@ -40,7 +40,7 @@ if (dataTableApp) {
 				uniqueValue.selected = false;
 				$scope.columnFilter.uniqueValues.push(uniqueValue);
 			}
-		}
+		};
 
 		$scope.$on('addToFilter', function(event, record) {
 			$scope.populateUniqueValue(record[$scope.columnFilter.name]);
@@ -72,21 +72,21 @@ if (dataTableApp) {
 		$scope.initializeColumnFilter = function(columnName, columnType) {
 			$scope.columnFilter.name = columnName;
 			$scope.columnFilter.type = columnType;
-		}
+		};
 		
 		$scope.closeDropdown = function() {
 			delete $scope.copyColumnFilter;
 			$('.dropdown.open').removeClass('open');
-		}
+		};
 
 		$scope.backupColumnFilter = function() {
 			$scope.copyColumnFilter = angular.copy($scope.columnFilter);
-		}
+		};
 		
 		$scope.restoreColumnFilter = function() {
 			$scope.columnFilter = angular.copy($scope.copyColumnFilter);
 			$scope.closeDropdown();
-		}
+		};
 		
 		$scope.clearColumnFilter = function() {
 			if ($scope.columnFilter.uniqueValues) {
@@ -113,7 +113,7 @@ if (dataTableApp) {
 			
 			$scope.$emit('filterColumn', $scope.columnFilter);
 			$scope.closeDropdown();
-		}
+		};
 		
 		$scope.hasFilter = function() {
 			if ($scope.columnFilter.blank || $scope.columnFilter.notBlank) {
@@ -144,17 +144,17 @@ if (dataTableApp) {
 			}
 			
 			return false;
-		}
+		};
 		
 		$scope.getFilterClass = function() {
 			return $scope.columnFilter.filterPresent ? 'red' : '';
-		}
+		};
 		
 		$scope.applyColumnFilter = function() {
 			$scope.columnFilter.filterPresent = $scope.hasFilter();
 			$scope.$emit('filterColumn', $scope.columnFilter);
 			$scope.closeDropdown();
-		}
+		};
 		
 		$scope.columnFilter.match = function(record, searchText) {
 			if (!record) {
