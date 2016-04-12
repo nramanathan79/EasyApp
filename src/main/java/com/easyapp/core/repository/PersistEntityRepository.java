@@ -7,4 +7,7 @@ import com.easyapp.core.entity.PersistEntity;
 
 @Repository
 public interface PersistEntityRepository<T extends PersistEntity> extends JpaRepository<T, String> {
+    default T saveOne(T record) {
+        return save(record);
+    }
 }

@@ -14,59 +14,59 @@ import com.easyapp.core.repository.PersistEntityRepository;
 
 @Transactional
 public class PersistModelServiceImpl<T extends PersistModel> extends PersistModelService<T> {
-	public PersistModelServiceImpl(Class<T> modelClass,
-			PersistEntityRepository<? extends PersistEntity> persistEntityRepository) {
-		super(modelClass, persistEntityRepository);
-	}
+    public PersistModelServiceImpl(Class<T> modelClass,
+                                   PersistEntityRepository<? extends PersistEntity> persistEntityRepository) {
+        super(modelClass, persistEntityRepository);
+    }
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<T> findAll() {
-		return persistEntityRepository.findAll().stream()
-				.map(persistEntity -> PersistModel.buildModelFromEntity(persistEntity, modelClass))
-				.filter(Optional::isPresent).map(Optional::get).collect(toList());
-	}
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public List<T> findAll() {
+        return persistEntityRepository.findAll().stream()
+                .map(persistEntity -> PersistModel.buildModelFromEntity(persistEntity, modelClass))
+                .filter(Optional::isPresent).map(Optional::get).collect(toList());
+    }
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public Optional<T> findOne(final String id) {
-		return PersistModel.buildModelFromEntity(persistEntityRepository.findOne(id), modelClass);
-	}
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public Optional<T> findOne(final String id) {
+        return PersistModel.buildModelFromEntity(persistEntityRepository.findOne(id), modelClass);
+    }
 
-	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
-	public Optional<T> create(final T record) {
-		// If the record is not supplied, we cannot create it.
-		if (record == null) {
-			return null;
-		}
+    @Transactional(propagation = Propagation.REQUIRED)
+    public Optional<T> create(final T record) {
+        // If the record is not supplied, we cannot create it.
+        if (record == null) {
+            return null;
+        }
 
-		// If record already exists, we cannot create one.
-		if (record.getId() != null) {
-			return null;
-		}
+        // If record already exists, we cannot create one.
+        if (record.getId() != null) {
+            return null;
+        }
 
-		PersistEntity savedEntity = persistEntityRepository.save(record.buildEntityFromModel());
-		return PersistModel.buildModelFromEntity(savedEntity, modelClass);
-	}
+        PersistEntity savedEntity = persistEntityRepository.saveOne(record.buildEntityFromModel());
+        return PersistModel.buildModelFromEntity(savedEntity, modelClass);
+    }
 
-	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
-	public Optional<T> update(final T record) {
-		// If the record is not supplied, we cannot create it.
-		if (record == null) {
-			return null;
-		}
+    @Transactional(propagation = Propagation.REQUIRED)
+    public Optional<T> update(final T record) {
+        // If the record is not supplied, we cannot create it.
+        if (record == null) {
+            return null;
+        }
 
-		PersistEntity existingRecord = persistEntityRepository.findOne(record.getId());
+        PersistEntity existingRecord = persistEntityRepository.findOne(record.getId());
 
-		// If record doesn't already exist, we cannot update one.
-		if (existingRecord == null) {
-			return null;
-		}
+        // If record doesn't already exist, we cannot update one.
+        if (existingRecord == null) {
+            return null;
+        }
 
-		PersistEntity savedEntity = persistEntityRepository.save(record.buildEntityFromModelAndMerge(existingRecord));
-		return PersistModel.buildModelFromEntity(savedEntity, modelClass);
-	}
+        PersistEntity savedEntity = persistEntityRepository.saveOne(record.buildEntityFromModelAndMerge(existingRecord));
+        return PersistModel.buildModelFromEntity(savedEntity, modelClass);
+    }
 
-	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
-	public void delete(final String id) {
-		persistEntityRepository.delete(id);
-	}
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void delete(final String id) {
+        persistEntityRepository.delete(id);
+    }
 }
