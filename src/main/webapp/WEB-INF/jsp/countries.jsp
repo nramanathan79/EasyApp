@@ -28,7 +28,7 @@
 <body>
 	<div class="page-layout">
 		<article class="page-main-article">
-			<c:import url="dataTable.jsp"></c:import>
+			<c:import url="dataTable.jsp"/>
 		</article>
 	</div>
 </body>

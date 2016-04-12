@@ -17,7 +17,7 @@ $('.dropdown-toggle').click(function() {
 
 if (dataTableApp) {
 	dataTableApp.controller('columnFilterController', function($scope) {
-		$scope.columnFilter = {};
+		$scope.columnFilter = {"filterPresent": false};
 
 		$scope.sortUniqueValues = function() {
 			if ($scope.columnFilter.uniqueValues && $scope.columnFilter.uniqueValues.length > 0) {
@@ -54,6 +54,9 @@ if (dataTableApp) {
 					return;
 				}
 			}
+            else {
+                $scope.columnFilter.filterPresent = false;
+            }
 			
 			if (records && angular.isArray(records)) {
 				$scope.columnFilter.uniqueValues = [];
@@ -105,6 +108,8 @@ if (dataTableApp) {
 				delete $scope.columnFilter.fromNumber;
 				delete $scope.columnFilter.toNumber;
 			}
+
+			$scope.columnFilter.filterPresent = false;
 			
 			$scope.$emit('filterColumn', $scope.columnFilter);
 			$scope.closeDropdown();
@@ -142,10 +147,11 @@ if (dataTableApp) {
 		}
 		
 		$scope.getFilterClass = function() {
-			return $scope.hasFilter() ? 'red' : '';
+			return $scope.columnFilter.filterPresent ? 'red' : '';
 		}
 		
 		$scope.applyColumnFilter = function() {
+			$scope.columnFilter.filterPresent = $scope.hasFilter();
 			$scope.$emit('filterColumn', $scope.columnFilter);
 			$scope.closeDropdown();
 		}
@@ -159,7 +165,7 @@ if (dataTableApp) {
 				return false;
 			}
 
-			if ($scope.hasFilter()) {
+			if ($scope.columnFilter.filterPresent) {
 				if ($scope.columnFilter.blank && record[$scope.columnFilter.name]) {
 					return false;
 				}

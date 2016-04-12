@@ -36,14 +36,14 @@
               Sort
             </button>
           </div>
-          <button class="btn btn-sm btn-default" ng-click="clearSort()">Clear
+          <button class="btn btn-sm btn-default" ng-click="clearSort()" ng-if="sortPresent()">Clear
             All Sort
           </button>
         </div>
       </c:if>
       <c:if test="${dataTable.enableColumnFilter}">
         <div class="col-md-1">
-          <button class="btn btn-sm btn-default" ng-click="clearFilters()">Clear
+          <button class="btn btn-sm btn-default" ng-click="clearFilters()" ng-if="hasFilters()">Clear
             All Filters
           </button>
         </div>
@@ -111,36 +111,39 @@
           <%
             numberOfColumns++;
           %>
-          <th><c:choose>
-            <c:when test="${dataTable.enableColumnSort}">
-              <a href=""
-                 ng-click="addSort('<c:out value="${column.dataCell.field.name}"/>')"><span
-                  <c:if test="${column.dataCell.field.required}">class="required-field"</c:if>><c:out
-                  value="${column.dataCell.field.label}"/></span></a>
-								<span class="glyphicon glyphicon-sort-by-attributes"
-                      ng-if="sortBy.indexOf('<c:out value="${column.dataCell.field.name}"/>') >= 0"
-                      ng-cloak></span>
-								<span class="glyphicon glyphicon-sort-by-attributes-alt"
-                      ng-if="sortBy.indexOf('-<c:out value="${column.dataCell.field.name}"/>') >= 0"
-                      ng-cloak></span>
-              <sup
-                  ng-if="showSortIndex('<c:out value="${column.dataCell.field.name}"/>') > 0"
-                  ng-cloak>{{showSortIndex('<c:out
-                  value="${column.dataCell.field.name}"/>')}}
-              </sup>
-            </c:when>
-            <c:otherwise>
+          <th>
+            <c:choose>
+              <c:when test="${dataTable.enableColumnSort}">
+                <a href=""
+                   ng-click="addSort('<c:out value="${column.dataCell.field.name}"/>')"><span
+                    <c:if test="${column.dataCell.field.required}">class="required-field"</c:if>><c:out
+                    value="${column.dataCell.field.label}"/></span></a>
+                  <span class="glyphicon glyphicon-sort-by-attributes"
+                        ng-if="sortBy.indexOf('<c:out value="${column.dataCell.field.name}"/>') >= 0"
+                        ng-cloak></span>
+                  <span class="glyphicon glyphicon-sort-by-attributes-alt"
+                        ng-if="sortBy.indexOf('-<c:out value="${column.dataCell.field.name}"/>') >= 0"
+                        ng-cloak></span>
+                <sup
+                    ng-if="showSortIndex('<c:out value="${column.dataCell.field.name}"/>') > 0"
+                    ng-cloak>{{showSortIndex('<c:out
+                    value="${column.dataCell.field.name}"/>')}}
+                </sup>
+              </c:when>
+              <c:otherwise>
 								<span
                     <c:if test="${column.dataCell.field.required}">class="required-field"</c:if>><c:out
                     value="${column.dataCell.field.label}"/></span>
-            </c:otherwise>
-          </c:choose> <c:if test="${dataTable.enableColumnFilter}">
-            <c:set var="columnDataCell" value="${column.dataCell}"
-                   scope="request"/>
-            <c:import url="columnFilter.jsp">
-              <c:param name="loopIndex" value="${loop.index}"/>
-            </c:import>
-          </c:if></th>
+              </c:otherwise>
+            </c:choose>
+            <c:if test="${dataTable.enableColumnFilter}">
+              <c:set var="columnDataCell" value="${column.dataCell}"
+                     scope="request"/>
+              <c:import url="columnFilter.jsp">
+                <c:param name="loopIndex" value="${loop.index}"/>
+              </c:import>
+            </c:if>
+          </th>
         </c:forEach>
         <c:if test="${dataTable.enableDataEdit}">
           <%
@@ -166,16 +169,18 @@
             </c:if>
                 <c:if test="${!empty inputCell.customStyle}">style="<c:out value='${inputCell.customStyle}'/>"
             </c:if>
-                ng-if="!record.editing" ng-cloak>
+                <c:if test="${dataTable.enableDataEdit}">ng-if="!record.editing" ng-cloak</c:if>>
               {{record.
               <c:out value="${column.dataCell.field.name}"/>
               }}
             </div>
-            <div ng-if="record.editing" ng-cloak>
-              <c:import url="textInput.jsp">
-                <c:param name="modelObject" value="record"/>
-              </c:import>
-            </div>
+            <c:if test="${dataTable.enableDataEdit}">
+              <div ng-if="record.editing" ng-cloak>
+                <c:import url="textInput.jsp">
+                  <c:param name="modelObject" value="record"/>
+                </c:import>
+              </div>
+            </c:if>
           </td>
         </c:forEach>
         <c:if test="${dataTable.enableDataEdit}">
@@ -207,18 +212,15 @@
     <c:if test="${dataTable.enableDataEdit}">
       <div class="row mbottom-5">
         <div class="col-sm-12">
-          <button class="btn btn-sm btn-primary" ng-if="!filteredRecords.editing"
-                  ng-cloak ng-click="addRecord()">
+          <button class="btn btn-sm btn-primary" ng-if="!filteredRecords.editing" ng-cloak ng-click="addRecord()">
             <span class="glyphicon glyphicon-plus mright-3"></span>Add
           </button>
         </div>
       </div>
     </c:if>
   </div>
-	<span us-spinner="{radius:30, width:8, length: 16}"
-        spinner-on="showSpinner"></span>
+  <span us-spinner="{radius:30, width:8, length: 16}" spinner-on="showSpinner"></span>
 </div>
-<script type="text/javascript"
-        src="webjars/papa-parse/4.1.0/papaparse.min.js"></script>
+<script type="text/javascript" src="webjars/papa-parse/4.1.0/papaparse.min.js"></script>
 <script type="text/javascript" src="resources/js/dataTable.js"></script>
 <script type="text/javascript" src="resources/js/columnFilter.js"></script>

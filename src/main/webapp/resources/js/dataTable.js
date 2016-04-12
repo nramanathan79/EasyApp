@@ -27,7 +27,10 @@ dataTableApp.controller('dataTableController', function($scope, $resource, apiUr
 				}
 			}
 
-			$scope.columnFilters.push(columnFilter);
+			if (columnFilter.filterPresent) {
+				$scope.columnFilters.push(columnFilter);
+			}
+
 			$scope.filteredRecords = [];
 			
 			angular.forEach($scope.records, function(record, key) {
@@ -44,7 +47,7 @@ dataTableApp.controller('dataTableController', function($scope, $resource, apiUr
 			$scope.$broadcast('resetFilters', $scope.filteredRecords, $scope.columnFilters);
 		}
 	});
-	
+
 	$scope.listRecords = function() {
 		$scope.startSpinner();
 
@@ -173,7 +176,11 @@ dataTableApp.controller('dataTableController', function($scope, $resource, apiUr
 	}
 
 	$scope.changeSortSelection = function(selection) {
-		$scope.sortSelection = selection;
+        if (!$scope.sortBy) {
+            $scope.sortBy = [];
+        }
+
+        $scope.sortSelection = selection;
 		if ($scope.sortSelection === 'Single') {
 			if ($scope.sortBy.length > 1) {
 				var primarySort = $scope.sortBy[0];
@@ -184,7 +191,11 @@ dataTableApp.controller('dataTableController', function($scope, $resource, apiUr
 	}
 	
 	$scope.hasSort = function(column) {
-		var columnIndex = $scope.sortBy.indexOf(column);
+        if (!$scope.sortBy) {
+            $scope.sortBy = [];
+        }
+
+        var columnIndex = $scope.sortBy.indexOf(column);
 		if (columnIndex >= 0) {
 			return true;
 		}
@@ -198,7 +209,11 @@ dataTableApp.controller('dataTableController', function($scope, $resource, apiUr
 	}
 
 	$scope.showSortIndex = function(column) {
-		if ($scope.sortSelection === 'Multiple') {
+        if (!$scope.sortBy) {
+            $scope.sortBy = [];
+        }
+
+        if ($scope.sortSelection === 'Multiple') {
 			var columnIndex = $scope.sortBy.indexOf(column);
 			if (columnIndex >= 0) {
 				return columnIndex + 1;
@@ -214,6 +229,10 @@ dataTableApp.controller('dataTableController', function($scope, $resource, apiUr
 	}
 	
 	$scope.addSort = function(column) {
+		if (!$scope.sortBy) {
+			$scope.sortBy = [];
+		}
+
 		var columnIndex = $scope.sortBy.indexOf(column);
 		var columnReverseIndex = $scope.sortBy.indexOf('-' + column);
 
@@ -235,6 +254,10 @@ dataTableApp.controller('dataTableController', function($scope, $resource, apiUr
 	$scope.clearSort = function() {
 		$scope.sortBy = [];
 	}
+
+    $scope.sortPresent = function() {
+        return $scope.sortBy && angular.isArray($scope.sortBy) && $scope.sortBy.length > 0;
+    }
 	
 	$scope.clearSearch = function() {
 		$scope.searchText = '';
@@ -244,6 +267,10 @@ dataTableApp.controller('dataTableController', function($scope, $resource, apiUr
 		$scope.columnFilters = [];
 		$scope.filteredRecords = $scope.records;
 		$scope.$broadcast('resetFilters', $scope.filteredRecords, $scope.columnFilters);
+	}
+
+	$scope.hasFilters = function() {
+		return $scope.columnFilters && angular.isArray($scope.columnFilters) && $scope.columnFilters.length > 0;
 	}
 	
 	$scope.hasImportCsvFile = function() {
