@@ -17,7 +17,7 @@
       <form
           name="filterForm<c:out value='${columnDataCell.field.name}'/>"
           class="form form-inline">
-        <div class="row mbottom-5" ng-if="columnFilter.filterPresent">
+        <div class="row mbottom-5" ng-if="columnFilter.filterPresent" ng-cloak>
           <div class="col-sm-12 text-right">
             <a href=""
                ng-click="clearColumnFilter()">Clear

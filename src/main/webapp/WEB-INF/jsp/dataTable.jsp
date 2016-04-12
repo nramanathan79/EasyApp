@@ -36,14 +36,14 @@
               Sort
             </button>
           </div>
-          <button class="btn btn-sm btn-default" ng-click="clearSort()" ng-if="sortPresent()">Clear
+          <button class="btn btn-sm btn-default" ng-click="clearSort()" ng-if="sortPresent()" ng-cloak>Clear
             All Sort
           </button>
         </div>
       </c:if>
       <c:if test="${dataTable.enableColumnFilter}">
         <div class="col-md-1">
-          <button class="btn btn-sm btn-default" ng-click="clearFilters()" ng-if="hasFilters()">Clear
+          <button class="btn btn-sm btn-default" ng-click="clearFilters()" ng-if="hasFilters()" ng-cloak>Clear
             All Filters
           </button>
         </div>
