@@ -1,4 +1,4 @@
-var dataTableApp = angular.module('dataTable', ['ngResource', 'angularSpinner']).constant('apiUri', 'api');
+var dataTableApp = angular.module('dataTable', ['ngResource', 'angularSpinner', 'ui.bootstrap']).constant('apiUri', 'api');
 
 dataTableApp.controller('dataTableController', function($scope, $resource, apiUri) {
 	$scope.startSpinner = function() {

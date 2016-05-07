@@ -22,6 +22,10 @@
 <script type="text/javascript"
 	src="webjars/angularjs/1.5.5/angular-resource.min.js"></script>
 <script type="text/javascript"
+	src="webjars/angular-animate/1.5.5/angular-animate.min.js"></script>
+<script type="text/javascript"
+	src="webjars/angular-touch/1.5.5/angular-touch.min.js"></script>
+<script type="text/javascript"
 	src="webjars/angular-ui-bootstrap/1.3.2/ui-bootstrap.min.js"></script>
 <script type="text/javascript" src="webjars/spin.js/2.3.2/spin.min.js"></script>
 <script type="text/javascript"
@@ -30,7 +34,7 @@
 <body>
 	<div class="page-layout">
 		<article class="page-main-article">
-			<c:import url="dataTable.jsp"/>
+			<c:import url="dataTable.jsp" />
 		</article>
 	</div>
 </body>
