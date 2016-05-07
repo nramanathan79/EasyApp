@@ -175,11 +175,17 @@ if (dataTableApp) {
 				}
 
 				if ($scope.columnFilter.uniqueValues) {
+					var selectedMatchFound = false;
+					
 					for (var i = 0; i < $scope.columnFilter.uniqueValues.length; i++) {
 						if ($scope.columnFilter.uniqueValues[i].selected
-							&& record[$scope.columnFilter.name] !== $scope.columnFilter.uniqueValues[i].value) {
-							return false;
+							&& record[$scope.columnFilter.name] === $scope.columnFilter.uniqueValues[i].value) {
+							selectedMatchFound = true;
 						}
+					}
+					
+					if (!selectedMatchFound) {
+						return false;
 					}
 				}
 				
