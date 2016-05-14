@@ -17,7 +17,7 @@ $('.dropdown-toggle').click(function() {
 
 if (dataTableApp) {
 	dataTableApp.controller('columnFilterController', function($scope) {
-		$scope.columnFilter = {"filterPresent": false};
+		$scope.columnFilter = {"filterPresent": false, "uniqueValuesFilterPresent": false};
 
 		$scope.sortUniqueValues = function() {
 			if ($scope.columnFilter.uniqueValues && $scope.columnFilter.uniqueValues.length > 0) {
@@ -56,6 +56,7 @@ if (dataTableApp) {
 			}
             else {
                 $scope.columnFilter.filterPresent = false;
+                $scope.columnFilter.uniqueValuesFilterPresent = false;
             }
 			
 			if (records && angular.isArray(records)) {
@@ -111,6 +112,7 @@ if (dataTableApp) {
 			}
 
 			$scope.columnFilter.filterPresent = false;
+			$scope.columnFilter.uniqueValuesFilterPresent = false;
 			
 			$scope.$emit('filterColumn', $scope.columnFilter);
 			$scope.closeDropdown();
@@ -139,6 +141,7 @@ if (dataTableApp) {
 			if ($scope.columnFilter.uniqueValues) {
 				for (var i = 0; i < $scope.columnFilter.uniqueValues.length; i++) {
 					if ($scope.columnFilter.uniqueValues[i].selected) {
+						$scope.columnFilter.uniqueValuesFilterPresent = true;
 						return true;
 					}
 				}
@@ -171,7 +174,7 @@ if (dataTableApp) {
 					return false;
 				}
 
-				if ($scope.columnFilter.uniqueValues) {
+				if ($scope.columnFilter.uniqueValuesFilterPresent) {
 					var selectedMatchFound = false;
 					
 					for (var i = 0; i < $scope.columnFilter.uniqueValues.length; i++) {
@@ -228,7 +231,7 @@ if (dataTableApp) {
 					}
 				}
 			}
-			
+
 			return true;
 		}
 	});
