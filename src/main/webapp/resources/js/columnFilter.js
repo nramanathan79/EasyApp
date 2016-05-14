@@ -72,6 +72,7 @@ if (dataTableApp) {
 		$scope.initializeColumnFilter = function(columnName, columnType) {
 			$scope.columnFilter.name = columnName;
 			$scope.columnFilter.type = columnType;
+			$scope.$emit('addColumn', $scope.columnFilter);
 		};
 		
 		$scope.closeDropdown = function() {
@@ -156,15 +157,11 @@ if (dataTableApp) {
 			$scope.closeDropdown();
 		};
 		
-		$scope.columnFilter.match = function(record, searchText) {
+		$scope.columnFilter.match = function(record) {
 			if (!record) {
 				return false;
 			}
 			
-			if (searchText && record[$scope.columnFilter.name].search(new RegExp(searchText, 'i')) < 0) {
-				return false;
-			}
-
 			if ($scope.columnFilter.filterPresent) {
 				if ($scope.columnFilter.blank && record[$scope.columnFilter.name]) {
 					return false;

@@ -30,23 +30,53 @@ dataTableApp.controller('dataTableController', function($scope, $resource, apiUr
 			if (columnFilter.filterPresent) {
 				$scope.columnFilters.push(columnFilter);
 			}
+			
+			$scope.filterRecords();
 
-			$scope.filteredRecords = [];
-			
-			angular.forEach($scope.records, function(record, key) {
-				var matchFound = true;
-				for (var col = 0; matchFound && col < $scope.columnFilters.length; col++) {
-					matchFound = $scope.columnFilters[col].match(record, $scope.searchText);
-				}
-				
-				if (matchFound) {
-					$scope.filteredRecords.push(record);
-				}
-			});
-			
 			$scope.$broadcast('resetFilters', $scope.filteredRecords, $scope.columnFilters);
 		}
 	});
+	
+	$scope.$on('addColumn', function(event, columnFilter) {
+		if (columnFilter) {
+			if (!$scope.columns) {
+				$scope.columns = [];
+			}
+				
+			$scope.columns.push(columnFilter.name);
+		}
+	});
+	
+	$scope.filterRecords = function() {
+		$scope.filteredRecords = [];
+		
+		angular.forEach($scope.records, function(record, key) {
+			var matchFound = true;
+
+			if (matchFound && $scope.searchText) {
+				var recordString = "";
+				
+				for (var col = 0; col < $scope.columns.length; col++) {
+					var colName = $scope.columns[col];
+					recordString += record[colName];
+				}
+
+				if (recordString.search(new RegExp($scope.searchText, 'i')) < 0) {
+					matchFound = false;
+				}
+			}
+
+			if (matchFound && $scope.columnFilters) {
+				for (var col = 0; matchFound && col < $scope.columnFilters.length; col++) {
+					matchFound = $scope.columnFilters[col].match(record);
+				}
+			}
+			
+			if (matchFound) {
+				$scope.filteredRecords.push(record);
+			}
+		});
+	};
 
 	$scope.listRecords = function() {
 		$scope.startSpinner();
@@ -175,12 +205,11 @@ dataTableApp.controller('dataTableController', function($scope, $resource, apiUr
 		$scope.filteredRecords.editing = true;
 	};
 
-	$scope.changeSortSelection = function(selection) {
+	$scope.$watch('sortSelection', function() {
         if (!$scope.sortBy) {
             $scope.sortBy = [];
         }
 
-        $scope.sortSelection = selection;
 		if ($scope.sortSelection === 'Single') {
 			if ($scope.sortBy.length > 1) {
 				var primarySort = $scope.sortBy[0];
@@ -188,7 +217,7 @@ dataTableApp.controller('dataTableController', function($scope, $resource, apiUr
 				$scope.sortBy.push(primarySort);
 			}
 		}
-	};
+	});
 	
 	$scope.hasSort = function(column) {
         if (!$scope.sortBy) {
@@ -253,8 +282,13 @@ dataTableApp.controller('dataTableController', function($scope, $resource, apiUr
         return $scope.sortBy && angular.isArray($scope.sortBy) && $scope.sortBy.length > 0;
     };
 	
+	$scope.performSearch = function() {
+		$scope.filterRecords();
+	};
+	
 	$scope.clearSearch = function() {
 		$scope.searchText = '';
+		$scope.filterRecords();
 	};
 	
 	$scope.clearFilters = function() {
