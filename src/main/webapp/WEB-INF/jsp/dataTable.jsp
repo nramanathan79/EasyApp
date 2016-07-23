@@ -10,7 +10,8 @@
 		<div class="row mtop-5">
 			<c:if test="${dataTable.enableSearch}">
 				<div class="col-md-3">
-					<form id="dataTableSearch" class="form form-inline" ng-submit="performSearch()">
+					<form id="dataTableSearch" class="form form-inline"
+						ng-submit="performSearch()">
 						<input class="form-control" type="text" placeholder="Search Table"
 							ng-model="searchText" ng-model-options="{updateOn: 'submit'}" />
 						<button class="btn btn-sm btn-primary" type="submit">
