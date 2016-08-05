@@ -9,16 +9,16 @@ ENV DB_PORT 5432
 
 # Set runtime environment variables
 ENV CATALINA_HOME /usr/local/tomcat
-COPY setenv.sh $CATALINA_HOME/bin
+COPY setenv.sh ${CATALINA_HOME}/bin
 
 # Set work directory
-WORKDIR=$CATALINA_HOME
+WORKDIR ${CATALINA_HOME}
 
 # Copy configurations
-COPY tomcat-users.xml $CATALINA_HOME/conf
-RUN mkdir -p $CATALINA_HOME/conf/Catalina/localhost
-COPY easyapp.xml $CATALINA_HOME/conf/Catalina/localhost
+COPY tomcat-users.xml ${CATALINA_HOME}/conf
+RUN mkdir -p ${CATALINA_HOME}/conf/Catalina/localhost
+COPY easyapp.xml ${CATALINA_HOME}/conf/Catalina/localhost
 
 # Copy deployment war file
-RUN mkdir -p $CATALINA_HOME/apps
-COPY easyapp*.war $CATALINA_HOME/apps
+RUN mkdir -p ${CATALINA_HOME}/apps
+COPY easyapp*.war ${CATALINA_HOME}/apps
