@@ -1,0 +1,1 @@
+CATALINA_OPTS="-Ddb.pool.max.active=$DB_POOL_MAX_ACTIVE -Ddb.pool.min.idle=$DB_POOL_MIN_IDLE -Ddb.pool.max.wait=$DB_POOL_MAX_WAIT -Ddb.pool.initial.size=$DB_POOL_INITIAL_SIZE -Ddb.port=$DB_PORT -Ddb.username=$DB_USERNAME -Ddb.password=$DB_PASSWORD -Ddb.hostname=$DB_HOSTNAME -Ddb.database=$DB_DATABASE"
