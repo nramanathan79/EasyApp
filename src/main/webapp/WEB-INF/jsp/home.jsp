@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Welcom to EasyApp!</title>
+<title>Welcome to EasyApp!</title>
 <link rel="stylesheet" type="text/css"
 	href="webjars/bootstrap/3.3.6/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css"

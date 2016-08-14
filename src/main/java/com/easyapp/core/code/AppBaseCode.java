@@ -34,7 +34,7 @@ abstract public class AppBaseCode extends PersistEntity {
 			field.setAccessible(true);
 			value = field.get(baseCode);
 		} catch (IllegalAccessException iae) {
-
+			iae.printStackTrace();
 		}
 
 		return value;

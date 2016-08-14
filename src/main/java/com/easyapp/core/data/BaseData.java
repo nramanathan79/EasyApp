@@ -10,7 +10,7 @@ abstract public class BaseData implements Event {
 	protected static final ObjectMapper jsonMapper = new ObjectMapper();
 
 	private enum MessageType {
-		SUCCESS, WARNING, ERROR
+		SUCCESS, WARNING, ERROR, INFO
 	};
 
 	private int messageCode;
@@ -61,6 +61,12 @@ abstract public class BaseData implements Event {
 		setMessageCode(errorCode);
 		setMessageType(MessageType.ERROR);
 		setMessageText(errorMessage);
+	}
+
+	public void info(final String infoMessage) {
+		setMessageCode(0);
+		setMessageType(MessageType.INFO);
+		setMessageText(infoMessage);
 	}
 
 	public void clear() {
