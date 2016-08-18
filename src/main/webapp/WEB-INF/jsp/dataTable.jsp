@@ -23,7 +23,7 @@
 				</div>
 			</c:if>
 			<c:if test="${dataTable.enableMultiColumnSort}">
-				<div class="col-md-3">
+				<div class="col-md-4">
 					<div class="btn-group" ng-init="sortSelection = 'Single'">
 						<label class="btn btn-sm"
 							ng-class="sortSelection == 'Single' ? 'btn-primary' : 'btn-default'"
@@ -74,7 +74,7 @@
 					</div>
 				</div>
 			</c:if>
-			<div class="col-md-3 text-right">
+			<div class="col-md-2 text-right">
 				<c:if test="${dataTable.enableRefresh}">
 					<div class="row">
 						<div class="col-md-12">
