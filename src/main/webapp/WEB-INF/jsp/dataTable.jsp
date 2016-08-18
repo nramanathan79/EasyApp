@@ -9,7 +9,7 @@
 		</div>
 		<div class="row mtop-5">
 			<c:if test="${dataTable.enableSearch}">
-				<div class="col-md-3">
+				<div class="col-md-4">
 					<form id="dataTableSearch" class="form form-inline"
 						ng-submit="performSearch()">
 						<input class="form-control" type="text" placeholder="Search Table"
@@ -74,7 +74,7 @@
 					</div>
 				</div>
 			</c:if>
-			<div class="col-md-4 text-right">
+			<div class="col-md-3 text-right">
 				<c:if test="${dataTable.enableRefresh}">
 					<div class="row">
 						<div class="col-md-12">
