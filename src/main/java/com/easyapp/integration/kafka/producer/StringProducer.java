@@ -10,7 +10,6 @@ import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
-import org.apache.kafka.common.KafkaException;
 
 import com.easyapp.integration.kafka.bean.MessageMetadata;
 import com.easyapp.integration.kafka.util.KafkaProperties;
@@ -19,20 +18,11 @@ public class StringProducer {
 	private Producer<String, String> producer;
 
 	public StringProducer() {
-		try {
-			producer = new KafkaProducer<>(KafkaProperties.getKafkaProducerProperties());
-		} catch (KafkaException e) {
-			e.printStackTrace();
-			producer = null;
-		}
+		producer = new KafkaProducer<>(KafkaProperties.getKafkaProducerProperties());
 	}
 
 	public StringProducer(final Properties producerProperties) {
-		try {
-			producer = new KafkaProducer<>(producerProperties);
-		} catch (Exception e) {
-			producer = null;
-		}
+		producer = new KafkaProducer<>(producerProperties);
 	}
 
 	public Optional<MessageMetadata> sendSync(final MessageMetadata messageMetadata, final String message) {
@@ -61,8 +51,6 @@ public class StringProducer {
 	}
 
 	public void close() {
-		if (producer != null) {
-			producer.close();
-		}
+		producer.close();
 	}
 }
