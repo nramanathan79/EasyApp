@@ -22,6 +22,22 @@ public class Consumer<K, V> {
 		this.pollingIntervalMillis = pollingIntervalMillis;
 	}
 
+	public Properties getConsumerProperties(final int partition) {
+		Properties partitionConsumerProperties = new Properties();
+
+		consumerProperties.keySet().forEach(key -> {
+			Object value = consumerProperties.get(key);
+
+			if (("client.id").equals(key)) {
+				value += String.valueOf(partition);
+			}
+
+			partitionConsumerProperties.put(key, value);
+		});
+
+		return partitionConsumerProperties;
+	}
+
 	public long consume(final String topic,
 			final Class<? extends MessageProcessor<String, String>> messageProcessorClass) {
 		// Return the future threads for consumers to wait on.
@@ -42,7 +58,7 @@ public class Consumer<K, V> {
 			partitions.forEach(partition -> {
 				try {
 					threads.add(executor.submit(messageProcessorClass
-							.getDeclaredConstructor(constructorParameterClasses).newInstance(consumerProperties,
+							.getDeclaredConstructor(constructorParameterClasses).newInstance(getConsumerProperties(partition.partition()),
 									new TopicPartition(topic, partition.partition()), pollingIntervalMillis)));
 				} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
 						| InvocationTargetException | NoSuchMethodException | SecurityException e) {
