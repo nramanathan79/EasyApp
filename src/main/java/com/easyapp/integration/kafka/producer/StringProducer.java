@@ -18,7 +18,7 @@ public class StringProducer {
 	private Producer<String, String> producer;
 
 	public StringProducer() {
-		producer = new KafkaProducer<>(KafkaProperties.getKafkaProducerProperties());
+		this(KafkaProperties.getKafkaProducerProperties());
 	}
 
 	public StringProducer(final Properties producerProperties) {
