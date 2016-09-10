@@ -37,13 +37,12 @@ public class RPCService {
 			rpcResponseHost = InetAddress.getByName(responseHost);
 		} catch (UnknownHostException e) {
 			try {
-			rpcResponseHost = InetAddress.getLocalHost();
-			}
-			catch (UnknownHostException uhe) {
+				rpcResponseHost = InetAddress.getLocalHost();
+			} catch (UnknownHostException uhe) {
 				uhe.printStackTrace();
 			}
 		}
-		
+
 		try {
 			rpcResponsePort = Integer.parseInt(rpcProperties.getProperty("response.port"));
 		} catch (Exception e) {
@@ -68,7 +67,7 @@ public class RPCService {
 	public InetAddress getResponseHost() {
 		return rpcResponseHost;
 	}
-	
+
 	public int getRPCResponsePort() {
 		return rpcResponsePort;
 	}
