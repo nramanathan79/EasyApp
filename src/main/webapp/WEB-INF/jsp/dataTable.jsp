@@ -223,5 +223,5 @@
 </div>
 <script type="text/javascript"
 	src="webjars/papa-parse/4.1.0/papaparse.min.js"></script>
-<script type="text/javascript" src="resources/js/dataTable.js"></script>
-<script type="text/javascript" src="resources/js/columnFilter.js"></script>
+<script type="text/javascript" src="js/dataTable.js"></script>
+<script type="text/javascript" src="js/columnFilter.js"></script>
