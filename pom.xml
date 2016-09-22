@@ -14,7 +14,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.4.0.RELEASE</version>
+		<version>1.4.1.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
@@ -22,6 +22,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+		<start-class>com.easyapp.EasyAppApplication</start-class>
 	</properties>
 
 	<dependencies>
@@ -32,11 +33,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.postgresql</groupId>
@@ -82,11 +78,6 @@
 			</exclusions>
 		</dependency>
 
-		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>bootstrap</artifactId>
-			<version>3.3.6</version>
-		</dependency>
 		<dependency>
 			<groupId>org.webjars</groupId>
 			<artifactId>jquery</artifactId>
@@ -135,27 +126,83 @@
 	</dependencies>
 
 	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>com.spotify</groupId>
-				<artifactId>docker-maven-plugin</artifactId>
-				<version>0.4.11</version>
-				<configuration>
-					<imageName>easyapp</imageName>
-					<dockerDirectory>docker</dockerDirectory>
-					<resources>
-						<resource>
-							<targetPath>/</targetPath>
-							<directory>${project.build.directory}</directory>
-							<include>${project.build.finalName}.war</include>
-						</resource>
-					</resources>
-				</configuration>
-			</plugin>
-		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+				</plugin>
+				<plugin>
+					<groupId>com.spotify</groupId>
+					<artifactId>docker-maven-plugin</artifactId>
+					<version>0.4.11</version>
+					<configuration>
+						<imageName>easyapp</imageName>
+						<dockerDirectory>docker</dockerDirectory>
+						<resources>
+							<resource>
+								<targetPath>/</targetPath>
+								<directory>${project.build.directory}</directory>
+								<include>${project.build.finalName}.war</include>
+							</resource>
+						</resources>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>exec-maven-plugin</artifactId>
+					<executions>
+						<execution>
+							<id>npm-install</id>
+							<phase>generate-sources</phase>
+							<configuration>
+								<workingDirectory>${project.basedir}/src/main/resources/static</workingDirectory>
+								<executable>npm</executable>
+								<arguments>
+									<argument>install</argument>
+								</arguments>
+							</configuration>
+							<goals>
+								<goal>exec</goal>
+							</goals>
+						</execution>
+						<execution>
+							<id>npm-run-tsc</id>
+							<phase>generate-sources</phase>
+							<configuration>
+								<workingDirectory>${project.basedir}/src/main/resources/static</workingDirectory>
+								<executable>npm</executable>
+								<arguments>
+									<argument>run</argument>
+									<argument>tsc</argument>
+								</arguments>
+							</configuration>
+							<goals>
+								<goal>exec</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<artifactId>maven-clean-plugin</artifactId>
+					<configuration>
+						<filesets>
+							<fileset>
+								<directory>${project.basedir}/src/main/resources/static/node_modules</directory>
+							</fileset>
+							<fileset>
+								<directory>${project.basedir}/src/main/resources/static/typings</directory>
+							</fileset>
+							<fileset>
+								<directory>${project.basedir}/src/main/resources/static/app</directory>
+								<excludes>
+									<exclude>*.ts</exclude>
+								</excludes>
+							</fileset>
+						</filesets>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 </project>

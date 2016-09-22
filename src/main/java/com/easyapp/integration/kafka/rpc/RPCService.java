@@ -37,13 +37,12 @@ public class RPCService {
 			rpcResponseHost = InetAddress.getByName(responseHost);
 		} catch (UnknownHostException e) {
 			try {
-			rpcResponseHost = InetAddress.getLocalHost();
-			}
-			catch (UnknownHostException uhe) {
+				rpcResponseHost = InetAddress.getLocalHost();
+			} catch (UnknownHostException uhe) {
 				uhe.printStackTrace();
 			}
 		}
-		
+
 		try {
 			rpcResponsePort = Integer.parseInt(rpcProperties.getProperty("response.port"));
 		} catch (Exception e) {
@@ -53,7 +52,7 @@ public class RPCService {
 		try {
 			timeoutMillis = Long.parseLong(rpcProperties.getProperty("response.timeout.ms"));
 		} catch (Exception e) {
-			rpcResponsePort = 11111;
+			timeoutMillis = 10000;
 		}
 
 		try {
@@ -68,7 +67,7 @@ public class RPCService {
 	public InetAddress getResponseHost() {
 		return rpcResponseHost;
 	}
-	
+
 	public int getRPCResponsePort() {
 		return rpcResponsePort;
 	}

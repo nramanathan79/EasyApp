@@ -10,15 +10,17 @@ import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
+import org.springframework.stereotype.Component;
 
 import com.easyapp.integration.kafka.bean.MessageMetadata;
 import com.easyapp.integration.kafka.util.KafkaProperties;
 
+@Component
 public class StringProducer {
 	private Producer<String, String> producer;
 
 	public StringProducer() {
-		producer = new KafkaProducer<>(KafkaProperties.getKafkaProducerProperties());
+		this(KafkaProperties.getKafkaProducerProperties());
 	}
 
 	public StringProducer(final Properties producerProperties) {
