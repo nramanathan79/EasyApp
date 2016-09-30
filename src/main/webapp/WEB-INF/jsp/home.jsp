@@ -11,11 +11,9 @@
 		href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
 	<link rel="stylesheet" type="text/css"
 		href="node_modules/bootstrap/dist/css/bootstrap-theme.min.css" />
-	<link rel="stylesheet" type="text/css"
-		href="webjars/font-awesome/4.6.3/css/font-awesome.min.css" />
 	<link rel="stylesheet" type="text/css" href="css/easyapp.css" />
 
-	<script type="text/javascript" src="webjars/jquery/2.2.4/jquery.min.js"></script>
+	<script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
 	<script type="text/javascript"
 		src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     
