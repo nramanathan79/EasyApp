@@ -22,8 +22,8 @@ import com.easyapp.core.service.PersistModelServiceImpl;
 abstract public class PersistModelRestController<T extends PersistModel> {
 	private PersistModelService<T> persistModelService;
 
-	public PersistModelRestController(Class<T> modelClass,
-			PersistEntityRepository<? extends PersistEntity> persistEntityRepository) {
+	public PersistModelRestController(final Class<T> modelClass,
+			final PersistEntityRepository<? extends PersistEntity> persistEntityRepository) {
 		persistModelService = new PersistModelServiceImpl<>(modelClass, persistEntityRepository);
 	}
 
