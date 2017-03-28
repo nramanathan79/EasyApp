@@ -11,6 +11,8 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"appName", "version"}))
 public class AppVersion extends AppBaseCode {
+	private static final long serialVersionUID = 1L;
+
 	@NotNull
 	private String appName;
 

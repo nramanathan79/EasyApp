@@ -21,6 +21,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 @MappedSuperclass
 abstract public class AppBaseCode extends PersistEntity {
+	private static final long serialVersionUID = 1L;
+
 	private String jsonStorage;
 
 	public String getJsonStorage() {

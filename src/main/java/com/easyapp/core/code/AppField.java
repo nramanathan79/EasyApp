@@ -20,6 +20,8 @@ import com.easyapp.core.util.Pair;
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = { "appName", "version", "className", "fieldName" }))
 public class AppField extends AppBaseCode {
+	private static final long serialVersionUID = 1L;
+
 	public enum FieldMode {
 		Simple, Object, List, Set, Map
 	};

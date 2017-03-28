@@ -2,6 +2,7 @@ package com.easyapp.core.entity;
 
 import static java.util.stream.Collectors.joining;
 
+import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.time.Clock;
 import java.time.LocalDateTime;
@@ -23,7 +24,9 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 @MappedSuperclass
-abstract public class PersistEntity extends BaseData implements PersistEvent {
+abstract public class PersistEntity extends BaseData implements PersistEvent, Serializable {
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	private String id;
 

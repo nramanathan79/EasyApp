@@ -14,6 +14,8 @@ import com.easyapp.core.annotation.JsonStorage;
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"appName", "version", "className"}))
 public class AppClass extends AppBaseCode {
+	private static final long serialVersionUID = 1L;
+
 	@NotNull
 	private String appName;
 

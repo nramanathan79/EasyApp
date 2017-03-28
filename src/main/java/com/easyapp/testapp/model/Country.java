@@ -4,6 +4,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import com.easyapp.core.entity.PersistEntity;
 import com.easyapp.core.model.PersistModel;
+import com.easyapp.testapp.entity.CityEntity;
 import com.easyapp.testapp.entity.CountryEntity;
 
 @XmlRootElement
@@ -11,12 +12,11 @@ public class Country extends PersistModel {
 	private String isoAlpha2Code;
 	private String isoAlpha3Code;
 	private String isoNumericCode;
-	private Long callingCode;
 	private String countryName;
 	private String continent;
-	private String capitalCity;
+	private Long callingCode;
 	private String currencyCode;
-	private String capitalCityTimeZone;
+	private String capitalCity;
 	private Double capitalCityLatitude;
 	private Double capitalCityLongitude;
 
@@ -84,14 +84,6 @@ public class Country extends PersistModel {
 		this.currencyCode = currencyCode;
 	}
 
-	public String getCapitalCityTimeZone() {
-		return capitalCityTimeZone;
-	}
-
-	public void setCapitalCityTimeZone(final String capitalCityTimeZone) {
-		this.capitalCityTimeZone = capitalCityTimeZone;
-	}
-
 	public Double getCapitalCityLatitude() {
 		return capitalCityLatitude;
 	}
@@ -116,14 +108,18 @@ public class Country extends PersistModel {
 			setIsoAlpha2Code(countryEntity.getIsoAlpha2Code());
 			setIsoAlpha3Code(countryEntity.getIsoAlpha3Code());
 			setIsoNumericCode(countryEntity.getIsoNumericCode());
-			setCallingCode(countryEntity.getCallingCode());
 			setCountryName(countryEntity.getCountryName());
 			setContinent(countryEntity.getContinent());
-			setCapitalCity(countryEntity.getCapitalCity());
+			setCallingCode(countryEntity.getCallingCode());
 			setCurrencyCode(countryEntity.getCurrencyCode());
-			setCapitalCityTimeZone(countryEntity.getCapitalCityTimeZone());
-			setCapitalCityLatitude(countryEntity.getCapitalCityLatitude());
-			setCapitalCityLongitude(countryEntity.getCapitalCityLongitude());
+			
+			if (countryEntity.getCities() != null && !countryEntity.getCities().isEmpty()) {
+				CityEntity capitalCity = countryEntity.getCities().get(0);
+				
+				setCapitalCity(capitalCity.getCityName());
+				setCapitalCityLatitude(capitalCity.getLatitude());
+				setCapitalCityLongitude(capitalCity.getLongitude());
+			}
 		}
 	}
 
@@ -135,14 +131,10 @@ public class Country extends PersistModel {
 		countryEntity.setIsoAlpha2Code(getIsoAlpha2Code());
 		countryEntity.setIsoAlpha3Code(getIsoAlpha3Code());
 		countryEntity.setIsoNumericCode(getIsoNumericCode());
-		countryEntity.setCallingCode(getCallingCode());
 		countryEntity.setCountryName(getCountryName());
 		countryEntity.setContinent(getContinent());
-		countryEntity.setCapitalCity(getCapitalCity());
+		countryEntity.setCallingCode(getCallingCode());
 		countryEntity.setCurrencyCode(getCurrencyCode());
-		countryEntity.setCapitalCityTimeZone(getCapitalCityTimeZone());
-		countryEntity.setCapitalCityLatitude(getCapitalCityLatitude());
-		countryEntity.setCapitalCityLongitude(getCapitalCityLongitude());
 
 		return (T) countryEntity;
 	}

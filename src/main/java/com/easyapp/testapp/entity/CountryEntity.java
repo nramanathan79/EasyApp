@@ -3,11 +3,16 @@ package com.easyapp.testapp.entity;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.hibernate.annotations.Where;
 
 import com.easyapp.core.entity.PersistEntity;
 
@@ -15,6 +20,8 @@ import com.easyapp.core.entity.PersistEntity;
 @Entity
 @Table(name = "country")
 public class CountryEntity extends PersistEntity {
+	private static final long serialVersionUID = 1L;
+
 	@NotNull
 	@Column(unique = true)
 	private String isoAlpha2Code;
@@ -27,23 +34,19 @@ public class CountryEntity extends PersistEntity {
 	@Column(unique = true)
 	private String isoNumericCode;
 
-	private Long callingCode;
-
 	@NotNull
 	private String countryName;
 
 	@NotNull
 	private String continent;
 
-	private String capitalCity;
+	private Long callingCode;
 
 	private String currencyCode;
-
-	private String capitalCityTimeZone;
-
-	private Double capitalCityLatitude;
-
-	private Double capitalCityLongitude;
+	
+	@OneToMany(mappedBy = "country", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@Where(clause = "is_capital is true")
+	private List<CityEntity> cities;
 
 	public String getIsoAlpha2Code() {
 		return isoAlpha2Code;
@@ -69,14 +72,6 @@ public class CountryEntity extends PersistEntity {
 		this.isoNumericCode = isoNumericCode;
 	}
 
-	public Long getCallingCode() {
-		return callingCode;
-	}
-
-	public void setCallingCode(final Long callingCode) {
-		this.callingCode = callingCode;
-	}
-
 	public String getCountryName() {
 		return countryName;
 	}
@@ -93,12 +88,12 @@ public class CountryEntity extends PersistEntity {
 		this.continent = continent != null ? continent.trim() : null;
 	}
 
-	public String getCapitalCity() {
-		return capitalCity;
+	public Long getCallingCode() {
+		return callingCode;
 	}
 
-	public void setCapitalCity(final String capitalCity) {
-		this.capitalCity = capitalCity != null ? capitalCity.trim() : null;
+	public void setCallingCode(final Long callingCode) {
+		this.callingCode = callingCode;
 	}
 
 	public String getCurrencyCode() {
@@ -109,32 +104,16 @@ public class CountryEntity extends PersistEntity {
 		this.currencyCode = currencyCode != null ? currencyCode.trim().toUpperCase() : null;
 	}
 
-	public String getCapitalCityTimeZone() {
-		return capitalCityTimeZone;
+	public List<CityEntity> getCities() {
+		return cities;
 	}
 
-	public void setCapitalCityTimeZone(final String capitalCityTimeZone) {
-		this.capitalCityTimeZone = capitalCityTimeZone != null ? capitalCityTimeZone.trim() : null;
-	}
-
-	public Double getCapitalCityLatitude() {
-		return capitalCityLatitude;
-	}
-
-	public void setCapitalCityLatitude(final Double capitalCityLatitude) {
-		this.capitalCityLatitude = capitalCityLatitude;
-	}
-
-	public Double getCapitalCityLongitude() {
-		return capitalCityLongitude;
-	}
-
-	public void setCapitalCityLongitude(final Double capitalCityLongitude) {
-		this.capitalCityLongitude = capitalCityLongitude;
+	public void setCities(final List<CityEntity> cities) {
+		this.cities = cities;
 	}
 
 	@Override
 	public List<String> uniqueKeyFields() {
-		return Arrays.asList("isoAlpha2Code", "isoAlpha3Code", "isoNumericCode");
+		return Arrays.asList("isoAlpha2Code");
 	}
 }
